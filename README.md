@@ -1,28 +1,132 @@
 # Creando una Red Social
 
-## Índice
+## Definición de producto
 
-* [1. Preámbulo](#1-preámbulo)
-* [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones generales](#4-consideraciones-generales)
-* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
-* [6. Hacker edition](#6-hacker-edition)
-* [7. Entrega](#7-entrega)
-* [8. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)
+### ¿Cuáles son los elementos básicos que tiene una red social?
+    -Permite crear una cuenta personal.  
+    -Permite iniciar sesión. 
+    -Permite hacer publicaciones.  
+    -Permite tener conversaciones con otras personas.  
+    -Permite reaccionar a las personas ante una publicación.   
+    -Permite filtrar por búsqueda publicaciones que al usuario le interese. 
 
-## 1. Preámbulo
 
-Instagram, Snapchat, Twitter, Facebook, Twitch, Linkedin, etc. Las redes
-sociales han invadido nuestras vidas. Las amamos u odiamos, y muchos no podemos
-vivir sin ellas.
+### ¿Cómo descubriste las necesidades de los usuarios?
+    Atravez de entrevistas de artistas independientes y sus nesesidades respecto a las carencias de muchas redes sociales destinadxs a ellxs
 
-Hay redes sociales de todo tipo y para todo tipo de intereses. Por ejemplo,
-en una ronda de financiamiento con inversionistas, se presentó una red social
-para químicos en la que los usuarios podían publicar artículos sobre sus
-investigaciones, comentar en los artículos de sus colegas, y filtrar artículos
-de acuerdo a determinadas etiquetas o su popularidad, lo más reciente, o lo
-más comentado.
+### ¿Qué problema resuelve el producto para estos usuarios?
+    La inexistencia de una red social enfocada exclusivamente en la exposición de su arte
+
+### ¿Cuáles son los objetivos de estos usuarios en relación al producto?
+
+    Poder encontrar publicaciones de artistas.
+    Poder conocer a otros artistas.
+    Poder promocionar su arte.
+    Poder crear o unirse a una comunidad de artistas
+
+
+### ¿Cuáles son las principales funcionalidades del producto y cuál es su prioridad?
+
+    Permitir hacer publicaciones.
+    Permitir crear una cuenta.
+    Permitir poder ingresar por Facebook o google.
+    Permitir ingresar a la red social.
+    Permitir el compartir y reaccionar a las publicaciones.
+    Permitir la edición o eliminación del post.
+
+# Historias de Usuario
+
+### `Historia de Usuario 1 `
+Yo como usuari@ deseo tener una vista inicial atractiva en la plataforma antes de ingresar a mi cuenta.
+
+    Criterio de aceptación:
+    -
+    -
+    -
+    Definición de lo terminado:
+    -
+
+### `Historia de Usuario 2`
+Yo como usuari@ quisiera poder registrarme a la plataforma con mi correo electrónico
+
+    Criterio de aceptación:
+    -
+    -
+    -
+    Definición de lo terminado:
+    -
+
+### `Historia de Usuario 3 `
+Yo como usuari@ quiero iniciar sesión con el correo y la contraseña que registré para poder ver mi muro
+
+    Criterio de aceptación:
+    -
+    -
+    -
+    Definición de lo terminado:
+    -
+
+### `Historia de Usuario 4 `
+Yo como usuari@ deseo una plataforma que me permita ver las publicaciones de otros y poder publicar en ella
+
+    Criterio de aceptación:
+    -
+    -
+    -
+    Definición de lo terminado:
+    -
+
+### `Historia de Usuario 5 `
+Yo como usuari@ quiero ver un muro de publicaciones en el muro
+
+    Criterio de aceptación:
+    -
+    -
+    -
+    Definición de lo terminado:
+    -
+
+### `Historia de Usuario 6`
+Yo como usuari@ deseo poder dale like o una emoción a las publicaciones que me gusten
+
+    Criterio de aceptación:
+    -
+    -
+    -
+    Definición de lo terminado:
+    -
+
+### `Historia de Usuario 7`
+Yo como usuario quiero editar mi publicación para plasmar algo distinto
+
+    Criterio de aceptación:
+    -
+    -
+    -
+    Definición de lo terminado:
+    -
+
+### `Historia de Usuario 8`
+Yo como usuario quiero eliminar mi publicación para que ya no aparezca en mi muro de mi red
+
+    Criterio de aceptación:
+    -
+    -
+    -
+    Definición de lo terminado:
+    -
+
+### `Historia de Usuario 9`
+Yo como usuaria deseo hacer una busqueda sobre temas que podrían interesarme
+
+    Criterio de aceptación:
+    -
+    -
+    -
+    Definición de lo terminado:
+    -
+
+
 
 ## 2. Resumen del proyecto
 
