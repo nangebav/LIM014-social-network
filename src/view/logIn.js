@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+import { singInFunction } from '../controller-function/auth-logIn.js';
+
 export default () => {
   const viewLogIn = `
   <form id="iniciarSesion">
@@ -8,8 +11,8 @@ export default () => {
     <a>Para ingresar con google</a>
     <label>imagen de fb</label>
     <section>
-      <img id="auth-fb" alt="ico-fb" class="ico-fb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
-      <img id="auth-google" alt="ico-google" class="ico-google" src="https://user-images.githubusercontent.com/77282012/117555346-07235780-b024-11eb-8bb0-1a93c7aa1a1f.png">
+      <img id="authFb" alt="ico-fb" class="ico-fb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
+      <img id="authGoogle" alt="ico-google" class="ico-google" src="https://user-images.githubusercontent.com/77282012/117555346-07235780-b024-11eb-8bb0-1a93c7aa1a1f.png">
     </section>
     <p>¿No tienes una cuenta? <a href="#/register">Registrarse</a> </p>
   </form>`;
@@ -23,18 +26,7 @@ export default () => {
     // console.log(email);
     // console.log(password);
     const inInit = () => {
-      firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          // Signed in
-          console.log('existe usuario');
-          const user = userCredential.user;
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log('no existe usuario');
-        });
+      singInFunction(email, password);
     };
 
     const observator = () => {
@@ -53,5 +45,15 @@ export default () => {
     inInit();
     observator();
   });
+
+  const btnFacebookR = divElem.querySelector('#authFb');
+  btnFacebookR.addEventListener('click', () => {
+    console.log('Debería ingresarse via facebook');
+  });
+  const btnGoogleR = divElem.querySelector('#authGoogle');
+  btnGoogleR.addEventListener('click', () => {
+    console.log('Debería ingresarse via Google');
+  });
+
   return divElem;
 };
