@@ -28,10 +28,44 @@ export default () => {
     const lastname = document.querySelector('#lastname').value;
     const email = document.querySelector('#emailR').value;
     const password = document.querySelector('#passwordR').value;
-    console.log(name);
-    console.log(lastname);
-    console.log(email);
-    console.log(password);
+    // console.log(name);
+    // console.log(lastname);
+    // console.log(email);
+    // console.log(password);
+
+    // funcion para actualizar usuario
+
+    // invocar funcion
+    // if(isPasswordCorrect){firebase.auth} else {log error}
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+      // Signed in
+        console.log(userCredential);
+      // var user = userCredential.user;
+      // llamar la funcion para settear el usuario
+      // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      // ..
+      });
+
+    const user = firebase.auth().currentUser;
+    // name, lastname, email,
+    // var photoUrl, uid, emailVerified;
+
+    // if (user != null) {
+    //   name = user.displayName;
+    //   email = user.email;
+    //   photoUrl = user.photoURL;
+    //   emailVerified = user.emailVerified;
+    //   uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+    // this value to authenticate with your backend server, if
+    // you have one. Use User.getToken() instead.
+    // }
   });
 
   return divElem;

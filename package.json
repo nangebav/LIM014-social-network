@@ -34,5 +34,18 @@
   },
   "engines": {
     "node": ">=10"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielaguerrac/LIM014-social-network.git"
+  },
+  "author": "Nancy y Gabriela",
+  "bugs": {
+    "url": "https://github.com/gabrielaguerrac/LIM014-social-network/issues"
+  },
+  "homepage": "https://github.com/gabrielaguerrac/LIM014-social-network#readme",
+  "dependencies": {}
 }

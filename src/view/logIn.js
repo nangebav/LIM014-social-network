@@ -20,8 +20,38 @@ export default () => {
   btnRegistration.addEventListener('click', () => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
-    console.log(email);
-    console.log(password);
+    // console.log(email);
+    // console.log(password);
+    const inInit = () => {
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Signed in
+          console.log('existe usuario');
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log('no existe usuario');
+        });
+    };
+
+    const observator = () => {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in.
+          // cambio de vista a perfil de usuario (muro,...)
+          console.log('entro al observator');
+        } else {
+          // No user is signed in.
+          console.log('Usuario no existe, mensaje de error observator');
+          // mostrar el formulario para que ingrese credenciales nuevamente
+        }
+      });
+    };
+    inInit();
+    observator();
   });
   return divElem;
 };
