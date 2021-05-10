@@ -22,20 +22,20 @@ export default () => {
     const password = document.querySelector('#password').value;
     // console.log(email);
     // console.log(password);
-    const inInit = () => {
-      firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          // Signed in
-          console.log('existe usuario');
-          const user = userCredential.user;
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log('no existe usuario');
-        });
-    };
+    // const inInit = () => {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Signed in
+        console.log('existe usuario');
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log('no existe usuario');
+      });
+    // };
 
     const observator = () => {
       firebase.auth().onAuthStateChanged((user) => {
@@ -50,8 +50,8 @@ export default () => {
         }
       });
     };
-    inInit();
-    observator();
+    // inInit();
+    // observator();
   });
   return divElem;
 };
