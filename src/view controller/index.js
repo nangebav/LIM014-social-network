@@ -1,4 +1,6 @@
-import { components } from '../view/index';
+/* eslint-disable consistent-return */
+/* eslint-disable no-console */
+import { components } from '../view/index.js';
 
 const changeView = (route) => {
   const container = document.getElementById('container');
