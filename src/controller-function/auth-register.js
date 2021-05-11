@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 // Función para poder Registrar una Cuenta en MiuArt
+// ---------------------------------------------REGISTER---------------------------------------
 const sendEmail = () => {
   const user = firebase.auth().currentUser;
 
