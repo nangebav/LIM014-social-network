@@ -3,32 +3,28 @@ import { singInFunction } from '../controller-function/auth-logIn.js';
 
 export default () => {
   const viewLogIn = `
-  <form id="iniciarSesion">
-    <h1>MiurArt</h1>
-    <input id="email" type="email" placeholder="Correo electrónico">
-    <input id="password" type="password" placeholder="Contraseña">
-    <button id="btnLogIn">Ingresar</button> 
-    <a class="o">------------------ O ------------------</a>
-    <section>
-      <img id="authFb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
-      <img id="authGoogle" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117555346-07235780-b024-11eb-8bb0-1a93c7aa1a1f.png">
+  <section id="viewLogIn">
+    <section id="messageLogIn">
+      <h2>Bienvenidx a la comunidad de muralistas independientes más increíble del mundo</h2>
+      <p>Muestra, promueve y comparte su trabajo</p>
     </section>
-    <p>¿No tienes una cuenta? <a href="#/register">Registrarse</a> </p>
-  </form>`;
+    <form id="frmLogIn">
+      <h1>MiurArt</h1>
+      <input id="email" type="email" placeholder="Correo electrónico">
+      <input id="password" type="password" placeholder="Contraseña">
+      <button id="btnLogIn">Ingresar</button> 
+      <a class="o">------------------ O ------------------</a>
+      <section>
+        <img id="authFb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
+        <img id="authGoogle" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117885191-282db780-b273-11eb-8899-ee6685fb9cf2.png">
+      </section>
+      <p id="aRegister">¿No tienes una cuenta? <a href="#/register">Registrarse</a> </p>
+    </form>
+  </section>`;
   const divElem = document.createElement('div');
   divElem.innerHTML = viewLogIn;
 
   const btnLogIn = divElem.querySelector('#btnLogIn');
-  // const inputs = divElem.querySelector('#email');
-  // inputs.addEventListener('keyup', () => {
-  //   const textInputs = document.querySelector('#email').value;
-  //   if (!textInputs) {
-  //     btnLogIn.disabled = true;
-  //     console.log('esta vacio');
-  //   } else {
-  //     btnLogIn.disabled = false;
-  //   }
-  // });
   btnLogIn.addEventListener('click', () => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;

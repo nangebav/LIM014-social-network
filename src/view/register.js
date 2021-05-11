@@ -2,24 +2,30 @@
 import { registrationFunction } from '../controller-function/auth-register.js';
 
 export default () => {
-  const viewRegister = ` 
-  <div id="registration">
-  <h1>MiurArt</h1>
-  <h3>¡Regístrese aquí!</h3>
-  <p> Muestre, promueva y comparta su trabajo </p>
-    <input id="name" type="text" placeholder="Nombre">
-    <input id="lastname" type="text" placeholder="Apellido">
-    <input id="emailR" type="email" placeholder="Correo electrónico">
-    <input id="passwordR" type="password" placeholder="Contraseña">
-    <label id="politics"><input id="agreements" type="checkbox">Acepto términos y condiciones y Política de privacidad de datos  </label>
-    <input id="btnRegister" type="button" value="Registrar">
-    <a class="o">------------------ O ------------------</a>
-    <section>
-      <img id="auth-fb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
-      <img id="auth-google" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117555346-07235780-b024-11eb-8bb0-1a93c7aa1a1f.png">
+  const viewRegister = `
+    <section id="viewRegistration">
+      <section id="messageRegister">
+      <h2>Únete a la comunidad de muralistas independientes más increíble del mundo </h2>
     </section>
-    <p>¿Ya tienes una cuenta? <a href="#/">Inicia tu sesión</a> </p>
-  </div>`;
+    <form id="registration">
+      <h1>MiurArt</h1>
+      <h3>¡Regístrate aquí!</h3>
+      <p> Muestra, promueve y comparte tu trabajo </p>
+        <input id="name" type="text" placeholder="Nombre">
+        <input id="lastname" type="text" placeholder="Apellido">
+        <input id="emailR" type="email" placeholder="Correo electrónico">
+        <input id="passwordR" type="password" placeholder="Contraseña">
+        <label id="politics"><input id="agreements" type="checkbox">Acepto términos y condiciones y Política de privacidad de datos  </label>
+        <input id="btnRegister" type="button" value="Registrar">
+        <a class="o">------------------ O ------------------</a>
+        <section>
+          <img id="auth-fb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
+          <img id="auth-google" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117885191-282db780-b273-11eb-8899-ee6685fb9cf2.png">
+        </section>
+        <p>¿Ya tienes una cuenta? <a href="#/">Inicia tu sesión</a> </p>
+    </form >
+  </section>
+`;
   const divElem = document.createElement('div');
   divElem.innerHTML = viewRegister;
 
