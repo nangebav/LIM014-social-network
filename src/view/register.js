@@ -7,18 +7,16 @@ export default () => {
   <h1>MiurArt</h1>
   <h3>¡Regístrese aquí!</h3>
   <p> Muestre, promueva y comparta su trabajo </p>
-    <input id="name" placeholder="Nombre">
-    <input id="lastname" placeholder="Apellido">
-    <input id="userName" placeholder="Nombre de usuario">
+    <input id="name" type="text" placeholder="Nombre">
+    <input id="lastname" type="text" placeholder="Apellido">
     <input id="emailR" type="email" placeholder="Correo electrónico">
     <input id="passwordR" type="password" placeholder="Contraseña">
-    <label><input id="agreements" type="checkbox">Acepto términos y condiciones y Política de privacidad de datos  </label>
+    <label id="politics"><input id="agreements" type="checkbox">Acepto términos y condiciones y Política de privacidad de datos  </label>
     <input id="btnRegister" type="button" value="Registrar">
-    <a>Para registrarse con google</a>
-    <label>imagen de fb</label>
+    <a class="o">------------------ O ------------------</a>
     <section>
-      <img id="auth-fb" alt="ico-fb" class="ico-fb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
-      <img id="auth-google" alt="ico-google" class="ico-google" src="https://user-images.githubusercontent.com/77282012/117555346-07235780-b024-11eb-8bb0-1a93c7aa1a1f.png">
+      <img id="auth-fb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
+      <img id="auth-google" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117555346-07235780-b024-11eb-8bb0-1a93c7aa1a1f.png">
     </section>
     <p>¿Ya tienes una cuenta? <a href="#/">Inicia tu sesión</a> </p>
   </div>`;

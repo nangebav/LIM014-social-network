@@ -7,12 +7,11 @@ export default () => {
     <h1>MiurArt</h1>
     <input id="email" type="email" placeholder="Correo electrónico">
     <input id="password" type="password" placeholder="Contraseña">
-    <input id="btnLogIn" type="submit" value="Ingresar">
-    <a>Para ingresar con google</a>
-    <label>imagen de fb</label>
+    <button id="btnLogIn">Ingresar</button> 
+    <a class="o">------------------ O ------------------</a>
     <section>
-      <img id="authFb" alt="ico-fb" class="ico-fb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
-      <img id="authGoogle" alt="ico-google" class="ico-google" src="https://user-images.githubusercontent.com/77282012/117555346-07235780-b024-11eb-8bb0-1a93c7aa1a1f.png">
+      <img id="authFb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
+      <img id="authGoogle" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117555346-07235780-b024-11eb-8bb0-1a93c7aa1a1f.png">
     </section>
     <p>¿No tienes una cuenta? <a href="#/register">Registrarse</a> </p>
   </form>`;
@@ -20,42 +19,22 @@ export default () => {
   divElem.innerHTML = viewLogIn;
 
   const btnLogIn = divElem.querySelector('#btnLogIn');
-
-  const enter = () => {
-    const container = document.querySelector('#container');
-    const messageContent = '<h1> se deberia mostrar el perfil</h1>';
-    container.innerHTML = messageContent;
-  };
-
-  // const inputs = divElem.querySelectorAll('#email, #password');
-  // console.log(inputs);
-
-  // function ableButton() {
-  //   if (inputs.value === null || inputs.value === '') {
+  // const inputs = divElem.querySelector('#email');
+  // inputs.addEventListener('keyup', () => {
+  //   const textInputs = document.querySelector('#email').value;
+  //   if (!textInputs) {
   //     btnLogIn.disabled = true;
+  //     console.log('esta vacio');
+  //   } else {
+  //     btnLogIn.disabled = false;
   //   }
-  //   btnLogIn.disabled = false;
-  // }
-  // inputs.addEventListener('click', ableButton);
-
+  // });
   btnLogIn.addEventListener('click', () => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
-    // console.log(email);
-    // console.log(password);
+
     const inInit = () => {
-      firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-        // Signed in
-          console.log('existe usuario');
-          const user = userCredential.user;
-        // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log('no existe usuario');
-        });
+      singInFunction(email, password);
     };
 
     const observator = () => {
@@ -63,7 +42,7 @@ export default () => {
         if (user) {
           // User is signed in.
           // cambio de vista a perfil de usuario (muro,...)
-          //enter();
+          // enter();
           console.log('entro al observator');
         } else {
           // No user is signed in.
