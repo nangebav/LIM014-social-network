@@ -5,7 +5,7 @@ export default () => {
   const viewLogIn = `
   <form id="iniciarSesion">
     <h1>MiurArt</h1>
-    <input id="email" placeholder="Correo electrónico">
+    <input id="email" type="email" placeholder="Correo electrónico">
     <input id="password" type="password" placeholder="Contraseña">
     <input id="btnLogIn" type="submit" value="Ingresar">
     <a>Para ingresar con google</a>
@@ -19,14 +19,43 @@ export default () => {
   const divElem = document.createElement('div');
   divElem.innerHTML = viewLogIn;
 
-  const btnRegistration = divElem.querySelector('#btnLogIn');
-  btnRegistration.addEventListener('click', () => {
+  const btnLogIn = divElem.querySelector('#btnLogIn');
+
+  const enter = () => {
+    const container = document.querySelector('#container');
+    const messageContent = '<h1> se deberia mostrar el perfil</h1>';
+    container.innerHTML = messageContent;
+  };
+
+  // const inputs = divElem.querySelectorAll('#email, #password');
+  // console.log(inputs);
+
+  // function ableButton() {
+  //   if (inputs.value === null || inputs.value === '') {
+  //     btnLogIn.disabled = true;
+  //   }
+  //   btnLogIn.disabled = false;
+  // }
+  // inputs.addEventListener('click', ableButton);
+
+  btnLogIn.addEventListener('click', () => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
     // console.log(email);
     // console.log(password);
     const inInit = () => {
-      singInFunction(email, password);
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+        // Signed in
+          console.log('existe usuario');
+          const user = userCredential.user;
+        // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log('no existe usuario');
+        });
     };
 
     const observator = () => {
@@ -34,6 +63,7 @@ export default () => {
         if (user) {
           // User is signed in.
           // cambio de vista a perfil de usuario (muro,...)
+          //enter();
           console.log('entro al observator');
         } else {
           // No user is signed in.

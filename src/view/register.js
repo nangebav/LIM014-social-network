@@ -10,7 +10,7 @@ export default () => {
     <input id="name" placeholder="Nombre">
     <input id="lastname" placeholder="Apellido">
     <input id="userName" placeholder="Nombre de usuario">
-    <input id="emailR" placeholder="Correo electrónico">
+    <input id="emailR" type="email" placeholder="Correo electrónico">
     <input id="passwordR" type="password" placeholder="Contraseña">
     <label><input id="agreements" type="checkbox">Acepto términos y condiciones y Política de privacidad de datos  </label>
     <input id="btnRegister" type="button" value="Registrar">
