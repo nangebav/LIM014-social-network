@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+import { registrationFunction } from '../controller-function/auth-register.js';
+
 export default () => {
   const viewRegister = ` 
   <div id="registration">
@@ -7,7 +10,7 @@ export default () => {
     <input id="name" placeholder="Nombre">
     <input id="lastname" placeholder="Apellido">
     <input id="userName" placeholder="Nombre de usuario">
-    <input id="emailR" placeholder="Correo electrónico">
+    <input id="emailR" type="email" placeholder="Correo electrónico">
     <input id="passwordR" type="password" placeholder="Contraseña">
     <label><input id="agreements" type="checkbox">Acepto términos y condiciones y Política de privacidad de datos  </label>
     <input id="btnRegister" type="button" value="Registrar">
@@ -24,8 +27,9 @@ export default () => {
 
   const btnRegistration = divElem.querySelector('#btnRegister');
   btnRegistration.addEventListener('click', () => {
-    const name = document.querySelector('#name').value;
-    const lastname = document.querySelector('#lastname').value;
+    // const userName = document.querySelector('#userName').value;
+    // const name = document.querySelector('#name').value;
+    // const lastname = document.querySelector('#lastname').value;
     const email = document.querySelector('#emailR').value;
     const password = document.querySelector('#passwordR').value;
     // console.log(name);
@@ -37,23 +41,9 @@ export default () => {
 
     // invocar funcion
     // if(isPasswordCorrect){firebase.auth} else {log error}
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-      // Signed in
-        console.log(userCredential);
-      // var user = userCredential.user;
-      // llamar la funcion para settear el usuario
-      // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode);
-        console.log(errorMessage);
-      // ..
-      });
+    registrationFunction(email, password);
 
-    const user = firebase.auth().currentUser;
+    // const user = firebase.auth().currentUser;
     // name, lastname, email,
     // var photoUrl, uid, emailVerified;
 
