@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { registrationFunction } from '../controller-function/auth-register.js';
+import { registrationFunction, updateProfile } from '../controller-function/auth-register.js';
 
 export default () => {
   const viewRegister = `
@@ -32,8 +32,8 @@ export default () => {
   const btnRegistration = divElem.querySelector('#btnRegister');
   btnRegistration.addEventListener('click', () => {
     // const userName = document.querySelector('#userName').value;
-    // const name = document.querySelector('#name').value;
-    // const lastname = document.querySelector('#lastname').value;
+    const name = document.querySelector('#name').value;
+    const lastname = document.querySelector('#lastname').value;
     const email = document.querySelector('#emailR').value;
     const password = document.querySelector('#passwordR').value;
     // console.log(name);
@@ -45,7 +45,11 @@ export default () => {
 
     // invocar funcion
     // if(isPasswordCorrect){firebase.auth} else {log error}
-    registrationFunction(email, password);
+    registrationFunction(email, password).then(() => {
+      updateProfile(name, lastname);
+    });
+
+   
 
     // const user = firebase.auth().currentUser;
     // name, lastname, email,
