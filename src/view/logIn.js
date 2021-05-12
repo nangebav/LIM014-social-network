@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { singInFunction } from '../controller-function/auth-logIn.js';
 
+
 export default () => {
   const viewLogIn = `
   <section id="viewLog">
@@ -55,9 +56,18 @@ export default () => {
   btnFacebookR.addEventListener('click', () => {
     console.log('Debería ingresarse via facebook');
   });
+
   const btnGoogleR = divElem.querySelector('#authGoogle');
   btnGoogleR.addEventListener('click', () => {
-    console.log('Debería ingresarse via Google');
+    //console.log('Debería ingresarse via Google');
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(googleProvider)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   });
 
   return divElem;

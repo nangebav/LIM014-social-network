@@ -257,4 +257,8 @@ button, h1 {
         color: #9B9999;
     
     }
+
+    .image{
+        display: none;
+    }
  }
