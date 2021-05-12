@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import { singInFunction } from '../controller-function/auth-logIn.js';
 
-
 export default () => {
   const viewLogIn = `
   <section id="viewLog">
@@ -25,10 +24,13 @@ export default () => {
   const divElem = document.createElement('div');
   divElem.innerHTML = viewLogIn;
 
+
+
   const btnLogIn = divElem.querySelector('#btnLogIn');
   btnLogIn.addEventListener('click', () => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
+//verificar user.emailvalidated true para que entre a home
 
     const inInit = () => {
       singInFunction(email, password);
@@ -59,7 +61,7 @@ export default () => {
 
   const btnGoogleR = divElem.querySelector('#authGoogle');
   btnGoogleR.addEventListener('click', () => {
-    //console.log('Debería ingresarse via Google');
+    // console.log('Debería ingresarse via Google');
     const googleProvider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(googleProvider)
       .then((result) => {
@@ -68,7 +70,24 @@ export default () => {
       .catch((error) => {
         console.log(error);
       });
-  });
 
+    const observator = () => {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+        // User is signed in.
+        // cambio de vista a perfil de usuario (muro,...)
+        // enter();
+          console.log('entro al observator');
+
+        } else {
+        // No user is signed in.
+          console.log('Usuario no existe, mensaje de error observator');
+        // mostrar el formulario para que ingrese credenciales nuevamente
+        }
+      });
+    };
+
+    observator();
+  });
   return divElem;
 };
