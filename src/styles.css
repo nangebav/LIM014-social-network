@@ -15,7 +15,7 @@
 #viewLogIn, #viewRegistration{
     margin-top: 15%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -36,15 +36,11 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 40px;
+    /* margin-left: 40px; */
     /* margin-right: 20px; */
     width: 70%;
     /* justify-content: space-between; */
 }
-
-
-
-
 
 /* #frmLogIn{
     display: flex;
@@ -69,7 +65,7 @@ form {
 
 #aRegister {
     font-family: Alegreya;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     line-height: 19px;
 }
@@ -93,23 +89,37 @@ h1{
     font-style: normal;
     font-weight: 700;
     line-height: 78px;
-    letter-spacing: 0em;
-    text-align: left;
-    padding: 0px;
-    margin: 0px;
+    /* letter-spacing: 0em; */
+    /* text-align: left; */
 }
 
 input[type=email],input[type=password],input[type=text] {
-    margin: 5px;
+    margin: 15px;
     border: none;
+    flex-direction: column;
     border-bottom: 3px solid #E5E5E5;
     padding-bottom: 10px;
     width: 100%
   }
+::placeholder{
+    color: #9B9999;
+}
+
+button, h1 {
+    margin: 20px;
+}
+
+#aRegister, #aLogIn {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    /* font-size: 9px; */
+}
   
 .o{
     color: #9B9999;
-
+    width: 100%;
+    text-align: center;
 }
 
 #btnRegister, #btnLogIn {
@@ -118,8 +128,8 @@ input[type=email],input[type=password],input[type=text] {
     border: 1px solid #ffffff;
     padding: 9px;
     border-radius: 12px;
-    margin: 18px;
     cursor: pointer;
+    width: 80%;
 }
 
 }
