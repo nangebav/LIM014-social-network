@@ -49,8 +49,6 @@ export default () => {
       updateProfile(name, lastname);
     });
 
-   
-
     // const user = firebase.auth().currentUser;
     // name, lastname, email,
     // var photoUrl, uid, emailVerified;

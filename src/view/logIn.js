@@ -24,13 +24,11 @@ export default () => {
   const divElem = document.createElement('div');
   divElem.innerHTML = viewLogIn;
 
-
-
   const btnLogIn = divElem.querySelector('#btnLogIn');
   btnLogIn.addEventListener('click', () => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
-//verificar user.emailvalidated true para que entre a home
+    // verificar user.emailvalidated true para que entre a home
 
     const inInit = () => {
       singInFunction(email, password);
@@ -78,7 +76,6 @@ export default () => {
         // cambio de vista a perfil de usuario (muro,...)
         // enter();
           console.log('entro al observator');
-
         } else {
         // No user is signed in.
           console.log('Usuario no existe, mensaje de error observator');
