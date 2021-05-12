@@ -22,7 +22,7 @@ export default () => {
           <img id="auth-fb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
           <img id="auth-google" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117885191-282db780-b273-11eb-8899-ee6685fb9cf2.png">
         </section>
-        <p>¿Ya tienes una cuenta? <a href="#/">Inicia tu sesión</a> </p>
+        <p id="aLogIn">¿Ya tienes una cuenta? <a href="#/">Inicia tu sesión</a> </p>
     </form >
   </section>
 `;
