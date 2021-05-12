@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { singInFunction } from '../controller-function/auth-logIn.js';
+import { sendEmail } from '../controller-function/auth-register.js';
 
 export default () => {
   const viewLogIn = `
@@ -24,33 +25,31 @@ export default () => {
   const divElem = document.createElement('div');
   divElem.innerHTML = viewLogIn;
 
-
-
   const btnLogIn = divElem.querySelector('#btnLogIn');
   btnLogIn.addEventListener('click', () => {
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
-//verificar user.emailvalidated true para que entre a home
+    // verificar user.emailvalidated true para que entre a home
 
-    const inInit = () => {
-      singInFunction(email, password);
-    };
+    singInFunction(email, password);
 
     const observator = () => {
       firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
+        console.log(user);
+        console.log(user.emailVerified);
+        if (user.emailVerified === true) {
           // User is signed in.
           // cambio de vista a perfil de usuario (muro,...)
           // enter();
-          console.log('entro al observator');
+          console.log('entra al home');
+          console.log(window.location);
+          window.location += 'home';
         } else {
-          // No user is signed in.
-          console.log('Usuario no existe, mensaje de error observator');
-          // mostrar el formulario para que ingrese credenciales nuevamente
+          console.log('la cuenta no esta verificada');
         }
       });
     };
-    inInit();
+    // inInit();
     observator();
   });
 
@@ -78,7 +77,6 @@ export default () => {
         // cambio de vista a perfil de usuario (muro,...)
         // enter();
           console.log('entro al observator');
-
         } else {
         // No user is signed in.
           console.log('Usuario no existe, mensaje de error observator');
