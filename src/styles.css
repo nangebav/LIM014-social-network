@@ -148,13 +148,6 @@ button, h1 {
 
     }
 
-    #viewLogin{
-        margin: 2%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-
     #imageLog{
         margin: 0px;
         display: none;
@@ -172,15 +165,27 @@ button, h1 {
  } */
 
  @media screen and (min-width: 1050px){
+
+    #viewLog, #viewRegistration{
+        margin: 4%;
+        padding: 2%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border-style: solid;
+        border-color: black;
+    }
+
     form {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-left: 40px;
-        /* margin-right: 20px; */
-        width: 70%;
-        /* justify-content: space-between; */
+        margin-right: 20px;
+        width: 35%;
     }
+
+
     .icoFb, .icoGoogle {
         width: 50px;
         height: 50px;
@@ -188,4 +193,68 @@ button, h1 {
         margin-right: 25px;
         margin-top: 10px;
     }    
+
+    #btnRegister, #btnLogIn {
+        color: #000000;
+        background: #FF826D;
+        border: 1px solid #ffffff;
+        padding: 9px;
+        border-radius: 12px;
+        margin: 18px;
+        cursor: pointer;
+    }
+
+    #aRegister {
+        font-family: Alegreya;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 19px;
+    }
+    
+    #politics{
+        font-size: 12px;
+        margin: 20px;
+    }
+    
+    .icoFb, .icoGoogle {
+        width: 50px;
+        height: 50px;
+        margin-left: 25px;
+        margin-right: 25px;
+        margin-top: 10px;
+    }
+    
+    h1{
+        font-family: Montserrat;
+        font-size: 55px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 78px;
+        letter-spacing: 0em;
+        text-align: left;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    h2{
+        font-family: Montserrat;
+        font-size: 25px;
+        width: 90%;
+        font-style: normal;
+        text-align: center;
+    }
+    
+    input[type=email],input[type=password],input[type=text] {
+        margin: 5px;
+        padding: 6px;
+        border: none;
+        border-bottom: 3px solid #E5E5E5;
+        padding-bottom: 10px;
+        width: 90%
+      }
+      
+    .o{
+        color: #9B9999;
+    
+    }
  }

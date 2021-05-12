@@ -3,11 +3,11 @@ import { singInFunction } from '../controller-function/auth-logIn.js';
 
 export default () => {
   const viewLogIn = `
-  <section id="viewLogIn">
+  <section id="viewLog">
     <section id="messageLogIn">
+      <img src="https://user-images.githubusercontent.com/77282012/117907841-195bfa80-b29d-11eb-88b3-9d9325fb12e3.jpg" class="image">
       <h2>Bienvenidx a la comunidad de muralistas independientes más increíble del mundo</h2>
-      <p>Muestra, promueve y comparte su trabajo</p>
-    </section>
+      </section>
     <form id="frmLogIn">
       <h1>MiurArt</h1>
       <input id="email" type="email" placeholder="Correo electrónico">
