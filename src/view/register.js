@@ -7,7 +7,7 @@ export default () => {
       <section id="messageRegister">
         <h2>Únete a la comunidad de muralistas independientes más increíble del mundo </h2>
       </section>
-      <form id="registration">
+      <form id="frmRegistration">
         <h1>MiurArt</h1>
         <h3>¡Regístrate aquí!</h3>
         <p> Muestra, promueve y comparte tu trabajo </p>
@@ -17,12 +17,12 @@ export default () => {
           <input id="passwordR" type="password" placeholder="Contraseña">
           <label id="politics"><input id="agreements" type="checkbox">Acepto términos y condiciones y Política de privacidad de datos  </label>
           <input id="btnRegister" type="button" value="Registrar">
-          <a class="o">------------------ O ------------------</a>
+          <a class="o">-------------------- o -------------------</a>
           <section>
             <img id="auth-fb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
             <img id="auth-google" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117885191-282db780-b273-11eb-8899-ee6685fb9cf2.png">
           </section>
-          <p>¿Ya tienes una cuenta? <a href="#/">Inicia tu sesión</a> </p>
+          <p id="aRegister">¿Ya tienes una cuenta? <a href="#/">Inicia tu sesión</a> </p>
       </form >
   </section>
 `;
@@ -48,8 +48,6 @@ export default () => {
     registrationFunction(email, password).then(() => {
       updateProfile(name, lastname);
     });
-
-   
 
     // const user = firebase.auth().currentUser;
     // name, lastname, email,
