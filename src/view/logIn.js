@@ -26,7 +26,9 @@ export default () => {
   divElem.innerHTML = viewLogIn;
 
   const btnLogIn = divElem.querySelector('#btnLogIn');
-  btnLogIn.addEventListener('click', () => {
+  btnLogIn.disabled = true;
+  btnLogIn.addEventListener('click', (event) => {
+    event.preventDefault();
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
     // verificar user.emailvalidated true para que entre a home
@@ -34,58 +36,44 @@ export default () => {
     signInFunction(email, password);
 
     const observator = () => {
-      firebase.auth().onAuthStateChanged((user) => {
-        console.log(user);
-        console.log(user.emailVerified);
-        if (user.emailVerified === true) {
-          // User is signed in.
-          // cambio de vista a perfil de usuario (muro,...)
-          // enter();
-          console.log('entra al home');
-          console.log(window.location);
-          window.location += 'home';
-        } else {
-          console.log('la cuenta no esta verificada');
-        }
-      });
+      if (email && password) {
+        firebase.auth().onAuthStateChanged((user) => {
+          // console.log(user);
+          // console.log(user.emailVerified);
+          if (user.emailVerified) {
+            console.log('entra al home');
+            console.log(window.location);
+            window.location.hash = '#/home';
+          } else {
+            console.log('la cuenta no esta verificada');
+          }
+        });
+      } else {
+        alert('llene los campos de login');
+      }
     };
     // inInit();
     observator();
   });
 
-  const btnFacebookR = divElem.querySelector('#authFb');
-  btnFacebookR.addEventListener('click', () => {
+  const btnFacebook = divElem.querySelector('#authFb');
+  btnFacebook.addEventListener('click', () => {
     console.log('Debería ingresarse via facebook');
   });
 
-  const btnGoogleR = divElem.querySelector('#authGoogle');
-  btnGoogleR.addEventListener('click', () => {
+  const btnGoogle = divElem.querySelector('#authGoogle');
+  btnGoogle.addEventListener('click', () => {
     // console.log('Debería ingresarse via Google');
     const googleProvider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(googleProvider)
-      .then(() => {
-        window.location += 'home';
+      .then((result) => {
+        console.log(result);
+        console.log(window.location);
+        window.location.hash = '#/home';
       })
       .catch((error) => {
         console.log(error);
       });
-
-    const observator = () => {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-        // User is signed in.
-        // cambio de vista a perfil de usuario (muro,...)
-        // enter();
-          console.log('entro al observator');
-        } else {
-        // No user is signed in.
-          console.log('Usuario no existe, mensaje de error observator');
-        // mostrar el formulario para que ingrese credenciales nuevamente
-        }
-      });
-    };
-
-    observator();
   });
   return divElem;
 };

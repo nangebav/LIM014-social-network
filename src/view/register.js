@@ -19,8 +19,8 @@ export default () => {
           <input id="btnRegister" type="button" value="Registrar">
           <a class="o">-------------------- o -------------------</a>
           <section>
-            <img id="auth-fb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
-            <img id="auth-google" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117885191-282db780-b273-11eb-8899-ee6685fb9cf2.png">
+            <img id="fbRegistration" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
+            <img id="googleRegistration" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117885191-282db780-b273-11eb-8899-ee6685fb9cf2.png">
           </section>
           <p id="aRegister">¿Ya tienes una cuenta? <a href="#/">Inicia tu sesión</a> </p>
       </form >
@@ -46,22 +46,28 @@ export default () => {
     // invocar funcion
     // if(isPasswordCorrect){firebase.auth} else {log error}
     registrationFunction(email, password).then(() => {
-      updateProfile(name, lastname);
+      if (email && lastname && name && password) {
+        updateProfile(name, lastname);
+        alert('Por favor verifica tu cuenta de correo electrónico');
+      } else {
+        alert('llene todos los campos');
+      }
     });
+  });
 
-    // const user = firebase.auth().currentUser;
-    // name, lastname, email,
-    // var photoUrl, uid, emailVerified;
-
-    // if (user != null) {
-    //   name = user.displayName;
-    //   email = user.email;
-    //   photoUrl = user.photoURL;
-    //   emailVerified = user.emailVerified;
-    //   uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-    // this value to authenticate with your backend server, if
-    // you have one. Use User.getToken() instead.
-    // }
+  const btnGoogleR = divElem.querySelector('#googleRegistration');
+  btnGoogleR.addEventListener('click', () => {
+    // console.log('Debería ingresarse via Google');
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(googleProvider)
+      .then((result) => {
+        console.log(result);
+        console.log(window.location);
+        window.location.hash = '#/home';
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   });
 
   return divElem;
