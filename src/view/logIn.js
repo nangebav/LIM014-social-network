@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import { singInFunction } from '../controller-function/auth-logIn.js';
-import { sendEmail } from '../controller-function/auth-register.js';
+import { signInFunction } from '../controller-function/auth-logIn.js';
+// import { sendEmail } from '../controller-function/auth-register.js';
 
 export default () => {
   const viewLogIn = `
@@ -14,7 +14,7 @@ export default () => {
       <input id="email" type="email" placeholder="Correo electrónico">
       <input id="password" type="password" placeholder="Contraseña">
       <button id="btnLogIn">Ingresar</button> 
-      <a class="o">------------------ O ------------------</a>
+      <a class="o">------------------ o ------------------</a>
       <section>
         <img id="authFb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
         <img id="authGoogle" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117885191-282db780-b273-11eb-8899-ee6685fb9cf2.png">
@@ -31,7 +31,7 @@ export default () => {
     const password = document.querySelector('#password').value;
     // verificar user.emailvalidated true para que entre a home
 
-    singInFunction(email, password);
+    signInFunction(email, password);
 
     const observator = () => {
       firebase.auth().onAuthStateChanged((user) => {
