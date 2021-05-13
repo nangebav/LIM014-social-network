@@ -26,7 +26,8 @@ export default () => {
   divElem.innerHTML = viewLogIn;
 
   const btnLogIn = divElem.querySelector('#btnLogIn');
-  btnLogIn.addEventListener('click', () => {
+  btnLogIn.addEventListener('click', (event) => {
+    event.preventDefault();
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
     // verificar user.emailvalidated true para que entre a home
@@ -43,7 +44,7 @@ export default () => {
           // enter();
           console.log('entra al home');
           console.log(window.location);
-          window.location += 'home';
+          window.location.hash = '#/home';
         } else {
           console.log('la cuenta no esta verificada');
         }
@@ -65,6 +66,8 @@ export default () => {
     firebase.auth().signInWithPopup(googleProvider)
       .then((result) => {
         console.log(result);
+        console.log(window.location);
+        window.location.hash = '#/home';
       })
       .catch((error) => {
         console.log(error);
