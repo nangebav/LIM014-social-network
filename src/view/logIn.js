@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import { singInFunction } from '../controller-function/auth-logIn.js';
+import { signInFunction } from '../controller-function/auth-logIn.js';
+// import { sendEmail } from '../controller-function/auth-register.js';
 
 export default () => {
   const viewLogIn = `
@@ -13,7 +14,7 @@ export default () => {
       <input id="email" type="email" placeholder="Correo electrónico">
       <input id="password" type="password" placeholder="Contraseña">
       <button id="btnLogIn">Ingresar</button> 
-      <a class="o">------------------ O ------------------</a>
+      <a class="o">------------------ o ------------------</a>
       <section>
         <img id="authFb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
         <img id="authGoogle" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117885191-282db780-b273-11eb-8899-ee6685fb9cf2.png">
@@ -30,25 +31,25 @@ export default () => {
     const password = document.querySelector('#password').value;
     // verificar user.emailvalidated true para que entre a home
 
-    const inInit = () => {
-      singInFunction(email, password);
-    };
+    signInFunction(email, password);
 
     const observator = () => {
       firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
+        console.log(user);
+        console.log(user.emailVerified);
+        if (user.emailVerified === true) {
           // User is signed in.
           // cambio de vista a perfil de usuario (muro,...)
           // enter();
-          console.log('entro al observator');
+          console.log('entra al home');
+          console.log(window.location);
+          window.location += 'home';
         } else {
-          // No user is signed in.
-          console.log('Usuario no existe, mensaje de error observator');
-          // mostrar el formulario para que ingrese credenciales nuevamente
+          console.log('la cuenta no esta verificada');
         }
       });
     };
-    inInit();
+    // inInit();
     observator();
   });
 
@@ -62,8 +63,8 @@ export default () => {
     // console.log('Debería ingresarse via Google');
     const googleProvider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(googleProvider)
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        window.location += 'home';
       })
       .catch((error) => {
         console.log(error);
