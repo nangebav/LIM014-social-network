@@ -25,13 +25,11 @@ export const registrationFunction = (email, password) => firebase.auth()
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.log(errorCode);
-    console.log(errorMessage);
+    alert(`${errorCode}\n${errorMessage}`);
   });
 
 export const updateProfile = (nombre, apellido) => {
   const user = firebase.auth().currentUser;
-
   user.updateProfile({
     displayName: `${nombre} ${apellido}`,
     // photoURL: 'https://example.com/jane-q-user/profile.jpg',
