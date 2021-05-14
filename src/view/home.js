@@ -2,9 +2,13 @@
 
 export default () => {
   const viewHome = `
+  <header>
+  <h1> Mi
+  <button id="btnSalir">Salir</button>
+  </header>
     <section id="viewHome">
     <h1> Bienvenido al Home
-    <button id="btnSalir">Salir</button>
+
     </section>
     `;
 

@@ -1,6 +1,6 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-console */
 import { signInFunction } from '../controller-function/auth-logIn.js';
-// import { sendEmail } from '../controller-function/auth-register.js';
 
 export default () => {
   const viewLogIn = `
@@ -11,6 +11,7 @@ export default () => {
       </section>
     <form id="frmLogIn">
       <h1>MiurArt</h1>
+      <p id="errorMessage"></p>
       <input id="email" type="email" placeholder="Correo electrónico">
       <input id="password" type="password" placeholder="Contraseña">
       <button id="btnLogIn">Ingresar</button> 
@@ -26,14 +27,20 @@ export default () => {
   divElem.innerHTML = viewLogIn;
 
   const btnLogIn = divElem.querySelector('#btnLogIn');
-  btnLogIn.disabled = true;
+  // btnLogIn.disabled = true;
   btnLogIn.addEventListener('click', (event) => {
     event.preventDefault();
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
     // verificar user.emailvalidated true para que entre a home
 
-    signInFunction(email, password);
+    const errorMessage = document.querySelector('#errorMessage');
+    signInFunction(email, password)
+      .catch((error) => {
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        errorMessage.innerHTML = error.message;
+      });
 
     const observator = () => {
       if (email && password) {
