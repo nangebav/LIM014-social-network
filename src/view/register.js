@@ -60,8 +60,6 @@ export default () => {
         errorMessageR.innerHTML = 'llene todos los campos';
       }
     });
-<<<<<<< HEAD
-=======
   });
 
   const btnGoogleR = divElem.querySelector('#googleRegistration');
@@ -77,7 +75,6 @@ export default () => {
       .catch((error) => {
         console.log(error);
       });
->>>>>>> 7c842cd3ecb59cac01ac56b572f1087d8e1d73a0
   });
 
   return divElem;

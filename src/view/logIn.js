@@ -43,19 +43,6 @@ export default () => {
       });
 
     const observator = () => {
-<<<<<<< HEAD
-      firebase.auth().onAuthStateChanged((user) => {
-        // console.log(user);
-        // console.log(user.emailVerified);
-        if (user.emailVerified) {
-          console.log('entra al home');
-          console.log(window.location);
-          window.location.hash = '#/home';
-        } else {
-          console.log('la cuenta no esta verificada');
-        }
-      });
-=======
       if (email && password) {
         firebase.auth().onAuthStateChanged((user) => {
           // console.log(user);
@@ -71,7 +58,6 @@ export default () => {
       } else {
         alert('llene los campos de login');
       }
->>>>>>> 7c842cd3ecb59cac01ac56b572f1087d8e1d73a0
     };
     // inInit();
     observator();
@@ -95,24 +81,6 @@ export default () => {
       .catch((error) => {
         console.log(error);
       });
-<<<<<<< HEAD
-
-    // const observator = () => {
-    //   firebase.auth().onAuthStateChanged((user) => {
-    //     if (user) {
-    //     // User is signed in.
-    //     // cambio de vista a perfil de usuario (muro,...)
-    //     // enter();
-    //       console.log('entro al observator');
-    //     } else {
-    //     // No user is signed in.
-    //       console.log('Usuario no existe, mensaje de error observator');
-    //     // mostrar el formulario para que ingrese credenciales nuevamente
-    //     }
-    //   });
-    // };
-=======
->>>>>>> 7c842cd3ecb59cac01ac56b572f1087d8e1d73a0
   });
   return divElem;
 };
