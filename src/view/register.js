@@ -6,18 +6,13 @@ export default () => {
     <section id="viewRegistration">
       <section id="messageRegister">
         <h2>Únete a la comunidad de muralistas independientes más increíble del mundo </h2>
-        <img alt="ico-fb" class="image" src="https://user-images.githubusercontent.com/77282012/118214062-bac98480-b434-11eb-80ec-83076148bf18.png">
+        <img alt="ico-fb" class="image" src="https://user-images.githubusercontent.com/77282012/118408276-83342580-b64a-11eb-831a-15778cddd83b.png">
       </section>
       <form id="frmRegistration">
         <h1>MiurArt</h1>
         <h3>¡Regístrate aquí!</h3>
         <p> Muestra, promueve y comparte tu trabajo </p>
-        <section>
-          <section>
-            <input id="name" type="text" placeholder="Nombre">
-          </section>
-        <p> No se permiten caracteres numéricos</p>
-        </section>
+        <input id="name" type="text" placeholder="Nombre">
         <input id="lastname" type="text" placeholder="Apellido">
         <input id="emailR" type="email" placeholder="Correo electrónico">
         <input id="passwordR" type="password" placeholder="Contraseña">
