@@ -6,15 +6,17 @@ export default () => {
   const viewLogIn = `
   <section id="viewLog">
     <section id="messageLogIn">
-      <img src="https://user-images.githubusercontent.com/77282012/117907841-195bfa80-b29d-11eb-88b3-9d9325fb12e3.jpg" class="image">
-      <h2>Bienvenidx a la comunidad de muralistas independientes más increíble del mundo</h2>
+      <h2 id="textLogIn">Bienvenidx a la comunidad de muralistas independientes más increíble del mundo</h2>
+      <img src="https://user-images.githubusercontent.com/77282012/118408278-84655280-b64a-11eb-927f-3b8056af3255.png" class="image">
       </section>
     <form id="frmLogIn">
       <h1>MiurArt</h1>
       <p id="errorMessage"></p>
-      <input id="email" type="email" placeholder="Correo electrónico">
-      <input id="password" type="password" placeholder="Contraseña">
-      <button id="btnLogIn">Ingresar</button> 
+      <input class="inputText" id="email" type="email" placeholder="Correo electrónico">
+      <span id="alertEmail"></span>
+      <input class="inputText" id="password" type="password" placeholder="Contraseña">
+      <span id="alertPassword"></span>
+      <button id="btnLogIn" disabled="true">Ingresar</button> 
       <a class="o">------------------ o ------------------</a>
       <section>
         <img id="authFb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
@@ -27,26 +29,46 @@ export default () => {
   divElem.innerHTML = viewLogIn;
 
   const btnLogIn = divElem.querySelector('#btnLogIn');
+  const inputText = divElem.querySelector('.inputText');
+  const alertEmail = divElem.querySelector('#alertEmail');
+  const alertPassword = divElem.querySelector('#alertPassword');
+  const emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+
+  inputText.addEventListener('keyup', () => {
+    const emailvalue = divElem.querySelector('#email').value;
+    const passwordValue = divElem.querySelector('#password').value;
+    if (emailRegex.test(emailvalue) === false) {
+      alertEmail.innerHTML = '⚠️ Debe ingresar su email';
+      btnLogIn.disabled = true;
+      alertEmail.classList.add('errorInput');
+    } if (passwordValue.length < 6) {
+      alertPassword.innerHTML = '⚠️ Debe ingresar contraseña';
+      btnLogIn.disabled = true;
+      alertPassword.classList.add('errorInput');
+    } else if (emailRegex.test(emailvalue) === true && passwordValue.length > 6) {
+      console.log('ya no deberian salir los mensajes');
+      alertEmail.innerHTML = '';
+      alertPassword.innerHTML = '';
+      btnLogIn.disabled = false;
+    }
+  });
+
   // btnLogIn.disabled = true;
   btnLogIn.addEventListener('click', (event) => {
     event.preventDefault();
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
-    // verificar user.emailvalidated true para que entre a home
 
+    // verificar user.emailvalidated true para que entre a home
     const errorMessage = document.querySelector('#errorMessage');
     signInFunction(email, password)
       .catch((error) => {
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
         errorMessage.innerHTML = error.message;
       });
 
     const observator = () => {
       if (email && password) {
         firebase.auth().onAuthStateChanged((user) => {
-          // console.log(user);
-          // console.log(user.emailVerified);
           if (user.emailVerified) {
             console.log('entra al home');
             console.log(window.location);
