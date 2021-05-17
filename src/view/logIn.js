@@ -36,12 +36,9 @@ export default () => {
 
     const observator = () => {
       firebase.auth().onAuthStateChanged((user) => {
-        console.log(user);
-        console.log(user.emailVerified);
-        if (user.emailVerified === true) {
-          // User is signed in.
-          // cambio de vista a perfil de usuario (muro,...)
-          // enter();
+        // console.log(user);
+        // console.log(user.emailVerified);
+        if (user.emailVerified) {
           console.log('entra al home');
           console.log(window.location);
           window.location.hash = '#/home';
@@ -73,22 +70,20 @@ export default () => {
         console.log(error);
       });
 
-    const observator = () => {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-        // User is signed in.
-        // cambio de vista a perfil de usuario (muro,...)
-        // enter();
-          console.log('entro al observator');
-        } else {
-        // No user is signed in.
-          console.log('Usuario no existe, mensaje de error observator');
-        // mostrar el formulario para que ingrese credenciales nuevamente
-        }
-      });
-    };
-
-    observator();
+    // const observator = () => {
+    //   firebase.auth().onAuthStateChanged((user) => {
+    //     if (user) {
+    //     // User is signed in.
+    //     // cambio de vista a perfil de usuario (muro,...)
+    //     // enter();
+    //       console.log('entro al observator');
+    //     } else {
+    //     // No user is signed in.
+    //       console.log('Usuario no existe, mensaje de error observator');
+    //     // mostrar el formulario para que ingrese credenciales nuevamente
+    //     }
+    //   });
+    // };
   });
   return divElem;
 };
