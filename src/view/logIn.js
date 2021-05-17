@@ -1,6 +1,6 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-console */
 import { signInFunction } from '../controller-function/auth-logIn.js';
-// import { sendEmail } from '../controller-function/auth-register.js';
 
 export default () => {
   const viewLogIn = `
@@ -11,6 +11,7 @@ export default () => {
       </section>
     <form id="frmLogIn">
       <h1>MiurArt</h1>
+      <p id="errorMessage"></p>
       <input id="email" type="email" placeholder="Correo electrónico">
       <input id="password" type="password" placeholder="Contraseña">
       <button id="btnLogIn">Ingresar</button> 
@@ -26,15 +27,23 @@ export default () => {
   divElem.innerHTML = viewLogIn;
 
   const btnLogIn = divElem.querySelector('#btnLogIn');
+  // btnLogIn.disabled = true;
   btnLogIn.addEventListener('click', (event) => {
     event.preventDefault();
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
     // verificar user.emailvalidated true para que entre a home
 
-    signInFunction(email, password);
+    const errorMessage = document.querySelector('#errorMessage');
+    signInFunction(email, password)
+      .catch((error) => {
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        errorMessage.innerHTML = error.message;
+      });
 
     const observator = () => {
+<<<<<<< HEAD
       firebase.auth().onAuthStateChanged((user) => {
         // console.log(user);
         // console.log(user.emailVerified);
@@ -46,18 +55,35 @@ export default () => {
           console.log('la cuenta no esta verificada');
         }
       });
+=======
+      if (email && password) {
+        firebase.auth().onAuthStateChanged((user) => {
+          // console.log(user);
+          // console.log(user.emailVerified);
+          if (user.emailVerified) {
+            console.log('entra al home');
+            console.log(window.location);
+            window.location.hash = '#/home';
+          } else {
+            console.log('la cuenta no esta verificada');
+          }
+        });
+      } else {
+        alert('llene los campos de login');
+      }
+>>>>>>> 7c842cd3ecb59cac01ac56b572f1087d8e1d73a0
     };
     // inInit();
     observator();
   });
 
-  const btnFacebookR = divElem.querySelector('#authFb');
-  btnFacebookR.addEventListener('click', () => {
+  const btnFacebook = divElem.querySelector('#authFb');
+  btnFacebook.addEventListener('click', () => {
     console.log('Debería ingresarse via facebook');
   });
 
-  const btnGoogleR = divElem.querySelector('#authGoogle');
-  btnGoogleR.addEventListener('click', () => {
+  const btnGoogle = divElem.querySelector('#authGoogle');
+  btnGoogle.addEventListener('click', () => {
     // console.log('Debería ingresarse via Google');
     const googleProvider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(googleProvider)
@@ -69,6 +95,7 @@ export default () => {
       .catch((error) => {
         console.log(error);
       });
+<<<<<<< HEAD
 
     // const observator = () => {
     //   firebase.auth().onAuthStateChanged((user) => {
@@ -84,6 +111,8 @@ export default () => {
     //     }
     //   });
     // };
+=======
+>>>>>>> 7c842cd3ecb59cac01ac56b572f1087d8e1d73a0
   });
   return divElem;
 };

@@ -6,23 +6,29 @@ export default () => {
     <section id="viewRegistration">
       <section id="messageRegister">
         <h2>Únete a la comunidad de muralistas independientes más increíble del mundo </h2>
+        <img alt="ico-fb" class="image" src="https://user-images.githubusercontent.com/77282012/118214062-bac98480-b434-11eb-80ec-83076148bf18.png">
       </section>
       <form id="frmRegistration">
         <h1>MiurArt</h1>
         <h3>¡Regístrate aquí!</h3>
         <p> Muestra, promueve y comparte tu trabajo </p>
-          <input id="name" type="text" placeholder="Nombre">
-          <input id="lastname" type="text" placeholder="Apellido">
-          <input id="emailR" type="email" placeholder="Correo electrónico">
-          <input id="passwordR" type="password" placeholder="Contraseña">
-          <label id="politics"><input id="agreements" type="checkbox">Acepto términos y condiciones y Política de privacidad de datos  </label>
-          <input id="btnRegister" type="button" value="Registrar">
-          <a class="o">-------------------- o -------------------</a>
+        <section>
           <section>
-            <img id="auth-fb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
-            <img id="auth-google" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117885191-282db780-b273-11eb-8899-ee6685fb9cf2.png">
+            <input id="name" type="text" placeholder="Nombre">
           </section>
-          <p id="aRegister">¿Ya tienes una cuenta? <a href="#/">Inicia tu sesión</a> </p>
+        <p> No se permiten caracteres numéricos</p>
+        </section>
+        <input id="lastname" type="text" placeholder="Apellido">
+        <input id="emailR" type="email" placeholder="Correo electrónico">
+        <input id="passwordR" type="password" placeholder="Contraseña">
+        <label id="politics"><input id="agreements" type="checkbox">Acepto términos y condiciones y Política de privacidad de datos  </label>
+        <input id="btnRegister" type="button" value="Registrar">
+        <a class="o">-------------------- o -------------------</a>
+        <section>
+          <img id="fbRegistration" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
+          <img id="googleRegistration" alt="ico-google" class="icoGoogle" src="https://user-images.githubusercontent.com/77282012/117885191-282db780-b273-11eb-8899-ee6685fb9cf2.png">
+        </section>
+        <p id="aRegister">¿Ya tienes una cuenta? <a href="#/">Inicia tu sesión</a> </p>
       </form >
   </section>
 `;
@@ -36,6 +42,7 @@ export default () => {
     const lastname = document.querySelector('#lastname').value;
     const email = document.querySelector('#emailR').value;
     const password = document.querySelector('#passwordR').value;
+    const errorMessageR = document.querySelector('#errorMessageR');
     // console.log(name);
     // console.log(lastname);
     // console.log(email);
@@ -46,8 +53,31 @@ export default () => {
     // invocar funcion
     // if(isPasswordCorrect){firebase.auth} else {log error}
     registrationFunction(email, password).then(() => {
-      updateProfile(name, lastname);
+      if (email && lastname && name && password) {
+        updateProfile(name, lastname);
+        alert('Por favor verifica tu cuenta de correo electrónico');
+      } else {
+        errorMessageR.innerHTML = 'llene todos los campos';
+      }
     });
+<<<<<<< HEAD
+=======
+  });
+
+  const btnGoogleR = divElem.querySelector('#googleRegistration');
+  btnGoogleR.addEventListener('click', () => {
+    // console.log('Debería ingresarse via Google');
+    const googleProvider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(googleProvider)
+      .then((result) => {
+        console.log(result);
+        console.log(window.location);
+        window.location.hash = '#/home';
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+>>>>>>> 7c842cd3ecb59cac01ac56b572f1087d8e1d73a0
   });
 
   return divElem;
