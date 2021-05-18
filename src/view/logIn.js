@@ -1,13 +1,11 @@
-/* eslint-disable no-alert */
-/* eslint-disable no-console */
-import { signInFunction } from '../controller-function/auth-logIn.js';
+import { signInFunction, signInGoogle } from '../controller-function/auth-logIn.js';
 
 export default () => {
   const viewLogIn = `
   <section id="viewLog">
     <section id="messageLogIn">
       <h2 id="textLogIn">Bienvenidx a la comunidad de muralistas independientes más increíble del mundo</h2>
-      <img src="https://user-images.githubusercontent.com/77282012/118408278-84655280-b64a-11eb-927f-3b8056af3255.png" class="image">
+      <img src="https://user-images.githubusercontent.com/77282012/118579586-fa091580-b753-11eb-9213-69ada53be066.png" class="image">
       </section>
     <form id="frmLogIn">
       <h1>MiurArt</h1>
@@ -16,7 +14,7 @@ export default () => {
       <span id="alertEmail"></span>
       <input class="inputText" id="password" type="password" name="password" minlength="six" placeholder="Contraseña">
       <span id="alertPassword"></span>
-      <button id="btnLogIn" disabled="true">Ingresar</button> 
+      <button id="btnLogIn">Ingresar</button> 
       <a class="o">------------------ o ------------------</a>
       <section>
         <img id="authFb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
@@ -69,7 +67,7 @@ export default () => {
   // FUNCION PARA HABILITAR BOTON
 
   const ableButton = () => {
-    (password.value.length > 6 && emailRegex.test(email.value))
+    password.value.length > 6 && emailRegex.test(email.value)
       ? btnLogIn.disabled = false
       : btnLogIn.disabled = true;
   };
@@ -191,12 +189,9 @@ export default () => {
 
   const btnGoogle = divElem.querySelector('#authGoogle');
   btnGoogle.addEventListener('click', () => {
-    // console.log('Debería ingresarse via Google');
-    const googleProvider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(googleProvider)
+    signInGoogle()
       .then((result) => {
         console.log(result);
-        console.log(window.location);
         window.location.hash = '#/home';
       })
       .catch((error) => {

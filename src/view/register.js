@@ -76,14 +76,14 @@ export default () => {
 
       case 'emailR':
         if (emailRegex.test(e.target.value)) {
-          console.log('es un email valido');
+          // console.log('es un email valido');
           alertEmailR.innerHTML = '';
           alertEmailR.classList.remove('errorInput');
         } else {
           alertEmailR.innerHTML = '⚠️ Debe ser un email';
           btnRegistration.disabled = true;
           alertEmailR.classList.add('errorInput');
-          console.log('no es un email valido');
+          // console.log('no es un email valido');
         }
         break;
 
