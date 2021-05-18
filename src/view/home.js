@@ -9,7 +9,12 @@ export default () => {
     </header>
     <section id="viewHome">
       <h1> Bienvenido al Home </h1>
-      <h2 id="username"></h2>
+      <section>
+      <ul>
+        <h2 id="username"></h2>
+        <p> [Aquí se debería poner la descripción del usuario]</p>
+      </ul>
+    </section>
     </section>
     `;
 
@@ -29,7 +34,13 @@ export default () => {
   });
   const username = divElem.querySelector('#username');
   firebase.auth().onAuthStateChanged((user) => {
-    username.innerHTML = user.displayName;
+    if (user) {
+      username.innerHTML = user.displayName;
+      console.log('Estas logueado');
+    } else {
+      window.location.hash = '';
+      console.log('Tu no estas logueado');
+    }
   });
 
   return divElem;
