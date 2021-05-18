@@ -35,7 +35,7 @@ export const updateProfile = (nombre, apellido) => {
     // photoURL: 'https://example.com/jane-q-user/profile.jpg',
   }).then(() => {
   // Update successful.
-    console.log('usuario creado');
+    // console.log('usuario creado');
   }).catch((error) => {
   // An error happened.
     console.log(error);
