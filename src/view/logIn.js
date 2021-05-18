@@ -26,7 +26,7 @@ export default () => {
   const divElem = document.createElement('div');
   divElem.innerHTML = viewLogIn;
 
-  const formulario = document.querySelector('#frmLogIN');
+  // const formulario = document.querySelector('#frmLogIN');
   const btnLogIn = divElem.querySelector('#btnLogIn');
   const inputText = divElem.querySelectorAll('.inputText');
   const email = divElem.querySelector('#email');
@@ -39,7 +39,7 @@ export default () => {
     switch (e.target.name) {
       case 'email':
         if (emailRegex.test(e.target.value)) {
-          //console.log(e);
+          // console.log(e);
           alertEmail.innerHTML = '';
           // btnLogIn.disabled = false;
           alertEmail.classList.remove('errorInput');
@@ -153,9 +153,6 @@ export default () => {
   // btnLogIn.disabled = true;
   btnLogIn.addEventListener('click', (event) => {
     event.preventDefault();
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
-
     // verificar user.emailvalidated true para que entre a home
     const errorMessage = document.querySelector('#errorMessage');
     signInFunction(email, password)
@@ -164,19 +161,13 @@ export default () => {
       });
 
     const observator = () => {
-      if (email && password) {
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user.emailVerified) {
-            console.log('entra al home');
-            console.log(window.location);
-            window.location.hash = '#/home';
-          } else {
-            console.log('la cuenta no esta verificada');
-          }
-        });
-      } else {
-        alert('llene los campos de login');
-      }
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user.emailVerified) {
+          window.location.hash = '#/home';
+        } else {
+          console.log('la cuenta no esta verificada');
+        }
+      });
     };
     // inInit();
     observator();
@@ -198,5 +189,14 @@ export default () => {
         console.log(error);
       });
   });
+
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      window.location.hash = '#/home';
+    } else {
+      window.location.hash = '';
+    }
+  });
+
   return divElem;
 };
