@@ -1,6 +1,4 @@
-/* eslint-disable no-alert */
-/* eslint-disable no-console */
-import { signInFunction } from '../controller-function/auth-logIn.js';
+import { signInFunction, signInGoogle } from '../controller-function/auth-logIn.js';
 
 export default () => {
   const viewLogIn = `
@@ -16,7 +14,7 @@ export default () => {
       <span id="alertEmail"></span>
       <input class="inputText" id="password" type="password" placeholder="Contraseña">
       <span id="alertPassword"></span>
-      <button id="btnLogIn" disabled="true">Ingresar</button> 
+      <button id="btnLogIn">Ingresar</button> 
       <a class="o">------------------ o ------------------</a>
       <section>
         <img id="authFb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">
@@ -29,6 +27,7 @@ export default () => {
   divElem.innerHTML = viewLogIn;
 
   const btnLogIn = divElem.querySelector('#btnLogIn');
+
   const inputText = divElem.querySelector('.inputText');
   const alertEmail = divElem.querySelector('#alertEmail');
   const alertPassword = divElem.querySelector('#alertPassword');
@@ -39,17 +38,14 @@ export default () => {
     const passwordValue = divElem.querySelector('#password').value;
     if (emailRegex.test(emailvalue) === false) {
       alertEmail.innerHTML = '⚠️ Debe ingresar su email';
-      btnLogIn.disabled = true;
       alertEmail.classList.add('errorInput');
     } if (passwordValue.length < 6) {
       alertPassword.innerHTML = '⚠️ Debe ingresar contraseña';
-      btnLogIn.disabled = true;
       alertPassword.classList.add('errorInput');
-    } else if (emailRegex.test(emailvalue) === true && passwordValue.length > 6) {
-      console.log('ya no deberian salir los mensajes');
+    } if (emailRegex.test(emailvalue) === true) {
       alertEmail.innerHTML = '';
+    } if (passwordValue.length > 6) {
       alertPassword.innerHTML = '';
-      btnLogIn.disabled = false;
     }
   });
 
@@ -92,12 +88,9 @@ export default () => {
 
   const btnGoogle = divElem.querySelector('#authGoogle');
   btnGoogle.addEventListener('click', () => {
-    // console.log('Debería ingresarse via Google');
-    const googleProvider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(googleProvider)
+    signInGoogle()
       .then((result) => {
         console.log(result);
-        console.log(window.location);
         window.location.hash = '#/home';
       })
       .catch((error) => {
