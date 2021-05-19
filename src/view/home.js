@@ -22,8 +22,8 @@ export default () => {
                       Guardar
                     </button>
                   </form>
-                  <section id="taksContainer"></section>
               </section>
+              <section id="taksContainer"></section>
             </section>
           </section>
       </section>
@@ -36,44 +36,55 @@ export default () => {
   btnSalir.addEventListener('click', () => {
     signOut()
       .then(() => {
-      //  console.log('saliste de sesión');
         window.location.hash = '';
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    // .catch((error) => {
-    //  console.log(error);
-    // });
   });
-  const username = divElem.querySelector('#username');
-  const userDescription = divElem.querySelector('#userDescription');
-  firebase.auth().onAuthStateChanged((user) => {
+  // const username = divElem.querySelector('#username');
+
+  const taksContainer = divElem.querySelector('#taksContainer');
+
+  // Vista Publicaciones
+
+  const setupPosts = (data) => {
+    if (data.length) {
+      console.log(data);
+      let html = '';
+      data.forEach((doc) => {
+        const post = doc.data();
+        const li = `<div class="card card-body mt-2 border-primary">
+      <h3 class="h5">${post.title}</h3>
+      <p>${post.description}</p>
+      </div>`;
+        html += li;
+      });
+      taksContainer.innerHTML = html;
+    } else {
+      taksContainer.innerHTML = '<h4 class="text-white">Login to See Posts</h4>';
+    }
+  };
+
+  // Mostrar posts
+  const post = () => firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      // username.innerHTML = user.displayName;
-      userDescription.innerHTML = 'usuario de MiurArt';
-      console.log('Estas logueado');
+      firebase.firestore().collection('task')
+        .get()
+        .then((snapshot) => {
+          setupPosts(snapshot.docs);
+        });
     } else {
       window.location.hash = '';
-      console.log('Tu no estas logueado');
     }
   });
 
+  post();
+
+  // Guardar notas en firebase
   const saveTask = (title, description) => firebase.firestore().collection('task').doc().set({
     title,
     description,
-  });
-
-  const getTaks = () => firebase.firestore().collection('task').doc().get();
-  const taksContainer = divElem.querySelector('#taksContainer');
-
-  window.addEventListener('DOMContentLoaded', async () => {
-    const querySnaptshot = await getTaks();
-    querySnaptshot.forEach((doc) => {
-      console.log(doc.data());
-      taksContainer.innerHTML += `
-      <section class="card card-body">
-      <h3>${doc.data().title}</h3>
-      </section>
-      `;
-    });
   });
 
   const taskForm = divElem.querySelector('#taks-form');
@@ -86,6 +97,10 @@ export default () => {
     saveTask(title.value, description.value);
     taskForm.reset();
     title.focus();
+
+    // Mostrar posts
+    post();
   });
+
   return divElem;
 };
