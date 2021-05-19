@@ -155,7 +155,7 @@ export default () => {
     event.preventDefault();
     // verificar user.emailvalidated true para que entre a home
     const errorMessage = document.querySelector('#errorMessage');
-    signInFunction(email, password)
+    signInFunction(email.value, password.value)
       .catch((error) => {
         errorMessage.innerHTML = error.message;
       });
@@ -191,7 +191,8 @@ export default () => {
   });
 
   firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
+    console.log(user);
+    if (user.emailVerified) {
       window.location.hash = '#/home';
     } else {
       window.location.hash = '';

@@ -70,9 +70,8 @@ export default () => {
   const post = () => firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       firebase.firestore().collection('task')
-        .get()
-        .then((snapshot) => {
-          setupPosts(snapshot.docs);
+        .onSnapshot((data) => {
+          setupPosts(data.docs);
         });
     } else {
       window.location.hash = '';
@@ -97,9 +96,6 @@ export default () => {
     saveTask(title.value, description.value);
     taskForm.reset();
     title.focus();
-
-    // Mostrar posts
-    post();
   });
 
   return divElem;
