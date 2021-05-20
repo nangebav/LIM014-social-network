@@ -191,7 +191,8 @@ export default () => {
   });
 
   firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
+    console.log(user);
+    if (user.emailVerified) {
       window.location.hash = '#/home';
     } else {
       window.location.hash = '';
