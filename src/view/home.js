@@ -50,7 +50,7 @@ export default () => {
 
   const setupPosts = (data) => {
     if (data.length) {
-      console.log(data);
+      // console.log(data);
       let html = '';
       data.forEach((doc) => {
         const post = doc.data();

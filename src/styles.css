@@ -410,6 +410,26 @@ input[type=checkbox] {
         height: 90%;
     }
 
+    .card {
+        /* display: flex; */
+        width: 100%;
+        
+    }
+
+   #taks-form {
+       border-color: #bb1414 5px solid;
+       /* /* //display: flex;
+       
+       width: 60px;
+       /* float: right; */
+       margin-left: 100px; 
+   } 
+
+   #taksContainer{
+       /* float: right; */
+       margin-left: 100px;
+   }
+
     /* #imageLog, #imageRegister{
     display: none;
     flex-direction: column;
