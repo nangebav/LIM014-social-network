@@ -14,10 +14,10 @@ export default () => {
                   <form id="post-form">
                     <section class="user-identifier">
                       <img id="post-userpic">
-                      <textarea id="post-username"rows="1" class="form-control"></textarea>
+                      <textarea id="post-username"rows="1" name="post-form" class="form-control"></textarea>
                     </section>
                     <section class="body-form">
-                        <textarea id="post-description" rows="3" class="form-control" placeholder="Descripción"></textarea>
+                        <textarea id="post-description" name="post-form" rows="3" class="form-control" placeholder="Descripción"></textarea>
                     </section>
                     <button id="btnPublicar">
                       Publicar
@@ -47,34 +47,35 @@ export default () => {
     }
   });
 
+  const deletePost = (id) => firebase.firestore().collection('posts').doc(id).delete();
+
+  const editPost = (id) => firebase.firestore().collection('posts').doc(id);
   // FUNCION PARA CREAR HTML PARA MOSTRAR LOS POSTS EN PANTALLA
   const setupPosts = (data) => {
     if (data.length) {
-      let postList = '';
+      postContainer.innerHTML = '';
       data.forEach((doc) => {
         const post = doc.data();
         post.id = doc.id;
-        const postHtml = `<div class="card card-body mt-2 border-primary">
+        postContainer.innerHTML += `<div class="card card-body mt-2 border-primary">
       <h3 class="h5">${post.name}</h3>
       <p>${post.description}</p>
       <div>
         <button class="btn-delete" data-id="${post.id}">Eliminar</button>
-        <button class="btn-edit">Editar</button>
+        <button class="btn-edit" data-id="${post.id}">Editar</button>
       </div>`;
-        postList += postHtml;
-        // const btnsDelete = document.querySelectorAll('btn-delete');
-        // console.log(btnsDelete);
-        // btnsDelete.forEach((btn) => {
-        //   btn.addEventListener('click', (e) => {
-        //     console.log('oprimiste el botn delte');
-        //   });
-        
-        postContainer.innerHTML = postList;
-        const btnsDelete = document.querySelectorAll('btn-delete');
-        console.log(btnsDelete);
+
+        const btnsDelete = document.querySelectorAll('button.btn-delete');
         btnsDelete.forEach((btn) => {
           btn.addEventListener('click', (e) => {
-            console.log('oprimiste el botn delte');
+            deletePost(e.target.dataset.id);
+          });
+        });
+
+        const btnsEdit = document.querySelectorAll('button.btn-edit');
+        btnsEdit.forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            editPost(e.target.dataset.id);
           });
         });
       });
@@ -106,8 +107,9 @@ export default () => {
   // EVENTO PARA ENVIAR DATOS DEL POST A FIREBASE
   taskForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    const usernameInside = taskForm['post-username'];
     const description = taskForm['post-description'];
-    saveTask(username.value, description.value);
+    saveTask(usernameInside.value, description.value);
     taskForm.reset();
     description.focus();
   });
