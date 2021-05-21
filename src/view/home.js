@@ -11,19 +11,20 @@ export default () => {
           <section class="row">
             <section class="col-md-4">
               <section class="card">
-                  <form id="taks-form">
-                    <section class="form-group">
-                      <input type="text" id="task-title" class="form-control" placeholder="título">
+                  <form id="post-form">
+                    <section class="user-identifier">
+                      <img id="post-userpic">
+                      <textarea id="post-username"rows="1" class="form-control"></textarea>
                     </section>
-                    <section class="form-group">
-                        <textarea id="task-description" rows="3" class="form-control" placeholder="Descripción"></textarea>
+                    <section class="body-form">
+                        <textarea id="post-description" rows="3" class="form-control" placeholder="Descripción"></textarea>
                     </section>
-                    <button class="btn btn-primary" id="btnPublicar">
-                      Guardar
+                    <button id="btnPublicar">
+                      Publicar
                     </button>
                   </form>
               </section>
-              <section id="taksContainer"></section>
+              <section id="PostContainer"></section>
             </section>
           </section>
       </section>
@@ -32,44 +33,60 @@ export default () => {
   const divElem = document.createElement('div');
   divElem.innerHTML = viewHome;
 
+  // CONSTANTES DE ELEMENTOS HTML
+  const taskForm = divElem.querySelector('#post-form');
   const btnSalir = divElem.querySelector('#btnSalir');
-  btnSalir.addEventListener('click', () => {
-    signOut()
-      .then(() => {
-        window.location.hash = '';
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const postContainer = divElem.querySelector('#PostContainer');
+  const username = divElem.querySelector('#post-username');
+
+  // FUNCION PARA OBTENER EL NOMBRE DEL USUARIO
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      username.innerHTML = user.displayName;
+      // console.log('Estas logueado');
+    }
   });
-  // const username = divElem.querySelector('#username');
 
-  const taksContainer = divElem.querySelector('#taksContainer');
-
-  // Vista Publicaciones
-
+  // FUNCION PARA CREAR HTML PARA MOSTRAR LOS POSTS EN PANTALLA
   const setupPosts = (data) => {
     if (data.length) {
-      console.log(data);
-      let html = '';
+      let postList = '';
       data.forEach((doc) => {
         const post = doc.data();
-        const li = `<div class="card card-body mt-2 border-primary">
-      <h3 class="h5">${post.title}</h3>
+        post.id = doc.id;
+        const postHtml = `<div class="card card-body mt-2 border-primary">
+      <h3 class="h5">${post.name}</h3>
       <p>${post.description}</p>
+      <div>
+        <button class="btn-delete" data-id="${post.id}">Eliminar</button>
+        <button class="btn-edit">Editar</button>
       </div>`;
-        html += li;
+        postList += postHtml;
+        // const btnsDelete = document.querySelectorAll('btn-delete');
+        // console.log(btnsDelete);
+        // btnsDelete.forEach((btn) => {
+        //   btn.addEventListener('click', (e) => {
+        //     console.log('oprimiste el botn delte');
+        //   });
+        
+        postContainer.innerHTML = postList;
+        const btnsDelete = document.querySelectorAll('btn-delete');
+        console.log(btnsDelete);
+        btnsDelete.forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            console.log('oprimiste el botn delte');
+          });
+        });
       });
-      taksContainer.innerHTML = html;
     } else {
-      taksContainer.innerHTML = '<h4 class="text-white">Login to See Posts</h4>';
+      postContainer.innerHTML = '<h4 class="text-white">Login to See Posts</h4>';
     }
   };
 
-  // Mostrar posts
+  // FUNCION PARA TRAER DE FIRESTORE LOS DOC CON LA INFO DE POSTS
   const post = () => firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      firebase.firestore().collection('task')
+      firebase.firestore().collection('posts')
         .onSnapshot((data) => {
           setupPosts(data.docs);
         });
@@ -80,22 +97,30 @@ export default () => {
 
   post();
 
-  // Guardar notas en firebase
-  const saveTask = (title, description) => firebase.firestore().collection('task').doc().set({
-    title,
+  // ENVIA EL CONTENIDO DEL POST A FIREBASE
+  const saveTask = (name, description) => firebase.firestore().collection('posts').doc().set({
+    name,
     description,
   });
 
-  const taskForm = divElem.querySelector('#taks-form');
-
+  // EVENTO PARA ENVIAR DATOS DEL POST A FIREBASE
   taskForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const title = taskForm['task-title'];
-    const description = taskForm['task-description'];
-
-    saveTask(title.value, description.value);
+    const description = taskForm['post-description'];
+    saveTask(username.value, description.value);
     taskForm.reset();
-    title.focus();
+    description.focus();
+  });
+
+  // FUNCION PARA CERRAR SESION
+  btnSalir.addEventListener('click', () => {
+    signOut()
+      .then(() => {
+        window.location.hash = '';
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   });
 
   return divElem;

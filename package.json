@@ -48,5 +48,7 @@
     "url": "https://github.com/gabrielaguerrac/LIM014-social-network/issues"
   },
   "homepage": "https://github.com/gabrielaguerrac/LIM014-social-network#readme",
-  "dependencies": {}
+  "dependencies": {
+    "firebase-mock": "^2.3.2"
+  }
 }
