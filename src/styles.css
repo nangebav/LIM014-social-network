@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=El+Messiri&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 
 *{
     margin: 0;
@@ -32,7 +32,7 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: Garamond;
+    font-family: 'EB Garamond', serif;
     width: 70%;
 }
 
@@ -45,12 +45,12 @@ h3{
 }
 
 h3, h1{
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     margin-bottom: 10px;
 }
 
 p {
-    font-family: Lora;
+    font-family:'Lora', serif;
     font-size: 12px;
     text-align: center;
     width: 100%;
@@ -107,7 +107,7 @@ input[type=checkbox] {
     width: 100%;
     text-align: center;
     margin-top: 10px;
-    font-family: Alegreya;
+    font-family: 'Alegreya', serif;
     font-size: 12px;
     font-weight: 700;
     line-height: 19px;
@@ -148,7 +148,7 @@ input[type=checkbox] {
         display: flex;
         flex-direction: column;
         align-items: center;
-        font-family: Garamond;
+        font-family: 'EB Garamond', serif;
         width: 50%;
         margin-right: 0;
     }
@@ -162,12 +162,12 @@ input[type=checkbox] {
     }
     
     h3, h1{
-        font-family: Montserrat;
+        font-family: 'Montserrat', sans-serif;
         margin-bottom: 10px;
     }
 
     p {
-        font-family: Lora;
+        font-family: 'Lora', serif;
         font-size: 12px;
         text-align: center;
         width: 100%;
@@ -226,7 +226,7 @@ input[type=checkbox] {
         width: 100%;
         text-align: center;
         margin-top: 10px;
-        font-family: Alegreya;
+        font-family:'Alegreya', serif;
         font-size: 12px;
         font-weight: 700;
         line-height: 19px;
@@ -262,6 +262,18 @@ input[type=checkbox] {
 
  @media screen and (min-width: 1050px){
 
+    .messageValid{
+        background-color: #ffffff;
+        border: #cfcfcf;
+        border-style: solid;
+        position: absolute;
+        padding: 2%;
+        margin: 10%;
+        z-index: 100;
+        box-shadow: 0px 10px 10px -6px black;
+        align-items: center;
+    }
+
     #perfil{
         width: 20%;
         margin: 5%;
@@ -286,7 +298,7 @@ input[type=checkbox] {
     .h1-style {
         color: #ffffff;
         padding: 3px;
-        font-family: Montserrat;
+        font-family: 'Montserrat', sans-serif;
         font-size: 50px;
         margin: 0;
         display: flex;
@@ -348,7 +360,7 @@ input[type=checkbox] {
     }
 
     #aRegister {
-        font-family: Alegreya;
+        font-family:'Alegreya', serif;
         font-size: 14px;
         font-weight: 700;
         line-height: 19px;
@@ -363,16 +375,8 @@ input[type=checkbox] {
         margin: 20px;
     }
     
-    .icoFb, .icoGoogle {
-        width: 50px;
-        height: 50px;
-        margin-left: 25px;
-        margin-right: 25px;
-        margin-top: 10px;
-    }
-    
     h1{
-        font-family: Montserrat;
+        font-family: 'Montserrat', sans-serif;
         font-size: 55px;
         font-style: normal;
         font-weight: 700;
@@ -384,7 +388,7 @@ input[type=checkbox] {
     }
 
     h2{
-        font-family: Montserrat;
+        font-family: 'Montserrat', sans-serif;
         font-size: 25px;
         width: 90%;
         font-style: normal;
