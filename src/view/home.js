@@ -89,12 +89,12 @@ export default () => {
             <button class="btn-edit" data-id="${post.id}"> 🖉 Editar</button>
           </div>
           <h3 class="h5">${post.name}</h3>
-          <!-- <p id="descriptionEdit">${post.description}</p> -->
+          <!-- <p id="descriptionEdit">${post.description}</p> --> 
           <div class="editPublicacion" disabled>
-            <p id="descriptionEdit">${post.description}</p>
+            <p id="descriptionEdit">${post.description}</p>   
           </div>
           </div>
-          <div>
+        <div>
           <button id="like"> ❤ </button>
           <button id="comment"> comentar </button>
         </div>`;
@@ -137,14 +137,14 @@ export default () => {
         const btnsEdit = document.querySelectorAll('button.btn-edit');
         btnsEdit.forEach((btn) => {
           btn.addEventListener('click', (e) => {
-            // console.log()
+            // console.log();
             const editPublicacion = e.target.parentElement.parentElement.querySelector('.editPublicacion');
             editPublicacion.removeAttribute('disabled');
-            console.log(post.description);
             editPublicacion.innerHTML = `
             <textarea class="note" name="comment">${post.description}</textarea>
             <button class="aceptEdit" >Aceptar</button>`;
             const aceptEdit = editPublicacion.querySelector('.aceptEdit');
+            document.querySelector('.note').value = '';
             aceptEdit.addEventListener('click', (eTwo) => {
               const editText = eTwo.target.parentElement.querySelector('.note');
               editPost(e.target.dataset.id)
