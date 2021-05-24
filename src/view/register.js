@@ -1,3 +1,7 @@
+/* eslint-disable no-alert */
+/* eslint-disable no-unused-vars */
+/* eslint-disable max-len */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-console */
 import { registrationFunction, updateProfile } from '../controller-function/auth-register.js';
 
