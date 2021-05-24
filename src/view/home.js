@@ -89,9 +89,12 @@ export default () => {
             <button class="btn-edit" data-id="${post.id}"> 🖉 Editar</button>
           </div>
           <h3 class="h5">${post.name}</h3>
-          <p id="descriptionEdit">${post.description}</p>
-        </div>
-        <div>
+          <!-- <p id="descriptionEdit">${post.description}</p> -->
+          <div class="editPublicacion" disabled>
+            <p id="descriptionEdit">${post.description}</p>
+          </div>
+          </div>
+          <div>
           <button id="like"> ❤ </button>
           <button id="comment"> comentar </button>
         </div>`;
@@ -117,6 +120,7 @@ export default () => {
             const btnConfirmDelete = document.querySelector('#confirmDelete');
             const btnCancelDelete = document.querySelector('#cancelDelete');
             const exitMessage = document.querySelector('#exitMessage');
+
             btnConfirmDelete.addEventListener('click', () => {
               deletePost(e.target.dataset.id);
               document.querySelector('#contenedorMessage').innerHTML = '';
@@ -133,9 +137,25 @@ export default () => {
         const btnsEdit = document.querySelectorAll('button.btn-edit');
         btnsEdit.forEach((btn) => {
           btn.addEventListener('click', (e) => {
-            const docDescription = editPost(e.target.dataset.id);
-            const postDescription = docDescription.data();
-            console.log(postDescription);
+            // console.log()
+            const editPublicacion = e.target.parentElement.parentElement.querySelector('.editPublicacion');
+            editPublicacion.removeAttribute('disabled');
+            console.log(post.description);
+            editPublicacion.innerHTML = `
+            <textarea class="note" name="comment">${post.description}</textarea>
+            <button class="aceptEdit" >Aceptar</button>`;
+            const aceptEdit = editPublicacion.querySelector('.aceptEdit');
+            aceptEdit.addEventListener('click', (eTwo) => {
+              const editText = eTwo.target.parentElement.querySelector('.note');
+              editPost(e.target.dataset.id)
+                .update({
+                  description: `${editText.value}`,
+                });
+              eTwo.target.parentElement.innerHTML = '';
+            });
+
+            // const postDescription = docDescription.data();
+            // console.log(postDescription);
           });
         });
       });
