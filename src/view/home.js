@@ -59,7 +59,7 @@ export default () => {
               <div class="user-detail text-center">
                 <h3>${user.displayName}</h3>
                 <div id="Description">
-                  <textarea placeholder="Web Developer"></textarea>
+                  <textarea placeholder="Artista mural"></textarea>
                 </div>
                 <button class="btn btn-defualt"> Follow </button><br>
               </div>
@@ -74,6 +74,8 @@ export default () => {
       profilePhoto.innerHTML = '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP8HtjDCK27FdSoqHRqLGnZ1Fq8yhs7UvvMTKPqMTlvOGdYiHvFzUW07V8gKsM9_fbK8Y&usqp=CAU"></img>';
     }
   });
+
+  // const orderPosts = () => firebase.firestore().collection('posts').orderBy('date', 'desc');
 
   // FUNCION PARA CREAR HTML PARA MOSTRAR LOS POSTS EN PANTALLA
   const setupPosts = (data) => {
@@ -160,14 +162,16 @@ export default () => {
         });
       });
     } else {
-      postContainer.innerHTML = '<h4 class="text-white">Login to See Posts</h4>';
+      postContainer.innerHTML = '<h4 class="text-white"></h4>';
     }
   };
+
+  
 
   // FUNCION PARA TRAER DE FIRESTORE LOS DOC CON LA INFO DE POSTS
   const post = () => firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      firebase.firestore().collection('posts')
+      firebase.firestore().collection('posts').orderBy('date', 'desc')
         .onSnapshot((data) => {
           setupPosts(data.docs);
         });
@@ -177,11 +181,13 @@ export default () => {
   });
 
   post();
+  // orderPosts();
 
   // ENVIA EL CONTENIDO DEL POST A FIREBASE
-  const saveTask = (name, description) => firebase.firestore().collection('posts').doc().set({
+  const saveTask = (name, description, date) => firebase.firestore().collection('posts').doc().set({
     name,
     description,
+    date,
   });
 
   // EVENTO PARA ENVIAR DATOS DEL POST A FIREBASE
@@ -189,7 +195,9 @@ export default () => {
     e.preventDefault();
     const usernameInside = divElem.querySelector('#post-username');
     const description = taskForm['post-description'];
-    saveTask(usernameInside.value, description.value);
+    const date = Date.now();
+    console.log(date);
+    saveTask(usernameInside.value, description.value, date);
     taskForm.reset();
     description.focus();
   });
