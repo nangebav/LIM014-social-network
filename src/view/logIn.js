@@ -14,8 +14,10 @@ export default () => {
       <span id="alertEmail"></span>
       <input class="inputText" id="password" type="password" name="password" minlength="six" placeholder="Contraseña">
       <span id="alertPassword"></span>
-      <li >¿No recuerdas tu contraseña?<a href="#/recoverPassword">ingresa aquí</a> <li>
-      <button id="btnLogIn" disabled= true >Ingresar</button> 
+      <button id="btnLogIn" disabled= true >Ingresar</button>
+      <section>
+        <p>¿No recuerdas tu contraseña?<a href="#/recoverPassword"> Ingresa aquí</a> <p>
+      </section>
       <a class="o">------------------ o ------------------</a>
       <section>
         <img id="authFb" alt="ico-fb" class="icoFb" src="https://user-images.githubusercontent.com/77282012/117555345-068ac100-b024-11eb-8c0f-811f51c99abb.png">

@@ -262,17 +262,152 @@ input[type=checkbox] {
 
  @media screen and (min-width: 1050px){
 
-    .messageValid{
-        background-color: #ffffff;
-        border: #cfcfcf;
-        border-style: solid;
-        position: absolute;
-        padding: 2%;
-        margin: 10%;
-        z-index: 100;
-        box-shadow: 0px 10px 10px -6px black;
+    /* Perfil */
+    .profile-badge{
+        border:1px solid #c1c1c1;
+        padding:5px;
+        position: relative;
+    }
+    .profile-badge img{
+        height: 200px;
+        width: 100%;
+    }
+    .user-detail{
+        background-color: #fff;
+        position: relative;
+        padding:65px 0px 10px 0px;
+        color:#8B8B89;
+        font-family: 'Montserrat', sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
     }
+    .user-detail h3{
+        margin: 0px;
+        margin:0px 0px 5px 0px;
+        color: #000;
+        padding: 2%;
+    }
+    .user-detail p{
+        font-size:14px;
+    }
+    .user-detail .btn{
+        margin-bottom:10px;
+        background-color: #fff;
+        border:1px solid #DEDEDE;
+        border-radius: 0px;
+        color:black;
+    }
+    .user-detail .btn i{
+        color:#D35B4D;
+        padding-right:18px;
+    }
+    .profile-pic{
+        position: absolute;
+        height:120px;
+        width:120px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 140px;
+        z-index: 1001;
+    }
+    .profile-pic img{
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        box-shadow: 0px 0px 5px 0px #c1c1c1;
+    }
+    #viewPerfil{
+        width: 25%;
+        padding: 0%;
+        margin: 3%;
+    }
+
+    h1 #viewPerfil {
+        font-size: 14px;
+        line-height: 100%;  
+    } 
+
+    /* FIN DE CSS PERFIL */
+
+    #viewHome{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .messageValid{
+        position: absolute;
+        padding: 2%;
+        margin: 5%;
+        z-index: 100;
+        box-shadow: 5px 5px 20px rgba(#CBCDD3, 10%);
+        align-items: center;
+        width: 20%;
+        left: 50%;
+        color: #000000;
+        box-shadow: 0px 0px 5px 0px #c1c1c1;
+        background-color: #fff;
+    }
+    
+    .imageWarning {
+        width: 40px;
+        height: 40px;
+        margin: 0 0 5% 40%;
+        
+    }
+
+    li{
+        font-size: 10px;
+    }
+
+    .message p{
+        color: #525252;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .message h2{
+        color: #000000;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 15px;
+    }
+
+    .confirm, .cancel{
+        background: #ffffff;
+        width: 40%;
+        outline: 0;
+        border: none;
+        box-shadow: 2px 2px 10px rgba(#777777, .5);
+        font-family: 'Montserrat', sans-serif;
+        padding: 4%;
+        margin: 2%;
+    }
+
+    .confirm{
+        background-color: #bb1414;
+        color: #E5E5E5;
+    }
+
+    .cancel{
+        background-color: #dbdbdb;
+    }
+    .btn-delete{
+        background-color: #bb1414;
+        color: #E5E5E5;
+        padding: 3px;
+        margin: auto;
+        border-radius: 5px;
+    }
+
+    .exitMessage {
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        top: 4%;
+        right: 6%;
+    }
+
 
     #perfil{
         width: 20%;
@@ -330,6 +465,10 @@ input[type=checkbox] {
         align-items: center;
         border-style: solid;
         background-color: #ffffff;
+        border: #cfcfcf;
+        padding: 2%;
+        box-shadow: 0px 10px 10px -6px black;
+
     }
 
     form {
@@ -417,6 +556,7 @@ input[type=checkbox] {
     .card {
         /* display: flex; */
         width: 100%;
+        margin-top: 8%;
         
     }
 

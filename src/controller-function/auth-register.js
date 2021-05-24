@@ -23,12 +23,12 @@ export const registrationFunction = (email, password) => firebase.auth()
     console.log(userCredential);
     // var user = userCredential.user;
     // llamar la funcion para settear el usuario
+  })
+  .catch((error) => {
+    // const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(`${errorMessage}`);
   });
-  // .catch((error) => {
-  //   const errorCode = error.code;
-  //   const errorMessage = error.message;
-  //   alert(`${errorCode}\n${errorMessage}`);
-  // });
 
 export const updateProfile = (nombre, apellido) => {
   const user = firebase.auth().currentUser;

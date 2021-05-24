@@ -67,7 +67,7 @@ describe('signOut', () => {
 describe('updateProfile', () => {
   it('debería poder guardar mi nombre y apellido', () => {
     updateProfile('Sutana', 'Fulanita')
-      .then((user) => expect(user.displayName).toBe('Sutana Fulanita'));
+      .then((user) => expect(user.name).toBe('Sutana Fulanita'));
   });
 });
 
