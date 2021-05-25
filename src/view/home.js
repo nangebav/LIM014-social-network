@@ -69,7 +69,7 @@ export default () => {
     }
     const profilePhoto = document.querySelector('.profile-pic');
     if (user.photoURL) {
-      profilePhoto.innerHTML = `<img src="${user.photoURL}"></img>`;
+      profilePhoto.innerHTML = `<a href=""><img src="${user.photoURL}"></img></a>`;
     } else {
       profilePhoto.innerHTML = '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP8HtjDCK27FdSoqHRqLGnZ1Fq8yhs7UvvMTKPqMTlvOGdYiHvFzUW07V8gKsM9_fbK8Y&usqp=CAU"></img>';
     }
