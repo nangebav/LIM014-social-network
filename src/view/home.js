@@ -23,6 +23,8 @@ export default () => {
                     </section>
                     <section class="body-form">
                         <textarea id="post-description" name="post-form" rows="3" class="form-control" placeholder="¿Qué estás pensando?"></textarea>
+                        <!-- <a><img id="uploadImage" src="https://user-images.githubusercontent.com/67443691/119537339-8c5e7a00-bd4f-11eb-9508-ace2d40f4695.png"</a> -->
+                        <input type="file" value="upload" id="fileButton" />
                     </section>
                     <button id="btnPublicar">
                       Publicar
@@ -44,6 +46,7 @@ export default () => {
   const postContainer = divElem.querySelector('#PostContainer');
   const username = divElem.querySelector('#post-username');
   const viewPerfil = divElem.querySelector('#viewPerfil');
+  const btnSelectFile = divElem.querySelector('#fileButton');
 
   // FUNCION PARA OBTENER EL NOMBRE DEL USUARIO
   firebase.auth().onAuthStateChanged((user) => {
@@ -166,8 +169,6 @@ export default () => {
     }
   };
 
-  
-
   // FUNCION PARA TRAER DE FIRESTORE LOS DOC CON LA INFO DE POSTS
   const post = () => firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -189,6 +190,17 @@ export default () => {
     description,
     date,
   });
+
+  btnSelectFile.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    console.log(file);
+
+    const sotorageRef = firebase.storage().ref('imagePosts/' + file.name);
+
+    const imageP = sotorageRef.put(file);
+
+  });
+  //uploadImg();
 
   // EVENTO PARA ENVIAR DATOS DEL POST A FIREBASE
   taskForm.addEventListener('submit', (e) => {
