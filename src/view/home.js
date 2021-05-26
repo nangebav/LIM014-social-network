@@ -86,6 +86,7 @@ export default () => {
       postContainer.innerHTML = '';
       data.forEach((doc) => {
         const post = doc.data();
+        // console.log(username);
         post.id = doc.id;
         postContainer.innerHTML += `
         <div class="card">
@@ -93,16 +94,56 @@ export default () => {
             <button class="btn-delete" data-id="${post.id}"> 🗑 Eliminar</button>
             <button class="btn-edit" data-id="${post.id}"> 🖉 Editar</button>
           </div>
-          <h3 class="h5">${post.name}</h3>
+          <h3 class="h5" name="${post.name}">${post.name}</h3>
           <!-- <p id="descriptionEdit">${post.description}</p> --> 
           <div class="editPublicacion" disabled>
             <p id="descriptionEdit">${post.description}</p>   
           </div>
-          </div>
+        </div>
         <div>
           <button id="like"> ❤ </button>
-          <button id="comment"> comentar </button>
+          <button class="comment"> comentarios </button>
+        </div>
+        <div>
+          <form class="commentForm" >
+           <div hidden class="commentContainer">
+             <h5 id="commenterName">${post.name}</h5>
+             <input id="commentDesc" type="text">
+             <button id="commentPost">Comentar</button>
+             <button id="cancelPost"">cancelar</button>
+            </div>
+          </form>
         </div>`;
+
+        // const btnComment = postContainer.querySelectorAll('.comment');
+        // btnComment.forEach((btn) => {
+        //   btn.addEventListener('click', () => {
+        //   // console.log('click en comentar');
+        //     const formComment = postContainer.querySelectorAll('.commentForm');
+        //     formComment.innerHTML += `
+        //     <h5 id="commenterName"
+        //     <input id="commentDesc" type="text">
+        //     <button id="commentPost>Comentar</button>`;
+        //   });
+        // });
+
+        // const btnComment = postContainer.querySelector('.comment');
+        // btnComment.addEventListener('click', () => {
+        //   postContainer.querySelector('.commentContainer').classList.toggle('show');
+        // });
+
+        const btnsComment = postContainer.querySelectorAll('.comment');
+        btnsComment.forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            console.log(e.target.parentElement.parentElement.querySelector('.commentForm'));
+          });
+        });
+
+        // window.addEventListener('click', (e) => {
+        //   if (e.target !== btnComment) {
+        //     postContainer.querySelector('.commentContainer').classList.remove('show');
+        //   }
+        // });
 
         const btnsDelete = document.querySelectorAll('button.btn-delete');
         btnsDelete.forEach((btn) => {
@@ -114,7 +155,7 @@ export default () => {
               <img class="imageWarning" src="https://image.flaticon.com/icons/png/512/95/95458.png" alt="alert">
                   <h2>¿Seguro(a) que deseas eliminar la publicación?<h2>
                   <p>Esta acción no puedrá revertirse.</p>
-                  <div>
+                  <div class="confirmUserPost">
                     <button class="cancel" id="cancelDelete"> cancelar </button>      
                     <button class="confirm" id="confirmDelete"> Eliminar </button>    
                   </div>
@@ -195,12 +236,11 @@ export default () => {
     const file = e.target.files[0];
     console.log(file);
 
-    const sotorageRef = firebase.storage().ref('imagePosts/' + file.name);
+    const sotorageRef = firebase.storage().ref(`imagePosts/${file.name}`);
 
     const imageP = sotorageRef.put(file);
-
   });
-  //uploadImg();
+  // uploadImg();
 
   // EVENTO PARA ENVIAR DATOS DEL POST A FIREBASE
   taskForm.addEventListener('submit', (e) => {
