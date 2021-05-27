@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-// console.log('esto es el home');
 // import { signOut } from '../controller-function/auth-logIn.js';
-import { deletePost, editPost } from '../controller-function/firesotre.js';
-import MessageSignOut from './box_message.js';
+import { deletePost, editPost } from '../controller-function/post-firestore.js';
+import MessageSignOut from './box_message_sign_out.js';
+import Perfil from './perfil.js';
 
 export default () => {
   const viewHome = `
@@ -24,26 +24,23 @@ export default () => {
                     <section class="body-form">
                         <textarea id="post-description" name="post-form" rows="3" class="form-control" placeholder="¿Qué estás pensando?"></textarea>
                         <!-- <a><img id="uploadImage" src="https://user-images.githubusercontent.com/67443691/119537339-8c5e7a00-bd4f-11eb-9508-ace2d40f4695.png"</a> -->
-                        <input type="file" value="upload" id="fileButton" />
+                        <input type="file" accept="image/png, image/jpeg" value="upload" id="fileButton" />
                     </section>
-                    <button id="btnPublicar">
-                      Publicar
-                    </button>
+                    <button id="btnPublicar">Publicar</button>
                   </form>
               </section>
-              <section id="PostContainer"></section>
+              <section id="postContainer"></section>
             </section>
           </section>
-      </section>
-    </section>`;
+        </section>`;
 
   const divElem = document.createElement('div');
   divElem.innerHTML = viewHome;
 
   // CONSTANTES DE ELEMENTOS HTML
-  const taskForm = divElem.querySelector('#post-form');
+  const postForm = divElem.querySelector('#post-form');
   const btnSalir = divElem.querySelector('#btnSalir');
-  const postContainer = divElem.querySelector('#PostContainer');
+  const postContainer = divElem.querySelector('#postContainer');
   const username = divElem.querySelector('#post-username');
   const viewPerfil = divElem.querySelector('#viewPerfil');
   const btnSelectFile = divElem.querySelector('#fileButton');
@@ -53,32 +50,9 @@ export default () => {
     if (user) {
       username.innerHTML = user.displayName;
       username.value = `${user.displayName}`;
-      viewPerfil.innerHTML = `
-      <div class="container">
-            <div class="profile-badge">
-              <img src="https://dummyimage.com/400x200/e85b27/e85b27">
-              <div class="profile-pic">
-              </div>
-              <div class="user-detail text-center">
-                <h3>${user.displayName}</h3>
-                <div id="Description">
-                  <textarea placeholder="Artista mural"></textarea>
-                </div>
-                <button class="btn btn-defualt"> Follow </button><br>
-              </div>
-            </div>
-      </div>`;
-      // console.log('Estas logueado');
-    }
-    const profilePhoto = document.querySelector('.profile-pic');
-    if (user.photoURL) {
-      profilePhoto.innerHTML = `<img src="${user.photoURL}"></img>`;
-    } else {
-      profilePhoto.innerHTML = '<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP8HtjDCK27FdSoqHRqLGnZ1Fq8yhs7UvvMTKPqMTlvOGdYiHvFzUW07V8gKsM9_fbK8Y&usqp=CAU"></img>';
+      viewPerfil.appendChild(Perfil());
     }
   });
-
-  // const orderPosts = () => firebase.firestore().collection('posts').orderBy('date', 'desc');
 
   // FUNCION PARA CREAR HTML PARA MOSTRAR LOS POSTS EN PANTALLA
   const setupPosts = (data) => {
@@ -99,6 +73,10 @@ export default () => {
           <div class="editPublicacion" disabled>
             <p id="descriptionEdit">${post.description}</p>   
           </div>
+          <div hidden class="editNote">
+            <textarea class="note" name="comment">${post.description}</textarea>
+            <button class="aceptEdit" >Aceptar</button>  
+          </div>
         </div>
         <div>
           <button id="like"> ❤ </button>
@@ -107,7 +85,7 @@ export default () => {
         <div>
           <form class="commentForm" >
            <div hidden class="commentContainer">
-             <h5 id="commenterName">${post.name}</h5>
+             <h5 id="commenterName">${post.displayName}</h5>
              <input id="commentDesc" type="text">
              <button id="commentPost">Comentar</button>
              <button id="cancelPost"">cancelar</button>
@@ -135,7 +113,8 @@ export default () => {
         const btnsComment = postContainer.querySelectorAll('.comment');
         btnsComment.forEach((btn) => {
           btn.addEventListener('click', (e) => {
-            console.log(e.target.parentElement.parentElement.querySelector('.commentForm'));
+            const commentContainer = e.target.parentElement.parentElement.querySelector('.commentContainer');
+            commentContainer.removeAttribute('hidden');
           });
         });
 
@@ -148,34 +127,36 @@ export default () => {
         const btnsDelete = document.querySelectorAll('button.btn-delete');
         btnsDelete.forEach((btn) => {
           btn.addEventListener('click', (e) => {
-            const mensaje = `
-            <section class="messageValid">
-              <div class="message">
-              <img class="exitMessage" id="exitMessage" src="chrome://global/skin/icons/close.svg">
-              <img class="imageWarning" src="https://image.flaticon.com/icons/png/512/95/95458.png" alt="alert">
-                  <h2>¿Seguro(a) que deseas eliminar la publicación?<h2>
-                  <p>Esta acción no puedrá revertirse.</p>
-                  <div class="confirmUserPost">
-                    <button class="cancel" id="cancelDelete"> cancelar </button>      
-                    <button class="confirm" id="confirmDelete"> Eliminar </button>    
-                  </div>
-              </div>
-            </section>
-            `;
-            document.querySelector('#contenedorMessage').innerHTML = mensaje;
-            const btnConfirmDelete = document.querySelector('#confirmDelete');
-            const btnCancelDelete = document.querySelector('#cancelDelete');
-            const exitMessage = document.querySelector('#exitMessage');
+            btn.addEventListener('click', (e) => {
+              const mensaje = `
+              <section class="messageValid">
+                <div class="message">
+                <img class="exitMessage" id="exitMessage" src="chrome://global/skin/icons/close.svg">
+                <img class="imageWarning" src="https://image.flaticon.com/icons/png/512/95/95458.png" alt="alert">
+                    <h2>¿Seguro(a) que deseas eliminar la publicación?<h2>
+                    <p>Esta acción no puedrá revertirse.</p>
+                    <div>
+                      <button class="cancel" id="cancelDelete"> cancelar </button>      
+                      <button class="confirm" id="confirmDelete"> Eliminar </button>    
+                    </div>
+                </div>
+              </section>
+              `;
+              document.querySelector('#contenedorMessage').innerHTML = mensaje;
+              const btnConfirmDelete = document.querySelector('#confirmDelete');
+              const btnCancelDelete = document.querySelector('#cancelDelete');
+              const exitMessage = document.querySelector('#exitMessage');
 
-            btnConfirmDelete.addEventListener('click', () => {
-              deletePost(e.target.dataset.id);
-              document.querySelector('#contenedorMessage').innerHTML = '';
-            });
-            btnCancelDelete.addEventListener('click', () => {
-              document.querySelector('#contenedorMessage').innerHTML = '';
-            });
-            exitMessage.addEventListener('click', () => {
-              document.querySelector('#contenedorMessage').innerHTML = '';
+              btnConfirmDelete.addEventListener('click', () => {
+                deletePost(e.target.dataset.id);
+                document.querySelector('#contenedorMessage').innerHTML = '';
+              });
+              btnCancelDelete.addEventListener('click', () => {
+                document.querySelector('#contenedorMessage').innerHTML = '';
+              });
+              exitMessage.addEventListener('click', () => {
+                document.querySelector('#contenedorMessage').innerHTML = '';
+              });
             });
           });
         });
@@ -185,14 +166,17 @@ export default () => {
           btn.addEventListener('click', (e) => {
             // console.log();
             const editPublicacion = e.target.parentElement.parentElement.querySelector('.editPublicacion');
-            editPublicacion.removeAttribute('disabled');
-            editPublicacion.innerHTML = `
-            <textarea class="note" name="comment">${post.description}</textarea>
-            <button class="aceptEdit" >Aceptar</button>`;
-            const aceptEdit = editPublicacion.querySelector('.aceptEdit');
-            document.querySelector('.note').value = '';
+            const editNote = e.target.parentElement.parentElement.querySelector('.editNote');
+            editNote.removeAttribute('hidden');
+            editPublicacion.setAttribute('hidden', true);
+            // editPublicacion.innerHTML = `
+            // <textarea class="note" name="comment">${post.description}</textarea>
+            // <button class="aceptEdit" >Aceptar</button>`;
+            // const aceptEdit = editPublicacion.querySelector('.aceptEdit');
+            const aceptEdit = editNote.querySelector('.aceptEdit');
             aceptEdit.addEventListener('click', (eTwo) => {
               const editText = eTwo.target.parentElement.querySelector('.note');
+              editPublicacion.removeAttribute('hidden');
               editPost(e.target.dataset.id)
                 .update({
                   description: `${editText.value}`,
@@ -232,25 +216,55 @@ export default () => {
     date,
   });
 
-  btnSelectFile.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    console.log(file);
-
-    const sotorageRef = firebase.storage().ref(`imagePosts/${file.name}`);
-
-    const imageP = sotorageRef.put(file);
-  });
+  // // Get a reference to the storage service, which is used to create references in your storage bucket
+  // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
+  // // Create a storage reference from our storage service
+  // const storageRef = storage.ref();
+  // btnSelectFile.addEventListener('change', (e) => {
+  //   const file = e.target.files[0];
+  //   console.log(file);
+  //   const imageRef = storageRef.child(`images/${file.name}`);
+  //   imageRef.put(file);
+  // });
   // uploadImg();
 
+  // Get a reference to the storage service, which is used to create references in your storage bucket
+  // var storage = firebase.app().storage("gs://miurart---red-social.appspot.com");
+  // // Create a storage reference from our storage service
+  // var storageRef = storage.ref();
+  // btnSelectFile.addEventListener('change', (e) => {
+  //  const file = e.target.files[0];
+  //   //console.log(file);
+  //   const imageRef = storageRef.child(`images/${file.name}`);
+  //   imageRef.put(file);
+  // });
+
+  const fileE = () => {
+    btnSelectFile.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      // console.log(file)
+      return file;
+    // console.log(file);
+    });
+  };
+  console.log(fileE());
+
   // EVENTO PARA ENVIAR DATOS DEL POST A FIREBASE
-  taskForm.addEventListener('submit', (e) => {
+  postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const usernameInside = divElem.querySelector('#post-username');
-    const description = taskForm['post-description'];
+    const description = postForm['post-description'];
     const date = Date.now();
+    const file = fileE();
     console.log(date);
     saveTask(usernameInside.value, description.value, date);
-    taskForm.reset();
+    // Get a reference to the storage service, which is used to create references in your storage bucket
+    const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
+    // Create a storage reference from our storage service
+    const storageRef = storage.ref();
+    const imageRef = storageRef.child(`images/${file.name}`);
+    imageRef.put(file);
+    postForm.reset();
     description.focus();
   });
 

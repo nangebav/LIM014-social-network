@@ -1,7 +1,7 @@
 import { signOut } from '../controller-function/auth-logIn.js';
 
 export default () => {
-  const viewMeesage = `
+  const viewMessage = `
     <section class="messageValid">
       <img class="exitMessage" id="exitMessage" src="chrome://global/skin/icons/close.svg">
       <div>
@@ -18,7 +18,7 @@ export default () => {
     `;
 
   const divElem = document.createElement('div');
-  divElem.innerHTML = viewMeesage;
+  divElem.innerHTML = viewMessage;
 
   // FUNCION PARA CERRAR SESION
   const btnConfirm = divElem.querySelector('#confirm');
