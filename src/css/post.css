@@ -1,0 +1,20 @@
+.photoForm{
+    height:90px;
+    width:90px;
+    margin: 5px;
+}
+.photoForm img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px 0px #c1c1c1;
+}
+.card{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+.post-description{
+    margin: 4px;
+}

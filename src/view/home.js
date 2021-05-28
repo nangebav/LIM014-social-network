@@ -16,6 +16,7 @@ export default () => {
           <section class="row">
             <section class="col-md-4">
               <section class="card">
+                  <section class="photoForm"></section>
                   <form id="post-form">
                     <section class="user-identifier">
                       <img id="post-userpic">
@@ -43,11 +44,14 @@ export default () => {
   const postContainer = divElem.querySelector('#postContainer');
   const username = divElem.querySelector('#post-username');
   const viewPerfil = divElem.querySelector('#viewPerfil');
+  const photoForm = divElem.querySelector('.photoForm');
   // const btnSelectFile = divElem.querySelector('#fileButton');
 
   // FUNCION PARA OBTENER EL NOMBRE DEL USUARIO
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+      photoForm.innerHTML = `
+        <img src="${user.photoURL}">`;
       username.innerHTML = user.displayName;
       username.value = `${user.displayName}`;
       viewPerfil.appendChild(Perfil());
@@ -127,8 +131,7 @@ export default () => {
         const btnsDelete = document.querySelectorAll('button.btn-delete');
         btnsDelete.forEach((btn) => {
           btn.addEventListener('click', (e) => {
-            btn.addEventListener('click', (e) => {
-              const mensaje = `
+            const mensaje = `
               <section class="messageValid">
                 <div class="message">
                 <img class="exitMessage" id="exitMessage" src="chrome://global/skin/icons/close.svg">
@@ -142,21 +145,20 @@ export default () => {
                 </div>
               </section>
               `;
-              document.querySelector('#contenedorMessage').innerHTML = mensaje;
-              const btnConfirmDelete = document.querySelector('#confirmDelete');
-              const btnCancelDelete = document.querySelector('#cancelDelete');
-              const exitMessage = document.querySelector('#exitMessage');
+            document.querySelector('#contenedorMessage').innerHTML = mensaje;
+            const btnConfirmDelete = document.querySelector('#confirmDelete');
+            const btnCancelDelete = document.querySelector('#cancelDelete');
+            const exitMessage = document.querySelector('#exitMessage');
 
-              btnConfirmDelete.addEventListener('click', () => {
-                deletePost(e.target.dataset.id);
-                document.querySelector('#contenedorMessage').innerHTML = '';
-              });
-              btnCancelDelete.addEventListener('click', () => {
-                document.querySelector('#contenedorMessage').innerHTML = '';
-              });
-              exitMessage.addEventListener('click', () => {
-                document.querySelector('#contenedorMessage').innerHTML = '';
-              });
+            btnConfirmDelete.addEventListener('click', () => {
+              deletePost(e.target.dataset.id);
+              document.querySelector('#contenedorMessage').innerHTML = '';
+            });
+            btnCancelDelete.addEventListener('click', () => {
+              document.querySelector('#contenedorMessage').innerHTML = '';
+            });
+            exitMessage.addEventListener('click', () => {
+              document.querySelector('#contenedorMessage').innerHTML = '';
             });
           });
         });
@@ -210,13 +212,14 @@ export default () => {
   // orderPosts();
 
   // ENVIA EL CONTENIDO DEL POST A FIREBASE
-  const saveTask = (name, description, date) => firebase.firestore().collection('posts').doc().set({
+  const saveTask = (name, description, id, date) => firebase.firestore().collection('posts').doc().set({
     name,
     description,
     date,
   });
 
-  // // Get a reference to the storage service, which is used to create references in your storage bucket
+  // Get a reference to the storage service, which is used to create references
+  // in your storage bucket
   // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
   // // Create a storage reference from our storage service
   // const storageRef = storage.ref();
@@ -228,7 +231,8 @@ export default () => {
   // });
   // uploadImg();
 
-  // Get a reference to the storage service, which is used to create references in your storage bucket
+  // Get a reference to the storage service, which is used to create
+  // references in your storage bucket
   // var storage = firebase.app().storage("gs://miurart---red-social.appspot.com");
   // // Create a storage reference from our storage service
   // var storageRef = storage.ref();
@@ -239,15 +243,15 @@ export default () => {
   //   imageRef.put(file);
   // });
 
-  const fileE = () => {
-    btnSelectFile.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      // console.log(file)
-      return file;
-    // console.log(file);
-    });
-  };
-  console.log(fileE());
+  // const fileE = () => {
+  //   btnSelectFile.addEventListener('change', (e) => {
+  //     const file = e.target.files[0];
+  //     // console.log(file)
+  //     return file;
+  //   // console.log(file);
+  //   });
+  // };
+  // console.log(fileE());
 
   // EVENTO PARA ENVIAR DATOS DEL POST A FIREBASE
   postForm.addEventListener('submit', (e) => {
@@ -258,7 +262,8 @@ export default () => {
     const file = fileE();
     console.log(date);
     saveTask(usernameInside.value, description.value, date);
-    // Get a reference to the storage service, which is used to create references in your storage bucket
+    // Get a reference to the storage service, which is used to
+    // create references in your storage bucket
     const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
     // Create a storage reference from our storage service
     const storageRef = storage.ref();
