@@ -23,6 +23,8 @@ export default () => {
                     </section>
                     <section class="body-form">
                         <textarea id="post-description" name="post-form" rows="3" class="form-control" placeholder="¿Qué estás pensando?"></textarea>
+                        <!-- <a><img id="uploadImage" src="https://user-images.githubusercontent.com/67443691/119537339-8c5e7a00-bd4f-11eb-9508-ace2d40f4695.png"</a> -->
+                        <input type="file" value="upload" id="fileButton" />
                     </section>
                     <button id="btnPublicar">
                       Publicar
@@ -44,6 +46,7 @@ export default () => {
   const postContainer = divElem.querySelector('#PostContainer');
   const username = divElem.querySelector('#post-username');
   const viewPerfil = divElem.querySelector('#viewPerfil');
+  // const btnSelectFile = divElem.querySelector('#fileButton');
 
   // FUNCION PARA OBTENER EL NOMBRE DEL USUARIO
   firebase.auth().onAuthStateChanged((user) => {
@@ -58,6 +61,8 @@ export default () => {
               </div>
               <div class="user-detail text-center">
                 <h3>${user.displayName}</h3>
+                <input type="file" name="archivossubidos[]" accept="image/png, .jpeg, .jpg, image/gif" id="select-photo-profile">
+                <img src="https://cdn.pixabay.com/photo/2013/07/13/10/29/icon-157351_960_720.png" style="width:10%; height:10%">
                 <div id="Description">
                   <textarea placeholder="Artista mural"></textarea>
                 </div>
@@ -68,6 +73,23 @@ export default () => {
       // console.log('Estas logueado');
     }
     const profilePhoto = document.querySelector('.profile-pic');
+    const selectPhotoProfile = document.querySelector('#select-photo-profile');
+    selectPhotoProfile.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      console.log(file);
+      if (file) {
+        const storageRef = firebase.storage().ref(`/userProfileImgs/${file.name}`);
+        const uploadRef = storageRef.put(file);
+        uploadRef.on('state_changed', (snapshot) => {
+
+        }, (error) => {
+          console.log(error);
+        }, () => {
+          console.log('Tu archivo se subió a Firebase');
+        });
+      }
+    });
+
     if (user.photoURL) {
       profilePhoto.innerHTML = `<a href=""><img src="${user.photoURL}"></img></a>`;
     } else {
@@ -187,6 +209,16 @@ export default () => {
     description,
     date,
   });
+
+  // btnSelectFile.addEventListener('change', (e) => {
+  //   const file = e.target.files[0];
+  //   console.log(file);
+
+  //   const sotorageRef = firebase.storage().ref(`imagePosts/${file.name}`);
+
+  //   const imageP = sotorageRef.put(file);
+  // });
+  // uploadImg();
 
   // EVENTO PARA ENVIAR DATOS DEL POST A FIREBASE
   taskForm.addEventListener('submit', (e) => {
