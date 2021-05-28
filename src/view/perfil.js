@@ -8,7 +8,16 @@ export default () => {
    <div class="user-detail text-center">
     <div class="profileDisplayName"></div>
      <div id="Description">
+     <section>
+      <h4>Correo Electrónico</h4>
+      <p>.....</p>
+      </section>
+      <section>
+      <h4>Número telefónico</h4>
+      <p>.....</p>
+      <h4>Sobre mí</h4>
        <textarea placeholder="Artista mural"></textarea>
+      </section>
      </div>
      <button class="btn btn-defualt"> Follow </button><br>
    </div>
