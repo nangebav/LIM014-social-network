@@ -16,7 +16,7 @@ export default () => {
           <section class="row">
             <section class="col-md-4">
               <section class="card">
-                  <section class="photoForm"></section>
+                  <--- <section class="photoForm"></section> --->
                   <form id="post-form">
                     <section class="user-identifier">
                       <img id="post-userpic">
@@ -44,14 +44,14 @@ export default () => {
   const postContainer = divElem.querySelector('#postContainer');
   const username = divElem.querySelector('#post-username');
   const viewPerfil = divElem.querySelector('#viewPerfil');
-  const photoForm = divElem.querySelector('.photoForm');
-  // const btnSelectFile = divElem.querySelector('#fileButton');
+  //  const photoForm = divElem.querySelector('.photoForm');
+  const btnSelectFile = divElem.querySelector('#fileButton');
 
   // FUNCION PARA OBTENER EL NOMBRE DEL USUARIO
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      photoForm.innerHTML = `
-        <img src="${user.photoURL}">`;
+      // photoForm.innerHTML = `
+      //  <img src="${user.photoURL}">`;
       username.innerHTML = user.displayName;
       username.value = `${user.displayName}`;
       viewPerfil.appendChild(Perfil());
