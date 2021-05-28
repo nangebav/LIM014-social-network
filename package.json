@@ -2,7 +2,7 @@
   "name": "social-network",
   "version": "1.0.0",
   "description": "Social Network @ Laboratoria",
-  "main": "src/index.html",
+  "main": "src/index.htm",
   "keywords": [
     "javascript",
     "firebase",
@@ -27,6 +27,7 @@
     "eslint-plugin-jest": "^24.1.0",
     "htmlhint": "^0.14.0",
     "jest": "^26.4.2",
+    "mock-cloud-firestore": "^0.12.0",
     "regenerator-runtime": "^0.13.1",
     "serve": "^11.0.2",
     "stylelint": "^13.6.1",
@@ -34,5 +35,20 @@
   },
   "engines": {
     "node": ">=10"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielaguerrac/LIM014-social-network.git"
+  },
+  "author": "Nancy y Gabriela",
+  "bugs": {
+    "url": "https://github.com/gabrielaguerrac/LIM014-social-network/issues"
+  },
+  "homepage": "https://github.com/gabrielaguerrac/LIM014-social-network#readme",
+  "dependencies": {
+    "firebase-mock": "^2.3.2"
   }
 }

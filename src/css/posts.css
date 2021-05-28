@@ -1,0 +1,45 @@
+@media screen and (min-width: 1050px){
+
+    #post-description{
+        resize: none;
+        border-radius: 16px;
+        padding: 8px;
+        margin: 5px;
+    }
+    .post-card{
+        border: solid rgb(223, 223, 223);
+        box-shadow: 2px 2px 10px rgba(#777777, .5);
+        margin: 8px;
+        padding: 15px;
+        border-radius: 21px;
+    }
+
+    .card {
+        /* display: flex; */
+        width: 100%;
+        font-family: sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 21px;
+        letter-spacing: 0em;
+        text-align: center;
+    }
+
+    .btns{
+        top: 4%;
+        right: 6%;
+    }
+
+    .btn-edit, .btn-delete{
+        padding: 3px;
+        margin: auto;
+        border-radius: 5px;
+        background-color: transparent;
+        border: none;
+    }
+
+    .note{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+}
