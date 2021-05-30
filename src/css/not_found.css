@@ -1,31 +1,33 @@
+.box {
+  width: 350px;
+  height: 100%;
+  background: #332F63;
+  border-radius: 20px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px 50px;
+}
+/* @media screen and (max-width: 600px){
 
-/*
-variables
-#8C8AA7: #28254C;
-$l-purple: #332F63;
-$t-purple: #8C8AA7;
-$pink: #FF5E65;
-$white: #fff;*/
+}
+@media screen and (min-width: 600px) and (max-width: 1049px) {
 
+} */
+@media screen and (min-width: 1050px){
 .errorPage {
     size: 100%;
     background-color: #8C8AA7;
-    font-family: 'Ubuntu';
+    font-family: 'Ubuntu', Arial, Helvetica, sans-serif;
     box-sizing: border-box;
   }
   
   .box {
-    width: 350px;
+    margin: 0;
+    width: 100%;
     height: 100%;
-    max-height: 600px;
-    min-height: 450px;
-    background: #332F63;
-    border-radius: 20px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    padding: 30px 50px;
+    border-radius: 0px;
   }
     .box__ghost {
       padding: 15px 25px 25px;
@@ -283,9 +285,7 @@ $white: #fff;*/
           background: transparent;
           border-color: white;}
   
-          .box__button:before {
-            transform: translateX(250px) rotate(45deg);
-          }
+
   
   /*keyframes*/
   @keyframes upndown {
@@ -305,4 +305,4 @@ $white: #fff;*/
     100% {opacity: .2;}
   }
   
-  
+}

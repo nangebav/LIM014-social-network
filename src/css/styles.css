@@ -3,6 +3,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=El+Messiri&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Ubuntu);
+
 
 *{
     margin: 0;
@@ -17,17 +19,6 @@
  /* {
     background-color: #FF826D;
 } */
-
-#container {
-    position: relative;
-    min-height: 100vh;
-    /* width: 100%; */
-    background-color: #BE3871;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* padding: 20px; */
-}
 
 
 #viewLog, #viewRegistration{
@@ -146,7 +137,9 @@ input[type=checkbox] {
         display: none;
     }
 
+
     #container {
+        grid-gap: 5 rem;
         position: relative;
         min-height: 100vh;
         /* width: 100%; */
@@ -272,12 +265,6 @@ input[type=checkbox] {
         font-size: smaller;
     }
 
-    
-
-    #container {
-        grid-gap: 5 rem;
-
-    }
 
     /* #imageLog{
         margin: 0px;
@@ -315,7 +302,7 @@ input[type=checkbox] {
     
     /* BOX MESSAGE PARA ELIMINAR POSTS Y SALIR DEL HOME*/
     .messageValid{
-        position: absolute;
+        position: fixed;
         padding: 2%;
         margin: 5%;
         z-index: 100;
@@ -324,7 +311,6 @@ input[type=checkbox] {
         width: 20%;
         left: 50%;
         color: #000000;
-        box-shadow: 0px 0px 5px 0px #c1c1c1;
         background-color: #fff;
     }
     
@@ -342,13 +328,14 @@ input[type=checkbox] {
     }
 
     /* DEL HOME*/
-    .message p{
+    p .message{
+        font-size: 15px;
         color: #525252;
         font-family: Arial, Helvetica, sans-serif;
     }
 
     /* DEL HOME*/
-    .message h2{
+    h2 .message {
         color: #000000;
         font-family: Arial, Helvetica, sans-serif;
         font-size: 15px;
