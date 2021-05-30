@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
-import { deletePost, editPost } from '../controller-function/post-firestore.js';
+import { deletePost, editPost, addComment } from '../controller-function/post-firestore.js';
 import MessageSignOut from './box_message_sign_out.js';
 import Perfil from './perfil.js';
 
@@ -92,6 +92,66 @@ export default () => {
           <div id="commentContainer"></div>
         </div>`;
 
+        const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
+        // console.log(divsEditDelete);
+        // const usuariodelpost = divsEditDelete.name;
+        // console.log(usuariodelpost);
+        const userNamePost = () => {
+          let postUserId;
+          Array.from(divsEditDelete).forEach((divED) => {
+            //   console.log(divED);
+            postUserId = divED.getAttribute('name');
+          });
+          return postUserId;
+        };
+        const usp = userNamePost();
+
+        //  const  Array.from(divsEditDelete).forEach((divED) => {
+        //         //   console.log(divED);
+        //         postUserId = divED.getAttribute('name');
+        //       });
+        //       return postUserId;
+        //     });
+
+        firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+            // console.log(user.uid);
+            // console.log(post.userId);
+            // const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
+            // console.log(divsEditDelete);
+            // const usuariodelpost = divsEditDelete.name;
+            // console.log(usuariodelpost);
+            // const userNamePost = () => {
+            //   let postUserId;
+            //   Array.from(divsEditDelete).forEach((divED) => {
+            //     //   console.log(divED);
+            //     postUserId = divED.getAttribute('name');
+            //   });
+            //   return postUserId;
+            // };
+            console.log(post.id);
+            console.log(usp);
+            console.log(user.uid);
+            // document.querySelector('div.btns-edit-delete').removeAttribute('hidden');
+            if (user.uid === usp) {
+              // post.id
+              // divED.setAttribute('hidden', false);
+              // .setAttribute('hidden', false);
+              // const divis = document.querySelectorAll('div.btns-edit-delete');
+              // console.log(divis);
+
+              console.log(true);
+            } else {
+              document.querySelector('div.btns-edit-delete').setAttribute('hidden', true);
+              // divED.setAttribute('hidden', true);
+              console.log(document.querySelector('div.btns-edit-delete'));
+              console.log(false);
+            }
+            // });
+          }
+        // });
+        });
+
         // }
         // const btnComment = postContainer.querySelectorAll('.comment');
         // btnComment.forEach((btn) => {
@@ -129,76 +189,25 @@ export default () => {
         //   });
         // });
 
-        const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
-        // console.log(divsEditDelete);
-        // const usuariodelpost = divsEditDelete.name;
-        // console.log(usuariodelpost);
-        const userNamePost = () => {
-          let postUserId;
-          Array.from(divsEditDelete).forEach((divED) => {
-            //   console.log(divED);
-            postUserId = divED.getAttribute('name');
-          });
-          return postUserId;
-        };
-        const usp = userNamePost();
-
-      //  const  Array.from(divsEditDelete).forEach((divED) => {
-      //         //   console.log(divED);
-      //         postUserId = divED.getAttribute('name');
-      //       });
-      //       return postUserId;
-      //     });
-        
-
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            // console.log(user.uid);
-            // console.log(post.userId);
-            // const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
-            // console.log(divsEditDelete);
-            // const usuariodelpost = divsEditDelete.name;
-            // console.log(usuariodelpost);
-            // const userNamePost = () => {
-            //   let postUserId;
-            //   Array.from(divsEditDelete).forEach((divED) => {
-            //     //   console.log(divED);
-            //     postUserId = divED.getAttribute('name');
-            //   });
-            //   return postUserId;
-            // };
-            console.log(post.id);
-            console.log(usp);
-            console.log(user.uid);
-            // document.querySelector('div.btns-edit-delete').removeAttribute('hidden');
-            if (user.uid === usp) {
-              //post.id
-              // divED.setAttribute('hidden', false);
-              // .setAttribute('hidden', false);
-              // const divis = document.querySelectorAll('div.btns-edit-delete');
-              // console.log(divis);
-              
-              console.log(true);
-            } else {
-              document.querySelector('div.btns-edit-delete').setAttribute('hidden', true);
-              // divED.setAttribute('hidden', true);
-              console.log(document.querySelector('div.btns-edit-delete'));
-              console.log(false);
-            }
-            // });
-          }
-        // });
-        });
-
         const btnsComment = document.querySelectorAll('button.commentButton');
         btnsComment.forEach((btn) => {
           btn.addEventListener('click', (e) => {
             const commentContainer = e.target.parentElement.parentElement.querySelector('div#commentContainer');
             commentContainer.innerHTML = `
             <h5 id="commenterName"></h5>
-            <textarea id="commentDesc"></textarea>
-            <button id="commentPost">Comentar</button>
+            <textarea id="commentDesc" data-id="${post.id}"></textarea>
+            <button class="commentPost" data-id="${post.id}">Comentar</button>
             <button id="cancelPost"">cancelar</button>`;
+
+             const commentPost = document.querySelectorAll('.commentPost');
+             console.log(e.target.parentElement.parentElement.querySelector('#commentDesc'));
+             // console.log(e.target.parentElement.parentElement.querySelector('.commentPost'));
+          
+            const commentPost1 = e.target.parentElement.parentElement.parentElement.querySelector('#commentDesc');
+            console.log(commentPost1);
+            // console.log(document.querySelectorAll('.commentPost'));
+            // const commentDesc = document.getElementById('commentDesc').value;
+            // addComment(post.userId, post.id, commentDesc);
           });
         });
 
