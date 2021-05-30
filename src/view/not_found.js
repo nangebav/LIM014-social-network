@@ -1,5 +1,5 @@
 export default () => {
-    const errorPage = `
+  const errorPage = `
     <div class="errorPage">
       <div class="box">
       <div class="box__ghost">
@@ -38,28 +38,27 @@ export default () => {
     </div>
   
   `;
-    const divElem = document.createElement('div');
-    divElem.innerHTML = errorPage;
-  
-    // based on https://dribbble.com/shots/3913847-404-page
-  
-    //   const pageX = $(document).width();
-    //   const pageY = $(document).height();
-    //   let mouseY = 0;
-    //   let mouseX = 0;
-  
-    //   $(document).mousemove((event) => {
-    //     // verticalAxis
-    //     mouseY = event.pageY;
-    //     yAxis = (pageY / 2 - mouseY) / pageY * 300;
-    //     // horizontalAxis
-    //     mouseX = event.pageX / -pageX;
-    //     xAxis = -mouseX * 100 - 100;
-  
-    //     $('.box__ghost-eyes').css({ transform: `translate(${xAxis}%,-${yAxis}%)` });
-  
-    //     // console.log('X: ' + xAxis);
-    //   });
-    return divElem;
-  };
-  
+  const divElem = document.createElement('div');
+  divElem.innerHTML = errorPage;
+
+  // based on https://dribbble.com/shots/3913847-404-page
+
+  //   const pageX = $(document).width();
+  //   const pageY = $(document).height();
+  //   let mouseY = 0;
+  //   let mouseX = 0;
+
+  //   $(document).mousemove((event) => {
+  //     // verticalAxis
+  //     mouseY = event.pageY;
+  //     yAxis = (pageY / 2 - mouseY) / pageY * 300;
+  //     // horizontalAxis
+  //     mouseX = event.pageX / -pageX;
+  //     xAxis = -mouseX * 100 - 100;
+
+  //     $('.box__ghost-eyes').css({ transform: `translate(${xAxis}%,-${yAxis}%)` });
+
+  //     // console.log('X: ' + xAxis);
+  //   });
+  return divElem;
+};
