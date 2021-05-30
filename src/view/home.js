@@ -63,14 +63,14 @@ export default () => {
       postContainer.innerHTML = '';
       data.forEach((doc) => {
         const post = doc.data();
-        console.log(post);
+        // console.log(post);
         // console.log(username);
         post.id = doc.id;
-        console.log(post.id);
+        // console.log(post.id);
         postContainer.innerHTML += `
         <div class="post-card">
           <div class="cardUserPost">
-            <div class="btns-edit-delete" name="${post.userId}">
+            <div class="btns-edit-delete" name="${post.userId}" data-id-post="${post.id}">
               <img class="btn-edit" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120040454-32b6b380-bfcc-11eb-81cb-96f0e713e84c.png">
               <img class="btn-delete" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120018025-389c9c80-bfac-11eb-9d7d-0a68441eca20.png">
             </div>
@@ -129,26 +129,60 @@ export default () => {
         //   });
         // });
 
+        const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
+        // console.log(divsEditDelete);
+        // const usuariodelpost = divsEditDelete.name;
+        // console.log(usuariodelpost);
+        const userNamePost = () => {
+          let postUserId;
+          Array.from(divsEditDelete).forEach((divED) => {
+            //   console.log(divED);
+            postUserId = divED.getAttribute('name');
+          });
+          return postUserId;
+        };
+        const usp = userNamePost();
+
+      //  const  Array.from(divsEditDelete).forEach((divED) => {
+      //         //   console.log(divED);
+      //         postUserId = divED.getAttribute('name');
+      //       });
+      //       return postUserId;
+      //     });
+        
+
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
             // console.log(user.uid);
             // console.log(post.userId);
-            const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
-            console.log(divsEditDelete);
-            const usuariodelpost = divsEditDelete.name;
-            console.log(usuariodelpost);
-            // Array.from(divsEditDelete).forEach((divED) => {
-            //   console.log(divED);
-            //   const postUserId = divED.getAttribute('name');
-            //   console.log(postUserId);
+            // const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
+            // console.log(divsEditDelete);
+            // const usuariodelpost = divsEditDelete.name;
+            // console.log(usuariodelpost);
+            // const userNamePost = () => {
+            //   let postUserId;
+            //   Array.from(divsEditDelete).forEach((divED) => {
+            //     //   console.log(divED);
+            //     postUserId = divED.getAttribute('name');
+            //   });
+            //   return postUserId;
+            // };
+            console.log(post.id);
+            console.log(usp);
             console.log(user.uid);
-            if (user.uid === usuariodelpost) {
+            // document.querySelector('div.btns-edit-delete').removeAttribute('hidden');
+            if (user.uid === usp) {
+              //post.id
               // divED.setAttribute('hidden', false);
-              document.querySelector('div.btns-edit-delete').setAttribute('hidden', false);
+              // .setAttribute('hidden', false);
+              // const divis = document.querySelectorAll('div.btns-edit-delete');
+              // console.log(divis);
+              
               console.log(true);
             } else {
               document.querySelector('div.btns-edit-delete').setAttribute('hidden', true);
               // divED.setAttribute('hidden', true);
+              console.log(document.querySelector('div.btns-edit-delete'));
               console.log(false);
             }
             // });
