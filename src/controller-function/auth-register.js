@@ -1,7 +1,9 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-console */
 // Función para poder Registrar una Cuenta en MiuArt
-// ---------------------------------------------REGISTER---------------------------------------
+
+// REGISTRARSE
+// Función para enviar el mensaje de validación a mi correo
 export const sendEmail = () => {
   const user = firebase.auth().currentUser;
 
@@ -15,6 +17,7 @@ export const sendEmail = () => {
     });
 };
 
+// Función para registrar a mi usuario
 export const registrationFunction = (email, password) => firebase.auth()
   .createUserWithEmailAndPassword(email, password)
   .then((userCredential) => {
@@ -30,6 +33,9 @@ export const registrationFunction = (email, password) => firebase.auth()
     alert(`${errorMessage}`);
   });
 
+//
+//
+
 export const updateProfile = (nombre, apellido) => {
   const user = firebase.auth().currentUser;
   user.updateProfile({
@@ -44,3 +50,8 @@ export const updateProfile = (nombre, apellido) => {
   //   console.log(error);
   // });
 };
+
+export const user = () => firebase.auth().currentUser;
+
+export const UserPhoto = (photoURL) => firebase.auth().currentUser
+  .updateProfile({ photoURL });

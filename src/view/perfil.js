@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 export default () => {
   const viewPerfil = `
  <div class="container">
@@ -10,7 +11,15 @@ export default () => {
     <input type="file" accept="image/png, image/jpeg" value="upload" id="fileProfile"/>
     <button id="acceptProfile">Aceptar</button>
      <div id="Description">
+     <section id="emailUser">
+      <h4>Correo Electrónico</h4>
+      </section>
+      <section>
+      <h4>Número telefónico</h4>
+      <p></p>
+      <h4>Sobre mí</h4>
        <textarea placeholder="Artista mural"></textarea>
+      </section>
      </div>
      <button class="btn btn-defualt"> Follow </button><br>
    </div>
@@ -24,6 +33,7 @@ export default () => {
 
   firebase.auth().onAuthStateChanged((user) => {
     perfilDisplayName.innerHTML = `<h3>${user.displayName}</h3>`;
+    divElem.querySelector('#emailUser').innerHTML += `<p>${user.email}</p>`;
     if (user.photoURL) {
       profilePhoto.innerHTML = `<img src="${user.photoURL}"></img>`;
     } else {

@@ -1,4 +1,4 @@
-// -------------------------------LOGIN----------------------------------------
+// LOGIN
 // Función para iniciar Sesión con mi correo electronico
 export const signInFunction = (email, password) => firebase.auth()
   .signInWithEmailAndPassword(email, password);
@@ -15,6 +15,6 @@ export const signInGoogle = () => {
   return firebase.auth().signInWithPopup(googleProvider);
 };
 
-// -------------------------------LOGIN----------------------------------------
+// SIGN OUT
 // Función para salir de mi sesion
 export const signOut = () => firebase.auth().signOut();

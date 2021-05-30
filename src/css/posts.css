@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya&display=swap');
+
+@media screen and (min-width: 1050px){
+
+    /* FOTO DE PERFIL */
+    .photoForm{
+        height:80px;
+        width:80px;
+        margin: 7px;
+    }
+    .photoForm img{
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        box-shadow: 0px 0px 5px 0px #c1c1c1;
+    }
+
+    /* FOTO DE PERFIL */
+
+    #post-username{
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+    }
+
+    #post-description{
+        resize: none;
+        border-radius: 16px;
+        padding: 8px;
+        margin: 5px;
+    }
+    .post-card{
+        width: 65%;
+        border: solid rgb(223, 223, 223);
+        margin: 8px;
+        padding: 10px;
+        border-radius: 21px;
+    }
+
+
+    .card {
+        /* display: flex; */
+        display: flex;
+        flex-direction: row;
+        margin: 15px;
+        width: 100%;
+        font-family: sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 21px;
+        letter-spacing: 0em;
+        text-align: center;
+    }
+
+    /* FOTO DE PERFIL */
+
+    .btns{
+        position: relative;
+        left: 90%;
+    }
+
+    .btn-edit, .btn-delete{
+        padding: 3px;
+        margin: auto;
+        border-radius: 5px;
+        background-color: transparent;
+        border: none;
+    }
+
+    .note{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+}
