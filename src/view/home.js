@@ -62,18 +62,22 @@ export default () => {
     if (data.length) {
       postContainer.innerHTML = '';
       data.forEach((doc) => {
+        const likes = 0;
         const post = doc.data();
         // console.log(post);
         // console.log(username);
         post.id = doc.id;
+        const user = firebase.auth().currentUser;
         // console.log(post.id);
         postContainer.innerHTML += `
         <div class="post-card">
           <div class="cardUserPost">
-            <div class="btns-edit-delete" name="${post.userId}" data-id-post="${post.id}">
+          ${(post.userId === user.uid)
+    ? `<div class="btns-edit-delete" name="${post.userId}" data-id-post="${post.id}">
               <img class="btn-edit" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120040454-32b6b380-bfcc-11eb-81cb-96f0e713e84c.png">
               <img class="btn-delete" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120018025-389c9c80-bfac-11eb-9d7d-0a68441eca20.png">
-            </div>
+            </div>` : ''}
+            <h6>${post.date}</h6>
             <h3 class="h5" name="${post.name}">${post.name}</h3>
             <div class="editPublicacion" disabled>
               <p id="descriptionEdit">${post.description}</p>   
@@ -86,25 +90,30 @@ export default () => {
             </div>
           </div>
           <div>
-            <button id="like"> ❤ </button>
+            <button class="like" data-id-p="${post.id}"> ❤ </button> <label>${likes}</label>
             <button class="commentButton" data-id="${post.id}"> comentarios </button>
           </div>
-          <div id="commentContainer"></div>
+          <div id="commentContainer">
+           <h5 id="commenterName"></h5>
+           <textarea id="commentDesc" data-id="${post.id}"></textarea>
+           <button class="commentPost" data-id="${post.id}">Comentar</button>
+           <button id="cancelPost"">cancelar</button>
+          </div>
         </div>`;
 
-        const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
-        // console.log(divsEditDelete);
-        // const usuariodelpost = divsEditDelete.name;
-        // console.log(usuariodelpost);
-        const userNamePost = () => {
-          let postUserId;
-          Array.from(divsEditDelete).forEach((divED) => {
-            //   console.log(divED);
-            postUserId = divED.getAttribute('name');
-          });
-          return postUserId;
-        };
-        const usp = userNamePost();
+        // const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
+        // // console.log(divsEditDelete);
+        // const arrayDivsEditDelete = Array.from(divsEditDelete);
+        // // console.log(usuariodelpost);
+        // const userNamePost = () => {
+        //   let postUserId;
+        //   arrayDivsEditDelete.forEach((divED) => {
+        //     //   console.log(divED);
+        //     postUserId = divED.getAttribute('name');
+        //   });
+        //   return postUserId;
+        // };
+        // const usp = userNamePost();
 
         //  const  Array.from(divsEditDelete).forEach((divED) => {
         //         //   console.log(divED);
@@ -112,45 +121,30 @@ export default () => {
         //       });
         //       return postUserId;
         //     });
+        // arrayDivsEditDelete.forEach((divED) => {
+        // firebase.auth().onAuthStateChanged((user) => {
+        //   if (user) {
+        //     console.log(post.id);
+        //     console.log(usp);
+        //     console.log(user.uid);
+        //     // document.querySelector('div.btns-edit-delete').removeAttribute('hidden');
+        //     if (user.uid === usp) {
+        //       console.log(true);
+        //     } else {
+        //       // document.querySelector('div.btns-edit-delete').setAttribute('hidden', true);
+        //       // console.log(divED);
+        //       // arrayDivsEditDelete.setAttribute('hidden', true);
 
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            // console.log(user.uid);
-            // console.log(post.userId);
-            // const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
-            // console.log(divsEditDelete);
-            // const usuariodelpost = divsEditDelete.name;
-            // console.log(usuariodelpost);
-            // const userNamePost = () => {
-            //   let postUserId;
-            //   Array.from(divsEditDelete).forEach((divED) => {
-            //     //   console.log(divED);
-            //     postUserId = divED.getAttribute('name');
-            //   });
-            //   return postUserId;
-            // };
-            console.log(post.id);
-            console.log(usp);
-            console.log(user.uid);
-            // document.querySelector('div.btns-edit-delete').removeAttribute('hidden');
-            if (user.uid === usp) {
-              // post.id
-              // divED.setAttribute('hidden', false);
-              // .setAttribute('hidden', false);
-              // const divis = document.querySelectorAll('div.btns-edit-delete');
-              // console.log(divis);
-
-              console.log(true);
-            } else {
-              document.querySelector('div.btns-edit-delete').setAttribute('hidden', true);
-              // divED.setAttribute('hidden', true);
-              console.log(document.querySelector('div.btns-edit-delete'));
-              console.log(false);
-            }
-            // });
-          }
+        //       // divED.setAttribute('hidden', true);
+        //       // console.log(document.querySelector('div.btns-edit-delete'));
+        //       console.log(false);
+        //     }
+        //   }
+        //   // });
+        //   // });
         // });
-        });
+        // });
+        // });
 
         // }
         // const btnComment = postContainer.querySelectorAll('.comment');
@@ -189,34 +183,50 @@ export default () => {
         //   });
         // });
 
-        const btnsComment = document.querySelectorAll('button.commentButton');
-        btnsComment.forEach((btn) => {
-          btn.addEventListener('click', (e) => {
-            const commentContainer = e.target.parentElement.parentElement.querySelector('div#commentContainer');
-            commentContainer.innerHTML = `
-            <h5 id="commenterName"></h5>
-            <textarea id="commentDesc" data-id="${post.id}"></textarea>
-            <button class="commentPost" data-id="${post.id}">Comentar</button>
-            <button id="cancelPost"">cancelar</button>`;
+        // const btnsComment = document.querySelectorAll(`button.commentButton[data-id]=${post.id}`);
 
-             const commentPost = document.querySelectorAll('.commentPost');
-             console.log(e.target.parentElement.parentElement.querySelector('#commentDesc'));
-             // console.log(e.target.parentElement.parentElement.querySelector('.commentPost'));
-          
-            const commentPost1 = e.target.parentElement.parentElement.parentElement.querySelector('#commentDesc');
-            console.log(commentPost1);
-            // console.log(document.querySelectorAll('.commentPost'));
-            // const commentDesc = document.getElementById('commentDesc').value;
-            // addComment(post.userId, post.id, commentDesc);
-          });
+        const btnsComment = document.querySelector('button.commentButton');
+        // const btnsComment = document.querySelector(`button.commentButton[data-id="${post.id}"]`);
+        // console.log(btnsComment);
+       // btnsComment.forEach((btn) => {
+        btnsComment.addEventListener('click', () => {
+          console.log('hiciste click');
+          // const commentContainer = e.target.parentElement.parentElement.querySelector('div#commentContainer');
+          // console.log(commentContainer);
+          // console.log(e.target.parentElement);
+          // commentContainer.innerHTML = `
+          // <h5 id="commenterName"></h5>
+          // <textarea id="commentDesc" data-id="${post.id}"></textarea>
+          // <button class="commentPost" data-id="${post.id}">Comentar</button>
+          // <button id="cancelPost"">cancelar</button>`;
+
+          // const commentPost = document.querySelectorAll('.commentPost');
+          // console.log(e.target.parentElement.parentElement.querySelector('#commentDesc'));
+          // console.log(e.target.parentElement.parentElement.querySelector('.commentPost'));
+
+          // const commentPost1 = e.target.parentElement.parentElement.parentElement.querySelector('#commentDesc');
+          // console.log(commentPost1);
+          // console.log(document.querySelectorAll('.commentPost'));
+          // const commentDesc = document.getElementById('commentDesc').value;
+          // addComment(post.userId, post.id, commentDesc);
+        });
+        // });
+
+        // -----
+        const setLikes = (like, p) => firebase.firestore().collection('posts').doc(p).update({
+          like,
         });
 
-        // window.addEventListener('click', (e) => {
-        //   if (e.target !== btnComment) {
-        //     postContainer.querySelector('.commentContainer').classList.remove('show');
-        //   }
-        // });
+        const btnsLikes = document.querySelectorAll('button.like');
+        console.log(btnsLikes);
+        btnsLikes.forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+
+          })
+        })
+
         const btnsDelete = document.querySelectorAll('img.btn-delete');
+        console.log(btnsDelete);
         btnsDelete.forEach((btn) => {
           btn.addEventListener('click', (e) => {
             const mensaje = `
@@ -392,10 +402,11 @@ export default () => {
     e.preventDefault();
     const usernameInside = divElem.querySelector('#post-username');
     const description = postForm['post-description'];
-    const date = Date.now();
+    const date = Date.now().toLocaleString('en-ES');
     const file = fileE();
     const userId = firebase.auth().currentUser.uid;
     const userPhoto = firebase.auth().currentUser.photoURL;
+
     // console.log(file);
     saveTask(usernameInside.value, description.value, date, userId, userPhoto);
     // Get a reference to the storage service, which is used to create
