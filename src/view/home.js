@@ -48,7 +48,7 @@ export default () => {
   // FUNCION PARA OBTENER EL NOMBRE DEL USUARIO
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      console.log(user);
+      // console.log(user);
       photoForm.innerHTML = `
       <img src="${user.photoURL}">`;
       username.innerHTML = user.displayName;
@@ -128,6 +128,17 @@ export default () => {
         //     // };
         //   });
         // });
+        const btnsComment = document.querySelectorAll('button.commentButton');
+        btnsComment.forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            const commentContainer = e.target.parentElement.parentElement.querySelector('div#commentContainer');
+            commentContainer.innerHTML = `
+            <h5 id="commenterName"></h5>
+            <textarea id="commentDesc"></textarea>
+            <button id="commentPost">Comentar</button>
+            <button id="cancelPost"">cancelar</button>`;
+          });
+        });
 
         const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
         // console.log(divsEditDelete);
@@ -143,13 +154,12 @@ export default () => {
         };
         const usp = userNamePost();
 
-      //  const  Array.from(divsEditDelete).forEach((divED) => {
-      //         //   console.log(divED);
-      //         postUserId = divED.getAttribute('name');
-      //       });
-      //       return postUserId;
-      //     });
-        
+        //  const  Array.from(divsEditDelete).forEach((divED) => {
+        //         //   console.log(divED);
+        //         postUserId = divED.getAttribute('name');
+        //       });
+        //       return postUserId;
+        //     });
 
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
@@ -167,39 +177,28 @@ export default () => {
             //   });
             //   return postUserId;
             // };
-            console.log(post.id);
-            console.log(usp);
-            console.log(user.uid);
+            // console.log(post.id);
+            // console.log(usp);
+            // console.log(user.uid);
             // document.querySelector('div.btns-edit-delete').removeAttribute('hidden');
+
             if (user.uid === usp) {
-              //post.id
+              // post.id
               // divED.setAttribute('hidden', false);
               // .setAttribute('hidden', false);
-              // const divis = document.querySelectorAll('div.btns-edit-delete');
+              document.querySelector('div.btns-edit-delete').setAttribute('hidden', false);
               // console.log(divis);
-              
+
               console.log(true);
             } else {
               document.querySelector('div.btns-edit-delete').setAttribute('hidden', true);
               // divED.setAttribute('hidden', true);
-              console.log(document.querySelector('div.btns-edit-delete'));
+              // console.log(document.querySelector('div.btns-edit-delete'));
               console.log(false);
             }
             // });
           }
         // });
-        });
-
-        const btnsComment = document.querySelectorAll('button.commentButton');
-        btnsComment.forEach((btn) => {
-          btn.addEventListener('click', (e) => {
-            const commentContainer = e.target.parentElement.parentElement.querySelector('div#commentContainer');
-            commentContainer.innerHTML = `
-            <h5 id="commenterName"></h5>
-            <textarea id="commentDesc"></textarea>
-            <button id="commentPost">Comentar</button>
-            <button id="cancelPost"">cancelar</button>`;
-          });
         });
 
         // window.addEventListener('click', (e) => {
