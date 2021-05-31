@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
-import { deletePost, editPost } from '../controller-function/post-firestore.js';
+import { deletePost, editPost, addComment } from '../controller-function/post-firestore.js';
 import MessageSignOut from './box_message_sign_out.js';
 import Perfil from './perfil.js';
 
@@ -74,6 +74,7 @@ export default () => {
               <img class="btn-edit" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120040454-32b6b380-bfcc-11eb-81cb-96f0e713e84c.png">
               <img class="btn-delete" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120018025-389c9c80-bfac-11eb-9d7d-0a68441eca20.png">
             </div>
+            <h6>${post.date}</h6>
             <h3 class="h5" name="${post.name}">${post.name}</h3>
             <div class="editPublicacion" disabled>
               <p id="descriptionEdit">${post.description}</p>   
@@ -89,56 +90,8 @@ export default () => {
             <button id="like"> ❤ </button>
             <button class="commentButton" data-id="${post.id}"> comentarios </button>
           </div>
-          <div id="commentContainer"></div>
+          <div class="commentContainer"></div>
         </div>`;
-
-        // }
-        // const btnComment = postContainer.querySelectorAll('.comment');
-        // btnComment.forEach((btn) => {
-        //   btn.addEventListener('click', () => {
-        //   // console.log('click en comentar');
-        //     const formComment = postContainer.querySelectorAll('.commentForm');
-        //     formComment.innerHTML += `
-        //     <h5 id="commenterName"
-        //     <input id="commentDesc" type="text">
-        //     <button id="commentPost>Comentar</button>`;
-        //   });
-        // });
-
-        // const btnComment = postContainer.querySelector('.comment');
-        // btnComment.addEventListener('click', () => {
-        //   postContainer.querySelector('.commentContainer').classList.toggle('show');
-        // });
-
-        // btnsComment.forEach((btn) => {
-        //   btn.addEventListener('click', (e) => {
-        //     // console.log(document.querySelector('.commentContainer'));
-        //     const commentContainer = e.target.parentElement('.commentContainer');
-        //     console.log(e.target.parentElement('.commentContainer'));
-        //     commentContainer.removeAttribute('hidden');
-        //     // const getComments = (idPost, callback) => {
-        //     //   const db = firebase.firestore();
-        //     //   db.collection(`post/${idPost}/comment`).orderBy('date', 'desc')
-        //     //     .onSnapshot((querySnapshot) => {
-        //     //       const comment = [];
-        //     //       querySnapshot.forEach((doc) => {
-        //     //         comment.push({ id: doc.id, ...doc.data() });
-        //     //       });
-        //     //     });
-        //     // };
-        //   });
-        // });
-        const btnsComment = document.querySelectorAll('button.commentButton');
-        btnsComment.forEach((btn) => {
-          btn.addEventListener('click', (e) => {
-            const commentContainer = e.target.parentElement.parentElement.querySelector('div#commentContainer');
-            commentContainer.innerHTML = `
-            <h5 id="commenterName"></h5>
-            <textarea id="commentDesc"></textarea>
-            <button id="commentPost">Comentar</button>
-            <button id="cancelPost"">cancelar</button>`;
-          });
-        });
 
         const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
         // console.log(divsEditDelete);
@@ -199,6 +152,68 @@ export default () => {
             // });
           }
         // });
+        });
+
+        // }
+        // const btnComment = postContainer.querySelectorAll('.comment');
+        // btnComment.forEach((btn) => {
+        //   btn.addEventListener('click', () => {
+        //   // console.log('click en comentar');
+        //     const formComment = postContainer.querySelectorAll('.commentForm');
+        //     formComment.innerHTML += `
+        //     <h5 id="commenterName"
+        //     <input id="commentDesc" type="text">
+        //     <button id="commentPost>Comentar</button>`;
+        //   });
+        // });
+
+        // const btnComment = postContainer.querySelector('.comment');
+        // btnComment.addEventListener('click', () => {
+        //   postContainer.querySelector('.commentContainer').classList.toggle('show');
+        // });
+
+        // btnsComment.forEach((btn) => {
+        //   btn.addEventListener('click', (e) => {
+        //     // console.log(document.querySelector('.commentContainer'));
+        //     const commentContainer = e.target.parentElement('.commentContainer');
+        //     console.log(e.target.parentElement('.commentContainer'));
+        //     commentContainer.removeAttribute('hidden');
+        //     // const getComments = (idPost, callback) => {
+        //     //   const db = firebase.firestore();
+        //     //   db.collection(`post/${idPost}/comment`).orderBy('date', 'desc')
+        //     //     .onSnapshot((querySnapshot) => {
+        //     //       const comment = [];
+        //     //       querySnapshot.forEach((doc) => {
+        //     //         comment.push({ id: doc.id, ...doc.data() });
+        //     //       });
+        //     //     });
+        //     // };
+        //   });
+        // });
+
+        const btnsComment = document.querySelectorAll('button.commentButton');
+        btnsComment.forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            const commentContainer = e.target.parentElement.parentElement.querySelector('div.commentContainer');
+            commentContainer.innerHTML = `
+            <h5 id="commenterName"></h5>
+            <textarea id="commentDesc" data-id="${post.id}"></textarea>
+            <button class="commentPost" data-id="${post.id}">Comentar</button>
+            <button id="cancelPost"">cancelar</button>`;
+
+            const commentPost = document.querySelectorAll('.commentPost');
+            commentPost.forEach((element) => {
+              console.log(element);
+            });
+            console.log(e.target.parentElement.parentElement.querySelector('#commentDesc'));
+            // console.log(e.target.parentElement.parentElement.querySelector('.commentPost'));
+
+            // const commentPost1 = e.target.parentElement.parentElement.parentElement.querySelector('#commentDesc');
+            // console.log(commentPost1);
+            // console.log(document.querySelectorAll('.commentPost'));
+            // const commentDesc = document.getElementById('commentDesc').value;
+            addComment(post.userId, post.id, 'Prueba texto');
+          });
         });
 
         // window.addEventListener('click', (e) => {
@@ -382,7 +397,7 @@ export default () => {
     e.preventDefault();
     const usernameInside = divElem.querySelector('#post-username');
     const description = postForm['post-description'];
-    const date = Date.now();
+    const date = new Date().toLocaleString('en-ES');
     const file = fileE();
     const userId = firebase.auth().currentUser.uid;
     const userPhoto = firebase.auth().currentUser.photoURL;
