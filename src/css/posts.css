@@ -30,7 +30,7 @@
         margin: 5px;
     }
     .post-card{
-        width: 65%;
+        width: 90%;
         border: solid rgb(223, 223, 223);
         margin: 8px;
         padding: 10px;
@@ -70,5 +70,40 @@
 
     .note{
         font-family: Georgia, 'Times New Roman', Times, serif;
+        resize: none;
+        width: 95%;
     }
+
+    .editNote{
+        margin: 10px;
+    }
+
+    .commentContainer {
+        border: solid rgb(223, 223, 223);
+        margin: 12px;
+        padding: 10px;
+        border-radius: 21px;
+        flex-direction: column;
+        align-items:flex-start;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    .photoComment {
+        border-radius: 50%;
+        width: 10%;
+    }
+
+    #commentDesc{
+        resize: none;
+        border-radius: 15px;
+        background-color: #e7e7e7;
+        border: none;
+        padding: 4px 0px 0px 10px;
+    }
+
+    .commentPost{
+        background-color: transparent;
+        border: none;
+    }
+
 }

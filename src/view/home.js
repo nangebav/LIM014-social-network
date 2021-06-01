@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import { deletePost, editPost, addComment } from '../controller-function/post-firestore.js';
@@ -16,13 +17,15 @@ export default () => {
       <section class="row">
         <section class="col-md-4">
           <section class="card">
-            <section class="photoForm"></section>
               <form id="post-form">
                 <section class="user-identifier">
                   <p id="post-username" name="post-form" class="form-control"></p>
                 </section>
                 <section class="body-form">
+                  <section class="photoForm"></section>
                   <textarea id="post-description" name="post-form" cols="50" rows="3" class="form-control" placeholder="¿Qué estás pensando?"></textarea>
+                </section>
+                <section>
                   <input type="file" accept="image/png, image/jpeg" value="upload" id="fileButton" />
                 </section>
                 <button id="btnPublicar">Publicar</button>
@@ -48,7 +51,7 @@ export default () => {
   // FUNCION PARA OBTENER EL NOMBRE DEL USUARIO
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      console.log(user);
+      // console.log(user);
       photoForm.innerHTML = `
       <img src="${user.photoURL}">`;
       username.innerHTML = user.displayName;
@@ -97,11 +100,12 @@ export default () => {
             <button class="like" data-id-p="${post.id}"> ❤ </button> <label>${likes}</label>
             <button class="commentButton" data-id="${post.id}"> comentarios </button>
           </div>
-          <div id="commentContainer">
-           <h5 id="commenterName"></h5>
-           <textarea id="commentDesc" data-id="${post.id}"></textarea>
-           <button class="commentPost" data-id="${post.id}">Comentar</button>
-           <button id="cancelPost"">cancelar</button>
+          <div  class="userComment" data-id="${post.id}">
+            <form class="commentContainer" data-id="${post.id}">
+                <img class="photoComment" src="${user.photoURL}">
+                <textarea id="commentDesc" cols="45" data-id="${post.id}" placeholder="Escribe una respuesta"></textarea>
+                <button class="commentPost" data-id="${post.id}"><img src="https://user-images.githubusercontent.com/77282012/120261005-a111a500-c25c-11eb-99b7-7f3bd7cc7697.png"></button>
+            </form>
           </div>
         </div>`;
 
@@ -187,47 +191,68 @@ export default () => {
         //   });
         // });
 
-        // const btnsComment = document.querySelectorAll(`button.commentButton[data-id]=${post.id}`);
+        const btnsComment = document.querySelectorAll('button.commentButton');
+        btnsComment.forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            const viewContainer = e.target.parentElement.parentElement.querySelector('div.userComment');
+            console.log(viewContainer);
+            viewContainer.toggle();
+          });
+        });
 
-        const btnsComment = document.querySelector('button.commentButton');
+        const commentContainer = document.querySelectorAll('.commentContainer');
+        console.log(commentContainer);
+        commentContainer.forEach((form) => {
+          form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const usernameComment = divElem.querySelector('#commenterName');
+            console.log(usernameComment);
+            const idPost = form.getAttribute('data-id');
+            console.log(idPost);
+            const descriptionComment = form.commentDesc;
+            addComment(post.userId, idPost, descriptionComment.value, user.displayName);
+          });
+        });
+
+        // const btnsComment = document.querySelector('button.commentButton');
         // const btnsComment = document.querySelector(`button.commentButton[data-id="${post.id}"]`);
         // console.log(btnsComment);
-       // btnsComment.forEach((btn) => {
-        btnsComment.addEventListener('click', () => {
-          console.log('hiciste click');
-          // const commentContainer = e.target.parentElement.parentElement.querySelector('div#commentContainer');
-          // console.log(commentContainer);
-          // console.log(e.target.parentElement);
-          // commentContainer.innerHTML = `
-          // <h5 id="commenterName"></h5>
-          // <textarea id="commentDesc" data-id="${post.id}"></textarea>
-          // <button class="commentPost" data-id="${post.id}">Comentar</button>
-          // <button id="cancelPost"">cancelar</button>`;
+        // btnsComment.forEach((btn) => {
+        // btnsComment.addEventListener('click', () => {
+        //   console.log('hiciste click');
+        //   // const commentContainer = e.target.parentElement.parentElement.querySelector('div#commentContainer');
+        //   // console.log(commentContainer);
+        //   // console.log(e.target.parentElement);
+        //   // commentContainer.innerHTML = `
+        //   // <h5 id="commenterName"></h5>
+        //   // <textarea id="commentDesc" data-id="${post.id}"></textarea>
+        //   // <button class="commentPost" data-id="${post.id}">Comentar</button>
+        //   // <button id="cancelPost"">cancelar</button>`;
 
-          // const commentPost = document.querySelectorAll('.commentPost');
-          // console.log(e.target.parentElement.parentElement.querySelector('#commentDesc'));
-          // console.log(e.target.parentElement.parentElement.querySelector('.commentPost'));
+        //   // const commentPost = document.querySelectorAll('.commentPost');
+        //   // console.log(e.target.parentElement.parentElement.querySelector('#commentDesc'));
+        //   // console.log(e.target.parentElement.parentElement.querySelector('.commentPost'));
 
-          // const commentPost1 = e.target.parentElement.parentElement.parentElement.querySelector('#commentDesc');
-          // console.log(commentPost1);
-          // console.log(document.querySelectorAll('.commentPost'));
-          // const commentDesc = document.getElementById('commentDesc').value;
-          // addComment(post.userId, post.id, commentDesc);
-        });
+        //   // const commentPost1 = e.target.parentElement.parentElement.parentElement.querySelector('#commentDesc');
+        //   // console.log(commentPost1);
+        //   // console.log(document.querySelectorAll('.commentPost'));
+        //   // const commentDesc = document.getElementById('commentDesc').value;
+        //   // addComment(post.userId, post.id, commentDesc);
+        // });
         // });
 
         // -----
-        const setLikes = (like, p) => firebase.firestore().collection('posts').doc(p).update({
-          like,
-        });
+        // const setLikes = (like, p) => firebase.firestore().collection('posts').doc(p).update({
+        //   like,
+        // });
 
-        const btnsLikes = document.querySelectorAll('button.like');
-        console.log(btnsLikes);
-        btnsLikes.forEach((btn) => {
-          btn.addEventListener('click', (e) => {
+        // const btnsLikes = document.querySelectorAll('button.like');
+        // console.log(btnsLikes);
+        // btnsLikes.forEach((btn) => {
+        //   btn.addEventListener('click', (e) => {
 
-          })
-        })
+        //   });
+        // });
 
         const btnsDelete = document.querySelectorAll('img.btn-delete');
         console.log(btnsDelete);
