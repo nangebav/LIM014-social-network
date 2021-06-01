@@ -68,7 +68,11 @@ export default () => {
         // console.log(username);
         post.id = doc.id;
         const user = firebase.auth().currentUser;
+        const dateP = post.date;
+        const datePost = dateP.toDateString();
+        console.log(datePost);
         // console.log(post.id);
+        // <h6>${post.date}</h6>
         postContainer.innerHTML += `
         <div class="post-card">
           <div class="cardUserPost">
@@ -402,7 +406,8 @@ export default () => {
     e.preventDefault();
     const usernameInside = divElem.querySelector('#post-username');
     const description = postForm['post-description'];
-    const date = Date.now().toLocaleString('en-ES');
+    const date = Date.now();
+    console.log(date);
     const file = fileE();
     const userId = firebase.auth().currentUser.uid;
     const userPhoto = firebase.auth().currentUser.photoURL;
