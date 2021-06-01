@@ -66,6 +66,7 @@ export default () => {
       postContainer.innerHTML = '';
       data.forEach((doc) => {
         const likes = 0;
+        const comments = 0;
         const post = doc.data();
         // console.log(post);
         // console.log(username);
@@ -94,14 +95,15 @@ export default () => {
           </div>
           <div>
             <button class="like" data-id-p="${post.id}"> ❤ </button> <label>${likes}</label>
-            <button class="commentButton" data-id="${post.id}"> comentarios </button>
+            <button class="commentButton" data-id="${post.id}"> comentarios  <label>${likes}</label></button>
           </div>
-          <div  class="userComment" data-id="${post.id}">
+          <div hidden class="userComment" data-id="${post.id}">
             <form class="commentContainer" data-id="${post.id}">
                 <img class="photoComment" src="${user.photoURL}">
                 <textarea id="commentDesc" cols="45" data-id="${post.id}" placeholder="Escribe una respuesta"></textarea>
                 <button class="commentPost" data-id="${post.id}"><img src="https://user-images.githubusercontent.com/77282012/120261005-a111a500-c25c-11eb-99b7-7f3bd7cc7697.png"></button>
             </form>
+            <div class="contentComment"></div>
           </div>
         </div>`;
 
@@ -191,8 +193,11 @@ export default () => {
         btnsComment.forEach((btn) => {
           btn.addEventListener('click', (e) => {
             const viewContainer = e.target.parentElement.parentElement.querySelector('div.userComment');
-            console.log(viewContainer);
-            viewContainer.toggle();
+            if (viewContainer.getAttribute('hidden') === null) {
+              viewContainer.setAttribute('hidden', true);
+            } else {
+              viewContainer.removeAttribute('hidden');
+            }
           });
         });
 
@@ -207,8 +212,24 @@ export default () => {
             console.log(idPost);
             const descriptionComment = form.commentDesc;
             addComment(post.userId, idPost, descriptionComment.value, user.displayName);
+            descriptionComment.value = '';
           });
         });
+
+        // const contentComment = document.querySelector('div.contentComment');
+        // const setupCommentPost = (comment) => {
+        //   if (comment.length) {
+        //     contentComment.innerHTML = '';
+        //     comment.forEach((element) => {
+        //       const commentPost = element.comment();
+        //       commentPost.id = element.id;
+        //     });
+        //   }
+        // };
+
+        // console.log(firebase.firestore().collection('l6xOBcDlVo1uROazER8D').doc(post.id).collection('comment')
+        //   .get()
+        //     .then(() =>))
 
         // const btnsComment = document.querySelector('button.commentButton');
         // const btnsComment = document.querySelector(`button.commentButton[data-id="${post.id}"]`);
