@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import { deletePost, editPost, addComment } from '../controller-function/post-firestore.js';
@@ -16,13 +17,15 @@ export default () => {
       <section class="row">
         <section class="col-md-4">
           <section class="card">
-            <section class="photoForm"></section>
               <form id="post-form">
                 <section class="user-identifier">
                   <p id="post-username" name="post-form" class="form-control"></p>
                 </section>
                 <section class="body-form">
+                  <section class="photoForm"></section>
                   <textarea id="post-description" name="post-form" cols="50" rows="3" class="form-control" placeholder="¿Qué estás pensando?"></textarea>
+                </section>
+                <section>
                   <input type="file" accept="image/png, image/jpeg" value="upload" id="fileButton" />
                 </section>
                 <button id="btnPublicar">Publicar</button>
@@ -62,18 +65,21 @@ export default () => {
     if (data.length) {
       postContainer.innerHTML = '';
       data.forEach((doc) => {
+        const likes = 0;
         const post = doc.data();
         // console.log(post);
         // console.log(username);
         post.id = doc.id;
+        const user = firebase.auth().currentUser;
         // console.log(post.id);
         postContainer.innerHTML += `
         <div class="post-card">
           <div class="cardUserPost">
-            <div class="btns-edit-delete" name="${post.userId}" data-id-post="${post.id}">
+          ${(post.userId === user.uid)
+    ? `<div class="btns-edit-delete" name="${post.userId}" data-id-post="${post.id}">
               <img class="btn-edit" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120040454-32b6b380-bfcc-11eb-81cb-96f0e713e84c.png">
               <img class="btn-delete" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120018025-389c9c80-bfac-11eb-9d7d-0a68441eca20.png">
-            </div>
+            </div>` : ''}
             <h6>${post.date}</h6>
             <h3 class="h5" name="${post.name}">${post.name}</h3>
             <div class="editPublicacion" disabled>
@@ -87,25 +93,31 @@ export default () => {
             </div>
           </div>
           <div>
-            <button id="like"> ❤ </button>
+            <button class="like" data-id-p="${post.id}"> ❤ </button> <label>${likes}</label>
             <button class="commentButton" data-id="${post.id}"> comentarios </button>
           </div>
-          <div class="commentContainer"></div>
+          <div  class="userComment" data-id="${post.id}">
+            <form class="commentContainer" data-id="${post.id}">
+                <img class="photoComment" src="${user.photoURL}">
+                <textarea id="commentDesc" cols="45" data-id="${post.id}" placeholder="Escribe una respuesta"></textarea>
+                <button class="commentPost" data-id="${post.id}"><img src="https://user-images.githubusercontent.com/77282012/120261005-a111a500-c25c-11eb-99b7-7f3bd7cc7697.png"></button>
+            </form>
+          </div>
         </div>`;
 
-        const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
-        // console.log(divsEditDelete);
-        // const usuariodelpost = divsEditDelete.name;
-        // console.log(usuariodelpost);
-        const userNamePost = () => {
-          let postUserId;
-          Array.from(divsEditDelete).forEach((divED) => {
-            //   console.log(divED);
-            postUserId = divED.getAttribute('name');
-          });
-          return postUserId;
-        };
-        const usp = userNamePost();
+        // const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
+        // // console.log(divsEditDelete);
+        // const arrayDivsEditDelete = Array.from(divsEditDelete);
+        // // console.log(usuariodelpost);
+        // const userNamePost = () => {
+        //   let postUserId;
+        //   arrayDivsEditDelete.forEach((divED) => {
+        //     //   console.log(divED);
+        //     postUserId = divED.getAttribute('name');
+        //   });
+        //   return postUserId;
+        // };
+        // const usp = userNamePost();
 
         //  const  Array.from(divsEditDelete).forEach((divED) => {
         //         //   console.log(divED);
@@ -113,46 +125,30 @@ export default () => {
         //       });
         //       return postUserId;
         //     });
+        // arrayDivsEditDelete.forEach((divED) => {
+        // firebase.auth().onAuthStateChanged((user) => {
+        //   if (user) {
+        //     console.log(post.id);
+        //     console.log(usp);
+        //     console.log(user.uid);
+        //     // document.querySelector('div.btns-edit-delete').removeAttribute('hidden');
+        //     if (user.uid === usp) {
+        //       console.log(true);
+        //     } else {
+        //       // document.querySelector('div.btns-edit-delete').setAttribute('hidden', true);
+        //       // console.log(divED);
+        //       // arrayDivsEditDelete.setAttribute('hidden', true);
 
-        firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-            // console.log(user.uid);
-            // console.log(post.userId);
-            // const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
-            // console.log(divsEditDelete);
-            // const usuariodelpost = divsEditDelete.name;
-            // console.log(usuariodelpost);
-            // const userNamePost = () => {
-            //   let postUserId;
-            //   Array.from(divsEditDelete).forEach((divED) => {
-            //     //   console.log(divED);
-            //     postUserId = divED.getAttribute('name');
-            //   });
-            //   return postUserId;
-            // };
-            // console.log(post.id);
-            // console.log(usp);
-            // console.log(user.uid);
-            // document.querySelector('div.btns-edit-delete').removeAttribute('hidden');
-
-            if (user.uid === usp) {
-              // post.id
-              // divED.setAttribute('hidden', false);
-              // .setAttribute('hidden', false);
-              document.querySelector('div.btns-edit-delete').setAttribute('hidden', false);
-              // console.log(divis);
-
-              console.log(true);
-            } else {
-              document.querySelector('div.btns-edit-delete').setAttribute('hidden', true);
-              // divED.setAttribute('hidden', true);
-              // console.log(document.querySelector('div.btns-edit-delete'));
-              console.log(false);
-            }
-            // });
-          }
+        //       // divED.setAttribute('hidden', true);
+        //       // console.log(document.querySelector('div.btns-edit-delete'));
+        //       console.log(false);
+        //     }
+        //   }
+        //   // });
+        //   // });
         // });
-        });
+        // });
+        // });
 
         // }
         // const btnComment = postContainer.querySelectorAll('.comment');
@@ -194,34 +190,68 @@ export default () => {
         const btnsComment = document.querySelectorAll('button.commentButton');
         btnsComment.forEach((btn) => {
           btn.addEventListener('click', (e) => {
-            const commentContainer = e.target.parentElement.parentElement.querySelector('div.commentContainer');
-            commentContainer.innerHTML = `
-            <h5 id="commenterName"></h5>
-            <textarea id="commentDesc" data-id="${post.id}"></textarea>
-            <button class="commentPost" data-id="${post.id}">Comentar</button>
-            <button id="cancelPost"">cancelar</button>`;
-
-            const commentPost = document.querySelectorAll('.commentPost');
-            commentPost.forEach((element) => {
-              console.log(element);
-            });
-            console.log(e.target.parentElement.parentElement.querySelector('#commentDesc'));
-            // console.log(e.target.parentElement.parentElement.querySelector('.commentPost'));
-
-            // const commentPost1 = e.target.parentElement.parentElement.parentElement.querySelector('#commentDesc');
-            // console.log(commentPost1);
-            // console.log(document.querySelectorAll('.commentPost'));
-            // const commentDesc = document.getElementById('commentDesc').value;
-            addComment(post.userId, post.id, 'Prueba texto');
+            const viewContainer = e.target.parentElement.parentElement.querySelector('div.userComment');
+            console.log(viewContainer);
+            viewContainer.toggle();
           });
         });
 
-        // window.addEventListener('click', (e) => {
-        //   if (e.target !== btnComment) {
-        //     postContainer.querySelector('.commentContainer').classList.remove('show');
-        //   }
+        const commentContainer = document.querySelectorAll('.commentContainer');
+        console.log(commentContainer);
+        commentContainer.forEach((form) => {
+          form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const usernameComment = divElem.querySelector('#commenterName');
+            console.log(usernameComment);
+            const idPost = form.getAttribute('data-id');
+            console.log(idPost);
+            const descriptionComment = form.commentDesc;
+            addComment(post.userId, idPost, descriptionComment.value, user.displayName);
+          });
+        });
+
+        // const btnsComment = document.querySelector('button.commentButton');
+        // const btnsComment = document.querySelector(`button.commentButton[data-id="${post.id}"]`);
+        // console.log(btnsComment);
+        // btnsComment.forEach((btn) => {
+        // btnsComment.addEventListener('click', () => {
+        //   console.log('hiciste click');
+        //   // const commentContainer = e.target.parentElement.parentElement.querySelector('div#commentContainer');
+        //   // console.log(commentContainer);
+        //   // console.log(e.target.parentElement);
+        //   // commentContainer.innerHTML = `
+        //   // <h5 id="commenterName"></h5>
+        //   // <textarea id="commentDesc" data-id="${post.id}"></textarea>
+        //   // <button class="commentPost" data-id="${post.id}">Comentar</button>
+        //   // <button id="cancelPost"">cancelar</button>`;
+
+        //   // const commentPost = document.querySelectorAll('.commentPost');
+        //   // console.log(e.target.parentElement.parentElement.querySelector('#commentDesc'));
+        //   // console.log(e.target.parentElement.parentElement.querySelector('.commentPost'));
+
+        //   // const commentPost1 = e.target.parentElement.parentElement.parentElement.querySelector('#commentDesc');
+        //   // console.log(commentPost1);
+        //   // console.log(document.querySelectorAll('.commentPost'));
+        //   // const commentDesc = document.getElementById('commentDesc').value;
+        //   // addComment(post.userId, post.id, commentDesc);
         // });
+        // });
+
+        // -----
+        // const setLikes = (like, p) => firebase.firestore().collection('posts').doc(p).update({
+        //   like,
+        // });
+
+        // const btnsLikes = document.querySelectorAll('button.like');
+        // console.log(btnsLikes);
+        // btnsLikes.forEach((btn) => {
+        //   btn.addEventListener('click', (e) => {
+
+        //   });
+        // });
+
         const btnsDelete = document.querySelectorAll('img.btn-delete');
+        console.log(btnsDelete);
         btnsDelete.forEach((btn) => {
           btn.addEventListener('click', (e) => {
             const mensaje = `
@@ -401,6 +431,7 @@ export default () => {
     const file = fileE();
     const userId = firebase.auth().currentUser.uid;
     const userPhoto = firebase.auth().currentUser.photoURL;
+
     // console.log(file);
     saveTask(usernameInside.value, description.value, date, userId, userPhoto);
     // Get a reference to the storage service, which is used to create

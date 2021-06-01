@@ -1,5 +1,10 @@
+// import { addComment } from '../controller-function/post-firestore.js';
+
 export default () => {
-  const viewLogIn = '';
+  const viewComment = `
+  `;
   const divElem = document.createElement('div');
-  divElem.innerHTML = viewLogIn;
+  divElem.innerHTML = viewComment;
+
+  return divElem;
 };

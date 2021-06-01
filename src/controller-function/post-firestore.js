@@ -11,11 +11,12 @@ export const editPost = (id) => firebase.firestore().collection('posts').doc(id)
 // });
 
 // ------ BASE DE DATOS CLOUD DE COMENTARIO---------
-export const addComment = (UserId, idPost, Comment) => {
+export const addComment = (UserId, idPost, Comment, userName) => {
   const db = firebase.firestore();
   return db.collection('posts').doc(idPost).collection('comment').add({
     userId: UserId,
     date: new Date().toLocaleString('en-ES'),
     comment: Comment,
+    userName,
   });
 };
