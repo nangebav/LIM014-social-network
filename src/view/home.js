@@ -65,15 +65,15 @@ export default () => {
     if (data.length) {
       postContainer.innerHTML = '';
       data.forEach((doc) => {
-        const likes = 0;
+        // const likes = 0;
         const post = doc.data();
         // console.log(post);
         // console.log(username);
         post.id = doc.id;
         const user = firebase.auth().currentUser;
-        const dateP = post.date;
-        const datePost = dateP.toDateString();
-        console.log(datePost);
+        // const dateP = post.date;
+        // const datePost = dateP.toDateString();
+        // console.log(datePost);
         // console.log(post.id);
         // <h6>${post.date}</h6>
         postContainer.innerHTML += `
@@ -97,7 +97,7 @@ export default () => {
             </div>
           </div>
           <div>
-            <button class="like" data-id-p="${post.id}"> ❤ </button> <label>${likes}</label>
+            <button class="like" data-id-p="${post.id}"> ❤ </button> <label>${post.likes}</label>
             <button class="commentButton" data-id="${post.id}"> comentarios </button>
           </div>
           <div  class="userComment" data-id="${post.id}">
@@ -245,14 +245,23 @@ export default () => {
         // const setLikes = (like, p) => firebase.firestore().collection('posts').doc(p).update({
         //   like,
         // });
+        // actualizar likes
+        const updateLikes = (postid, likes) => firebase.firestore().collection('posts').doc(postid).update({ likes });
 
-        // const btnsLikes = document.querySelectorAll('button.like');
+        const btnsLikes = document.querySelectorAll('button.like');
         // console.log(btnsLikes);
-        // btnsLikes.forEach((btn) => {
-        //   btn.addEventListener('click', (e) => {
+        btnsLikes.forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            const likeAdded = post.likes.indexOf(user.uid);
+            if (likeAdded === -1) {
+              post.likes.push(user.uid);
+            } else {
+              post.likes.splice(likeAdded, 1);
+            }
 
-        //   });
-        // });
+            updateLikes(post.id, post.likes);
+          });
+        });
 
         const btnsDelete = document.querySelectorAll('img.btn-delete');
         console.log(btnsDelete);
@@ -369,7 +378,7 @@ export default () => {
   // FUNCION PARA TRAER DE FIRESTORE LOS DOC CON LA INFO DE POSTS
   const post = () => firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      firebase.firestore().collection('posts').orderBy('date', 'desc')
+      firebase.firestore().collection('posts').orderBy('date', 'asc')
         .onSnapshot((data) => {
           setupPosts(data.docs);
           getImagePosted();
@@ -382,14 +391,17 @@ export default () => {
   post();
 
   // ENVIA EL CONTENIDO DEL POST A FIREBASE
-  const saveTask = (name, description, date, userId, userPhoto) => firebase.firestore().collection('posts').doc().set({
+  const saveTask = (name, description, date, userId, userPhoto, likes) => firebase.firestore().collection('posts').add({
     name,
     description,
     date,
     userId,
     userPhoto,
+    likes,
   });
 
+  //hacer update 
+  //.doc(id).update()
   // Get a reference to the storage service, which is used to create
   // references in your storage bucket
   // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
@@ -431,14 +443,14 @@ export default () => {
     e.preventDefault();
     const usernameInside = divElem.querySelector('#post-username');
     const description = postForm['post-description'];
-    const date = Date.now();
-    console.log(date);
+    const date = new Date().toLocaleString('en-ES');
     const file = fileE();
     const userId = firebase.auth().currentUser.uid;
     const userPhoto = firebase.auth().currentUser.photoURL;
+    const likes = [];
 
     // console.log(file);
-    saveTask(usernameInside.value, description.value, date, userId, userPhoto);
+    saveTask(usernameInside.value, description.value, date, userId, userPhoto, likes);
     // Get a reference to the storage service, which is used to create
     // references in your storage bucket
     const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
