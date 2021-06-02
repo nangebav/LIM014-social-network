@@ -2,9 +2,10 @@
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import {
-  deletePost, editPost, addComment, savePost, getComment, currentUser, updateLikes,
+  editPost, addComment, savePost, getComment, currentUser, updateLikes,
 } from '../controller-function/post-firestore.js';
 import MessageSignOut from './box_message_sign_out.js';
+import MessageDelte from './box_message_delete.js';
 import Perfil from './perfil.js';
 
 export default () => {
@@ -49,7 +50,7 @@ export default () => {
   const viewPerfil = divElem.querySelector('#viewPerfil');
   const btnSelectFile = divElem.querySelector('#fileButton');
   const photoForm = divElem.querySelector('.photoForm');
-  const userP = currentUser();
+  // const userP = currentUser();
 
   // FUNCION PARA OBTENER EL NOMBRE DEL USUARIO
   const getProfile = () => {
@@ -203,35 +204,7 @@ export default () => {
         // console.log(btnsDelete);
         btnsDelete.forEach((btn) => {
           btn.addEventListener('click', (e) => {
-            const mensaje = `
-              <section class="messageValid">
-                <div class="message">
-                  <img class="exitMessage" id="exitMessage" src="chrome://global/skin/icons/close.svg">
-                  <img class="imageWarning" src="https://image.flaticon.com/icons/png/512/95/95458.png" alt="alert">
-                    <h2>¿Seguro(a) que deseas eliminar la publicación?<h2>
-                    <p>Esta acción no puedrá revertirse.</p>
-                    <div>
-                      <button class="cancel" id="cancelDelete"> cancelar </button>      
-                      <button class="confirm" id="confirmDelete"> Eliminar </button>    
-                    </div>
-                </div>
-              </section>
-              `;
-            document.querySelector('#contenedorMessage').innerHTML = mensaje;
-            const btnConfirmDelete = document.querySelector('#confirmDelete');
-            const btnCancelDelete = document.querySelector('#cancelDelete');
-            const exitMessage = document.querySelector('#exitMessage');
-
-            btnConfirmDelete.addEventListener('click', () => {
-              deletePost(e.target.dataset.id);
-              document.querySelector('#contenedorMessage').innerHTML = '';
-            });
-            btnCancelDelete.addEventListener('click', () => {
-              document.querySelector('#contenedorMessage').innerHTML = '';
-            });
-            exitMessage.addEventListener('click', () => {
-              document.querySelector('#contenedorMessage').innerHTML = '';
-            });
+            document.querySelector('#contenedorMessage').appendChild(MessageDelte(e.target.dataset.id, '#contenedorMessage'));
           });
         });
 

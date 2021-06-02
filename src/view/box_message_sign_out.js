@@ -3,7 +3,7 @@ import { signOut } from '../controller-function/auth-logIn.js';
 export default () => {
   const viewMessage = `
     <section class="messageValid">
-      <img class="exitMessage" id="exitMessage" src="chrome://global/skin/icons/close.svg">
+      <img class="exitMessage" id="exitMessage" src="https://user-images.githubusercontent.com/77282012/120414466-ab48a780-c31f-11eb-90c2-964c8493f064.png">
       <div>
         <div class="message">
         <img class="imageWarning" src="https://image.flaticon.com/icons/png/512/95/95458.png" alt="alert">
