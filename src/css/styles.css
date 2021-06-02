@@ -543,5 +543,15 @@ input[type=checkbox] {
        margin-left: 100px;
    }
 
+   #body-form-postsection {
+       display: flex;
+       flex-direction: column;
+   }
+
+   
+
+   #imgpreview > img {
+       width: 30px;
+   }
 
  }

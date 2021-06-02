@@ -26,7 +26,10 @@ export default () => {
                 </section>
                 <section class="body-form">
                   <section class="photoForm"></section>
+                  <div id="body-form-postsection">
                   <textarea id="post-description" name="post-form" cols="50" rows="3" class="form-control" placeholder="¿Qué estás pensando?"></textarea>
+                  <div id="imgpreview"></div>
+                  </div>
                 </section>
                 <section>
                   <input type="file" accept="image/png, image/jpeg" value="upload" id="fileButton" />
@@ -76,7 +79,8 @@ export default () => {
         // console.log(post);
         post.id = doc.id;
         const user = currentUser();
-        postContainer.innerHTML += `
+        const postElem = document.createElement('div');
+        postElem.innerHTML = `
         <div class="post-card">
           <div class="cardUserPost">
           ${(post.userId === user.uid)
@@ -97,7 +101,7 @@ export default () => {
             </div>
           </div>
           <div>
-            <button class="like" data-id-p="${post.id}"> ❤ </button> <label>${post.likes}</label>
+            <button class="like" data-id="${post.id}"> ❤ </button> <label>${post.likes}</label>
             <button class="commentButton" data-id="${post.id}"> comentarios </button><label class="conterComment"></label>
           </div>
           <div hidden class="userComment" data-id="${post.id}">
@@ -110,7 +114,8 @@ export default () => {
           </div>
         </div>
        `;
-
+        
+       postContainer.appendChild(postElem);
         const btnsComment = document.querySelectorAll('button.commentButton');
         btnsComment.forEach((btn) => {
           btn.addEventListener('click', (e) => {
@@ -157,21 +162,23 @@ export default () => {
                 `;
           }));
         });
-        // ---- actualizar likes
+        // ------ actualizar likes
 
         const btnsLikes = document.querySelectorAll('button.like');
         // console.log(btnsLikes);
         btnsLikes.forEach((btn) => {
-          btn.addEventListener('click', (e) => {
-            const likeAdded = post.likes.indexOf(user.uid);
-            if (likeAdded === -1) {
-              post.likes.push(user.uid);
-            } else {
-              post.likes.splice(likeAdded, 1);
-            }
+          if (btn.dataset.id === post.id) {
+            btn.addEventListener('click', () => {
+              const likeAdded = post.likes.indexOf(user.uid);
+              if (likeAdded === -1) {
+                post.likes.push(user.uid);
+              } else {
+                post.likes.splice(likeAdded, 1);
+              }
 
-            updateLikes(post.id, post.likes);
-          });
+              updateLikes(post.id, post.likes);
+            });
+          }
         });
 
         const btnsDelete = document.querySelectorAll('img.btn-delete');
@@ -264,7 +271,7 @@ export default () => {
   const post = () => {
     const user = currentUser();
     if (user) {
-      firebase.firestore().collection('posts').orderBy('date', 'asc')
+      firebase.firestore().collection('posts').orderBy('date', 'desc')
         .onSnapshot((data) => {
           setupPosts(data.docs);
           getImagePosted();
@@ -280,15 +287,34 @@ export default () => {
 
   // Get a reference to the storage service, which is used to create
   // references in your storage bucket
-  // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
-  // // Create a storage reference from our storage service
-  // const storageRef = storage.ref();
-  // btnSelectFile.addEventListener('change', (e) => {
-  //   const file = e.target.files[0];
-  //   console.log(file);
-  //   const imageRef = storageRef.child(`images/${file.name}`);
-  //   imageRef.put(file);
-  // });
+  // --ENVIA IMG A FIREBASE AL MOEMNTO DE DAR CLICK ABRIR
+  const postImg = () => {
+    // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
+    // Create a storage reference from our storage service
+    // const storageRef = storage.ref();
+    btnSelectFile.addEventListener('change', (e) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+
+      reader.onload = function () {
+        const preview = divElem.querySelector('#imgpreview');
+        const image = document.createElement('img');
+
+        image.src = reader.result;
+
+        preview.innerHTML = '';
+        preview.append(image);
+      };
+
+      // console.log(file);
+      // const imgpv =
+      // divElem.querySelector('#imgpreview').innerHTML = imgpv;
+      // const imageRef = storageRef.child(`images/${file.name}`);
+      // imageRef.put(file);
+    });
+  };
+  // postImg();
+
   // uploadImg();
 
   // Get a reference to the storage service, which is used to
