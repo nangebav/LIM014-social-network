@@ -26,7 +26,10 @@ export default () => {
                 </section>
                 <section class="body-form">
                   <section class="photoForm"></section>
+                  <div id="body-form-postsection">
                   <textarea id="post-description" name="post-form" cols="50" rows="3" class="form-control" placeholder="¿Qué estás pensando?"></textarea>
+                  <div id="imgpreview"></div>
+                  </div>
                 </section>
                 <section>
                   <input type="file" accept="image/png, image/jpeg" value="upload" id="fileButton" />
@@ -73,10 +76,11 @@ export default () => {
       postContainer.innerHTML = '';
       data.forEach((doc) => {
         const post = doc.data();
-        console.log(post);
+        // console.log(post);
         post.id = doc.id;
         const user = currentUser();
-        postContainer.innerHTML += `
+        const postElem = document.createElement('div');
+        postElem.innerHTML = `
         <div class="post-card">
           <div class="cardUserPost">
           ${(post.userId === user.uid)
@@ -97,7 +101,7 @@ export default () => {
             </div>
           </div>
           <div>
-            <button class="like" data-id-p="${post.id}"> ❤ </button> <label>${post.likes}</label>
+            <button class="like" data-id="${post.id}"> ❤ </button> <label>${post.likes}</label>
             <button class="commentButton" data-id="${post.id}"> comentarios </button><label class="conterComment"></label>
           </div>
           <div hidden class="userComment" data-id="${post.id}">
@@ -110,7 +114,8 @@ export default () => {
           </div>
         </div>
        `;
-
+        
+       postContainer.appendChild(postElem);
         const btnsComment = document.querySelectorAll('button.commentButton');
         btnsComment.forEach((btn) => {
           btn.addEventListener('click', (e) => {
@@ -138,66 +143,42 @@ export default () => {
           });
         });
 
-        // const btnsComment = document.querySelector('button.commentButton');
-        // const btnsComment = document.querySelector(`button.commentButton[data-id="${post.id}"]`);
-        // console.log(btnsComment);
-        // btnsComment.forEach((btn) => {
-        // btnsComment.addEventListener('click', () => {
-        //   console.log('hiciste click');
-        //   // const commentContainer = e.target.parentElement.parentElement.querySelector('div#commentContainer');
-        //   // console.log(commentContainer);
-        //   // console.log(e.target.parentElement);
-        //   // commentContainer.innerHTML = `
-        //   // <h5 id="commenterName"></h5>
-        //   // <textarea id="commentDesc" data-id="${post.id}"></textarea>
-        //   // <button class="commentPost" data-id="${post.id}">Comentar</button>
-        //   // <button id="cancelPost"">cancelar</button>`;
-
-        //   // const commentPost = document.querySelectorAll('.commentPost');
-        //   // console.log(e.target.parentElement.parentElement.querySelector('#commentDesc'));
-        //   // console.log(e.target.parentElement.parentElement.querySelector('.commentPost'));
-
-        //   // const commentPost1 = e.target.parentElement.parentElement.parentElement.querySelector('#commentDesc');
-        //   // console.log(commentPost1);
-        //   // console.log(document.querySelectorAll('.commentPost'));
-        //   // const commentDesc = document.getElementById('commentDesc').value;
-        //   // addComment(post.userId, post.id, commentDesc);
-        // });
-        // });
-
+        const contentComment = document.querySelectorAll('div.contentComment');
+        contentComment.forEach((content) => {
+          const idContent = content.getAttribute('data-id');
+          getComment(idContent).then((querySnapshot) => querySnapshot.forEach((com) => {
+            const commentPost = com.data();
+            content.innerHTML += `
+                <div class="boxComment">
+                ${(commentPost.userId === user.uid) ? `
+                <div class="btns-edit-delete" name="${post.userId}" data-id-post="${post.id}">
+                  <img class="btn-edit" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120040454-32b6b380-bfcc-11eb-81cb-96f0e713e84c.png">
+                  <img class="btn-delete" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120018025-389c9c80-bfac-11eb-9d7d-0a68441eca20.png">
+                </div>` : ''}
+                <h5>${commentPost.userName}</h5>
+                <h6>${commentPost.date}</h6>
+                <p>${commentPost.comment}</p>
+                </div>
+                `;
+          }));
+        });
         // ------ actualizar likes
-        const updateLikes = (postid, likesA) => firebase.firestore().collection('posts').doc(postid).update({ likes: likesA });
 
-        function removeItemFromArr(arr, item) {
-          const i = arr.indexOf(item);
+        const btnsLikes = document.querySelectorAll('button.like');
+        // console.log(btnsLikes);
+        btnsLikes.forEach((btn) => {
+          if (btn.dataset.id === post.id) {
+            btn.addEventListener('click', () => {
+              const likeAdded = post.likes.indexOf(user.uid);
+              if (likeAdded === -1) {
+                post.likes.push(user.uid);
+              } else {
+                post.likes.splice(likeAdded, 1);
+              }
 
-          if (i !== -1) {
-            arr.splice(i, 1);
+              updateLikes(post.id, post.likes);
+            });
           }
-        }
-
-        const btnsLikes = document.querySelector(`#like-${post.id}`);
-        console.log(btnsLikes);
-        btnsLikes.addEventListener('click', () => {
-          // e.preventDefault();
-          // const a = e.target.dataset;
-          // console.log(a);
-          // const pid = btnsLikes.getAttribute('data-id-p');
-          // console.log(pid);
-          console.log(post.id);
-          // console.log(post);
-          const likeAdded = post.likes;
-          console.log(likeAdded);
-
-          if (likeAdded.includes(user.uid)) {
-            likeAdded.push(user.uid);
-            console.log('dentro del if');
-          } else {
-            // post.likes.splice(likeAdded, 1);
-            removeItemFromArr(likeAdded, user.uid);
-          }
-
-          updateLikes(post.id, likeAdded);
         });
 
         const btnsDelete = document.querySelectorAll('img.btn-delete');
@@ -304,20 +285,36 @@ export default () => {
 
   // --NO BORRAR, IMAGENES
 
-  // hacer update
-  // .doc(id).update()
-
   // Get a reference to the storage service, which is used to create
   // references in your storage bucket
-  // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
-  // // Create a storage reference from our storage service
-  // const storageRef = storage.ref();
-  // btnSelectFile.addEventListener('change', (e) => {
-  //   const file = e.target.files[0];
-  //   console.log(file);
-  //   const imageRef = storageRef.child(`images/${file.name}`);
-  //   imageRef.put(file);
-  // });
+  // --ENVIA IMG A FIREBASE AL MOEMNTO DE DAR CLICK ABRIR
+  const postImg = () => {
+    // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
+    // Create a storage reference from our storage service
+    // const storageRef = storage.ref();
+    btnSelectFile.addEventListener('change', (e) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+
+      reader.onload = function () {
+        const preview = divElem.querySelector('#imgpreview');
+        const image = document.createElement('img');
+
+        image.src = reader.result;
+
+        preview.innerHTML = '';
+        preview.append(image);
+      };
+
+      // console.log(file);
+      // const imgpv =
+      // divElem.querySelector('#imgpreview').innerHTML = imgpv;
+      // const imageRef = storageRef.child(`images/${file.name}`);
+      // imageRef.put(file);
+    });
+  };
+  // postImg();
+
   // uploadImg();
 
   // Get a reference to the storage service, which is used to
