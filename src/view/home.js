@@ -102,7 +102,7 @@ export default () => {
             </div>
           </div>
           <div>
-            <button class="like" data-id="${post.id}"> ❤ </button> <label>${post.likes}</label>
+            <button class="like" data-id="${post.id}"> ❤ </button> <label>${post.likes.length}</label>
             <button class="commentButton" data-id="${post.id}"> comentarios </button><label class="conterComment"></label>
           </div>
           <div hidden class="userComment" data-id="${post.id}">
