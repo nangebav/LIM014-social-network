@@ -1,7 +1,9 @@
 /* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
-import { deletePost, editPost, addComment } from '../controller-function/post-firestore.js';
+import {
+  deletePost, editPost, addComment, savePost, getComment, currentUser, updateLikes,
+} from '../controller-function/post-firestore.js';
 import MessageSignOut from './box_message_sign_out.js';
 import Perfil from './perfil.js';
 
@@ -47,35 +49,32 @@ export default () => {
   const viewPerfil = divElem.querySelector('#viewPerfil');
   const btnSelectFile = divElem.querySelector('#fileButton');
   const photoForm = divElem.querySelector('.photoForm');
+  const userP = currentUser();
 
   // FUNCION PARA OBTENER EL NOMBRE DEL USUARIO
-  firebase.auth().onAuthStateChanged((user) => {
+  const getProfile = () => {
+    const user = currentUser();
+    // firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      // console.log(user);
+      console.log(user);
       photoForm.innerHTML = `
       <img src="${user.photoURL}">`;
       username.innerHTML = user.displayName;
       username.value = `${user.displayName}`;
       viewPerfil.appendChild(Perfil());
     }
-  });
-
+  };
+  // });
+  getProfile();
   // FUNCION PARA CREAR HTML PARA MOSTRAR LOS POSTS EN PANTALLA
   const setupPosts = (data) => {
     if (data.length) {
       postContainer.innerHTML = '';
       data.forEach((doc) => {
-        // const likes = 0;
         const post = doc.data();
         // console.log(post);
-        // console.log(username);
         post.id = doc.id;
-        const user = firebase.auth().currentUser;
-        // const dateP = post.date;
-        // const datePost = dateP.toDateString();
-        // console.log(datePost);
-        // console.log(post.id);
-        // <h6>${post.date}</h6>
+        const user = currentUser();
         postContainer.innerHTML += `
         <div class="post-card">
           <div class="cardUserPost">
@@ -98,155 +97,66 @@ export default () => {
           </div>
           <div>
             <button class="like" data-id-p="${post.id}"> ❤ </button> <label>${post.likes}</label>
-            <button class="commentButton" data-id="${post.id}"> comentarios </button>
+            <button class="commentButton" data-id="${post.id}"> comentarios </button><label class="conterComment"></label>
           </div>
-          <div  class="userComment" data-id="${post.id}">
+          <div hidden class="userComment" data-id="${post.id}">
             <form class="commentContainer" data-id="${post.id}">
                 <img class="photoComment" src="${user.photoURL}">
                 <textarea id="commentDesc" cols="45" data-id="${post.id}" placeholder="Escribe una respuesta"></textarea>
                 <button class="commentPost" data-id="${post.id}"><img src="https://user-images.githubusercontent.com/77282012/120261005-a111a500-c25c-11eb-99b7-7f3bd7cc7697.png"></button>
             </form>
+            <div class="contentComment" data-id="${post.id}"></div>
           </div>
-        </div>`;
-
-        // const divsEditDelete = document.getElementsByClassName('btns-edit-delete');
-        // // console.log(divsEditDelete);
-        // const arrayDivsEditDelete = Array.from(divsEditDelete);
-        // // console.log(usuariodelpost);
-        // const userNamePost = () => {
-        //   let postUserId;
-        //   arrayDivsEditDelete.forEach((divED) => {
-        //     //   console.log(divED);
-        //     postUserId = divED.getAttribute('name');
-        //   });
-        //   return postUserId;
-        // };
-        // const usp = userNamePost();
-
-        //  const  Array.from(divsEditDelete).forEach((divED) => {
-        //         //   console.log(divED);
-        //         postUserId = divED.getAttribute('name');
-        //       });
-        //       return postUserId;
-        //     });
-        // arrayDivsEditDelete.forEach((divED) => {
-        // firebase.auth().onAuthStateChanged((user) => {
-        //   if (user) {
-        //     console.log(post.id);
-        //     console.log(usp);
-        //     console.log(user.uid);
-        //     // document.querySelector('div.btns-edit-delete').removeAttribute('hidden');
-        //     if (user.uid === usp) {
-        //       console.log(true);
-        //     } else {
-        //       // document.querySelector('div.btns-edit-delete').setAttribute('hidden', true);
-        //       // console.log(divED);
-        //       // arrayDivsEditDelete.setAttribute('hidden', true);
-
-        //       // divED.setAttribute('hidden', true);
-        //       // console.log(document.querySelector('div.btns-edit-delete'));
-        //       console.log(false);
-        //     }
-        //   }
-        //   // });
-        //   // });
-        // });
-        // });
-        // });
-
-        // }
-        // const btnComment = postContainer.querySelectorAll('.comment');
-        // btnComment.forEach((btn) => {
-        //   btn.addEventListener('click', () => {
-        //   // console.log('click en comentar');
-        //     const formComment = postContainer.querySelectorAll('.commentForm');
-        //     formComment.innerHTML += `
-        //     <h5 id="commenterName"
-        //     <input id="commentDesc" type="text">
-        //     <button id="commentPost>Comentar</button>`;
-        //   });
-        // });
-
-        // const btnComment = postContainer.querySelector('.comment');
-        // btnComment.addEventListener('click', () => {
-        //   postContainer.querySelector('.commentContainer').classList.toggle('show');
-        // });
-
-        // btnsComment.forEach((btn) => {
-        //   btn.addEventListener('click', (e) => {
-        //     // console.log(document.querySelector('.commentContainer'));
-        //     const commentContainer = e.target.parentElement('.commentContainer');
-        //     console.log(e.target.parentElement('.commentContainer'));
-        //     commentContainer.removeAttribute('hidden');
-        //     // const getComments = (idPost, callback) => {
-        //     //   const db = firebase.firestore();
-        //     //   db.collection(`post/${idPost}/comment`).orderBy('date', 'desc')
-        //     //     .onSnapshot((querySnapshot) => {
-        //     //       const comment = [];
-        //     //       querySnapshot.forEach((doc) => {
-        //     //         comment.push({ id: doc.id, ...doc.data() });
-        //     //       });
-        //     //     });
-        //     // };
-        //   });
-        // });
+        </div>
+       `;
 
         const btnsComment = document.querySelectorAll('button.commentButton');
         btnsComment.forEach((btn) => {
           btn.addEventListener('click', (e) => {
             const viewContainer = e.target.parentElement.parentElement.querySelector('div.userComment');
-            console.log(viewContainer);
-            viewContainer.toggle();
+            if (viewContainer.getAttribute('hidden') === null) {
+              viewContainer.setAttribute('hidden', true);
+            } else {
+              viewContainer.removeAttribute('hidden');
+            }
           });
         });
 
         const commentContainer = document.querySelectorAll('.commentContainer');
-        console.log(commentContainer);
+        // console.log(commentContainer);
         commentContainer.forEach((form) => {
           form.addEventListener('submit', (e) => {
             e.preventDefault();
             const usernameComment = divElem.querySelector('#commenterName');
             console.log(usernameComment);
             const idPost = form.getAttribute('data-id');
-            console.log(idPost);
+            // console.log(idPost);
             const descriptionComment = form.commentDesc;
-            addComment(post.userId, idPost, descriptionComment.value, user.displayName);
+            addComment(user.uid, idPost, descriptionComment.value, user.displayName);
+            descriptionComment.value = '';
           });
         });
 
-        // const btnsComment = document.querySelector('button.commentButton');
-        // const btnsComment = document.querySelector(`button.commentButton[data-id="${post.id}"]`);
-        // console.log(btnsComment);
-        // btnsComment.forEach((btn) => {
-        // btnsComment.addEventListener('click', () => {
-        //   console.log('hiciste click');
-        //   // const commentContainer = e.target.parentElement.parentElement.querySelector('div#commentContainer');
-        //   // console.log(commentContainer);
-        //   // console.log(e.target.parentElement);
-        //   // commentContainer.innerHTML = `
-        //   // <h5 id="commenterName"></h5>
-        //   // <textarea id="commentDesc" data-id="${post.id}"></textarea>
-        //   // <button class="commentPost" data-id="${post.id}">Comentar</button>
-        //   // <button id="cancelPost"">cancelar</button>`;
-
-        //   // const commentPost = document.querySelectorAll('.commentPost');
-        //   // console.log(e.target.parentElement.parentElement.querySelector('#commentDesc'));
-        //   // console.log(e.target.parentElement.parentElement.querySelector('.commentPost'));
-
-        //   // const commentPost1 = e.target.parentElement.parentElement.parentElement.querySelector('#commentDesc');
-        //   // console.log(commentPost1);
-        //   // console.log(document.querySelectorAll('.commentPost'));
-        //   // const commentDesc = document.getElementById('commentDesc').value;
-        //   // addComment(post.userId, post.id, commentDesc);
-        // });
-        // });
-
-        // -----
-        // const setLikes = (like, p) => firebase.firestore().collection('posts').doc(p).update({
-        //   like,
-        // });
-        // actualizar likes
-        const updateLikes = (postid, likes) => firebase.firestore().collection('posts').doc(postid).update({ likes });
+        const contentComment = document.querySelectorAll('div.contentComment');
+        contentComment.forEach((content) => {
+          const idContent = content.getAttribute('data-id');
+          getComment(idContent).then((querySnapshot) => querySnapshot.forEach((com) => {
+            const commentPost = com.data();
+            content.innerHTML += `
+                <div class="boxComment">
+                ${(commentPost.userId === user.uid) ? `
+                <div class="btns-edit-delete" name="${post.userId}" data-id-post="${post.id}">
+                  <img class="btn-edit" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120040454-32b6b380-bfcc-11eb-81cb-96f0e713e84c.png">
+                  <img class="btn-delete" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120018025-389c9c80-bfac-11eb-9d7d-0a68441eca20.png">
+                </div>` : ''}
+                <h5>${commentPost.userName}</h5>
+                <h6>${commentPost.date}</h6>
+                <p>${commentPost.comment}</p>
+                </div>
+                `;
+          }));
+        });
+        // ---- actualizar likes
 
         const btnsLikes = document.querySelectorAll('button.like');
         // console.log(btnsLikes);
@@ -264,7 +174,7 @@ export default () => {
         });
 
         const btnsDelete = document.querySelectorAll('img.btn-delete');
-        console.log(btnsDelete);
+        // console.log(btnsDelete);
         btnsDelete.forEach((btn) => {
           btn.addEventListener('click', (e) => {
             const mensaje = `
@@ -321,6 +231,7 @@ export default () => {
                   description: `${editText.value}`,
                 });
             });
+
             const cancelEdit = editNote.querySelector('.cancelEdit');
             cancelEdit.addEventListener('click', () => {
               editPublicacion.removeAttribute('hidden');
@@ -376,7 +287,9 @@ export default () => {
   };
 
   // FUNCION PARA TRAER DE FIRESTORE LOS DOC CON LA INFO DE POSTS
-  const post = () => firebase.auth().onAuthStateChanged((user) => {
+  // firebase.auth().onAuthStateChanged((user) => {
+  const post = () => {
+    const user = currentUser();
     if (user) {
       firebase.firestore().collection('posts').orderBy('date', 'asc')
         .onSnapshot((data) => {
@@ -386,22 +299,12 @@ export default () => {
     } else {
       window.location.hash = '';
     }
-  });
+  };
 
   post();
 
-  // ENVIA EL CONTENIDO DEL POST A FIREBASE
-  const saveTask = (name, description, date, userId, userPhoto, likes) => firebase.firestore().collection('posts').add({
-    name,
-    description,
-    date,
-    userId,
-    userPhoto,
-    likes,
-  });
+  // --NO BORRAR, IMAGENES
 
-  //hacer update 
-  //.doc(id).update()
   // Get a reference to the storage service, which is used to create
   // references in your storage bucket
   // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
@@ -427,7 +330,9 @@ export default () => {
   //   imageRef.put(file);
   // });
 
-  const fileE = () => {
+  // ---
+
+  const getFile = () => {
     btnSelectFile.addEventListener('change', (e) => {
       const file = e.target.files[0].name;
       // console.log(file);
@@ -444,13 +349,17 @@ export default () => {
     const usernameInside = divElem.querySelector('#post-username');
     const description = postForm['post-description'];
     const date = new Date().toLocaleString('en-ES');
-    const file = fileE();
-    const userId = firebase.auth().currentUser.uid;
-    const userPhoto = firebase.auth().currentUser.photoURL;
+    const file = getFile();
+    const userPr = currentUser();
+    const userId = userPr.uid;
+    // const userId = firebase.auth().currentUser.uid;
+    // const userId = currentUserId;
+    const userPhoto = userPr.photoURL;
     const likes = [];
-
     // console.log(file);
-    saveTask(usernameInside.value, description.value, date, userId, userPhoto, likes);
+    savePost(usernameInside.value, description.value, date, userId, userPhoto, likes);
+
+    // ---PROBAR
     // Get a reference to the storage service, which is used to create
     // references in your storage bucket
     const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
@@ -461,6 +370,7 @@ export default () => {
     postForm.reset();
     description.focus();
   });
+  // --- PROBAR --
 
   // FUNCION PARA CERRAR SESION
   btnSalir.addEventListener('click', () => {
