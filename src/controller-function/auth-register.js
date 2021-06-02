@@ -4,6 +4,9 @@
 
 // REGISTRARSE
 // Función para enviar el mensaje de validación a mi correo
+
+// export const verificationEmail = () => firebase.auth().currentUser.sendEmailVerification();
+
 export const sendEmail = () => {
   const user = firebase.auth().currentUser;
 
