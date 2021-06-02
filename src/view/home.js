@@ -67,8 +67,7 @@ export default () => {
       data.forEach((doc) => {
         // const likes = 0;
         const post = doc.data();
-        // console.log(post);
-        // console.log(username);
+        console.log(post);
         post.id = doc.id;
         const user = firebase.auth().currentUser;
         // const dateP = post.date;
@@ -97,7 +96,7 @@ export default () => {
             </div>
           </div>
           <div>
-            <button class="like" data-id-p="${post.id}"> ❤ </button> <label>${post.likes}</label>
+            <button class="like" id="like-${post.id}" > ❤ </button> <label>${post.likes.length}</label>
             <button class="commentButton" data-id="${post.id}"> comentarios </button>
           </div>
           <div  class="userComment" data-id="${post.id}">
@@ -201,7 +200,7 @@ export default () => {
         });
 
         const commentContainer = document.querySelectorAll('.commentContainer');
-        console.log(commentContainer);
+        // console.log(commentContainer);
         commentContainer.forEach((form) => {
           form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -241,30 +240,43 @@ export default () => {
         // });
         // });
 
-        // -----
-        // const setLikes = (like, p) => firebase.firestore().collection('posts').doc(p).update({
-        //   like,
-        // });
-        // actualizar likes
-        const updateLikes = (postid, likes) => firebase.firestore().collection('posts').doc(postid).update({ likes });
+        // ------ actualizar likes
+        const updateLikes = (postid, likesA) => firebase.firestore().collection('posts').doc(postid).update({ likes: likesA });
 
-        const btnsLikes = document.querySelectorAll('button.like');
-        // console.log(btnsLikes);
-        btnsLikes.forEach((btn) => {
-          btn.addEventListener('click', (e) => {
-            const likeAdded = post.likes.indexOf(user.uid);
-            if (likeAdded === -1) {
-              post.likes.push(user.uid);
-            } else {
-              post.likes.splice(likeAdded, 1);
-            }
+        function removeItemFromArr(arr, item) {
+          const i = arr.indexOf(item);
 
-            updateLikes(post.id, post.likes);
-          });
+          if (i !== -1) {
+            arr.splice(i, 1);
+          }
+        }
+
+        const btnsLikes = document.querySelector(`#like-${post.id}`);
+        console.log(btnsLikes);
+        btnsLikes.addEventListener('click', () => {
+          // e.preventDefault();
+          // const a = e.target.dataset;
+          // console.log(a);
+          // const pid = btnsLikes.getAttribute('data-id-p');
+          // console.log(pid);
+          console.log(post.id);
+          // console.log(post);
+          const likeAdded = post.likes;
+          console.log(likeAdded);
+
+          if (likeAdded.includes(user.uid)) {
+            likeAdded.push(user.uid);
+            console.log('dentro del if');
+          } else {
+            // post.likes.splice(likeAdded, 1);
+            removeItemFromArr(likeAdded, user.uid);
+          }
+
+          updateLikes(post.id, likeAdded);
         });
 
         const btnsDelete = document.querySelectorAll('img.btn-delete');
-        console.log(btnsDelete);
+        // console.log(btnsDelete);
         btnsDelete.forEach((btn) => {
           btn.addEventListener('click', (e) => {
             const mensaje = `
@@ -378,7 +390,7 @@ export default () => {
   // FUNCION PARA TRAER DE FIRESTORE LOS DOC CON LA INFO DE POSTS
   const post = () => firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      firebase.firestore().collection('posts').orderBy('date', 'asc')
+      firebase.firestore().collection('posts').orderBy('date', 'desc')
         .onSnapshot((data) => {
           setupPosts(data.docs);
           getImagePosted();
@@ -400,8 +412,9 @@ export default () => {
     likes,
   });
 
-  //hacer update 
-  //.doc(id).update()
+  // hacer update
+  // .doc(id).update()
+
   // Get a reference to the storage service, which is used to create
   // references in your storage bucket
   // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
