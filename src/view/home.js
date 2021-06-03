@@ -316,7 +316,6 @@ export default () => {
   //     const fileName = e.target.files[0].name;
   //   });
   // }
-  
 
   // uploadImg();
 
@@ -335,7 +334,6 @@ export default () => {
   // ---
 
   const getFile = () => {
-    
     btnSelectFile.addEventListener('change', (e) => {
       const file = e.target.files[0].name;
       console.log(typeof file);
