@@ -8,6 +8,9 @@ export default () => {
    </div>
    <div class="user-detail text-center">
     <div class="profileDisplayName"></div>
+    <label for="fileProfile">
+      <img id="img_form" src="https://image.flaticon.com/icons/svg/56/56535.svg" />
+    </label>
     <input type="file" accept="image/png, image/jpeg" value="upload" id="fileProfile"/>
     <button id="acceptProfile">Aceptar</button>
      <div id="Description">

@@ -2,7 +2,7 @@ import { deletePost } from '../controller-function/post-firestore.js';
 
 export default (dataTargetId) => {
   const viewMessageDelete = `
-  <div id="contenedor">
+  <div class="contenedor">
     <section class="messageValid">
     <div class="message">
       <img class="exitMessage" id="exitMessage" src="https://user-images.githubusercontent.com/77282012/120414466-ab48a780-c31f-11eb-90c2-964c8493f064.png">
@@ -26,14 +26,17 @@ export default (dataTargetId) => {
   const exitMessage = divElem.querySelector('#exitMessage');
 
   btnConfirmDelete.addEventListener('click', () => {
+    // deletePostAndComments(dataTargetId);
     deletePost(dataTargetId);
-    divElem.querySelector('#contenedor').innerHTML = '';
+    document.querySelector('#contenedorMessage').innerHTML = '';
   });
+
   btnCancelDelete.addEventListener('click', () => {
-    divElem.querySelector('#contenedor').innerHTML = '';
+    document.querySelector('#contenedorMessage').innerHTML = '';
   });
+
   exitMessage.addEventListener('click', () => {
-    divElem.querySelector('#contenedor').innerHTML = '';
+    document.querySelector('#contenedorMessage').innerHTML = '';
   });
 
   return divElem;

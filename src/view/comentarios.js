@@ -1,29 +1,19 @@
-import { addComment } from '../controller-function/post-firestore.js';
-
-export default (user, post) => {
-  const viewComment = `
-  <form class="commentContainer" data-id="${post.id}">
-  <img class="photoComment" src="${user.photoURL}">
-  <textarea id="commentDesc" cols="45" data-id="${post.id}" placeholder="Escribe una respuesta"></textarea>
-  <button class="commentPost" data-id="${post.id}"><img src="https://user-images.githubusercontent.com/77282012/120261005-a111a500-c25c-11eb-99b7-7f3bd7cc7697.png"></button>
-</form>
-  `;
-  const divElem = document.createElement('div');
-  divElem.innerHTML = viewComment;
-
-  const commentContainer = divElem.querySelectorAll('.commentContainer');
-  console.log(commentContainer);
-  commentContainer.forEach((form) => {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const usernameComment = divElem.querySelector('#commenterName');
-      console.log(usernameComment);
-      const idPost = form.getAttribute('data-id');
-      console.log(idPost);
-      const descriptionComment = form.commentDesc;
-      addComment(post.userId, idPost, descriptionComment.value, user.displayName);
-    });
+export const commentView = (collection, post, user, contenedor) => {
+  collection.forEach((com) => {
+    const commentPost = com.data();
+    const viewComment = document.createElement('div');
+    viewComment.innerHTML = `
+    <div class="boxComment">
+    ${(commentPost.userId === user.uid) ? `
+    <div class="btns-edit-delete" name="${commentPost.userId}" data-id-post="${post.id}">
+      <img class="btn-edit" data-id="${commentPost.id}" src="https://user-images.githubusercontent.com/77282012/120040454-32b6b380-bfcc-11eb-81cb-96f0e713e84c.png">
+      <img class="btn-delete" data-id="${commentPost.id}" src="https://user-images.githubusercontent.com/77282012/120018025-389c9c80-bfac-11eb-9d7d-0a68441eca20.png">
+    </div>` : ''}
+    <h5>${commentPost.userName}</h5>
+    <h6>${commentPost.date}</h6>
+    <p>${commentPost.comment}</p>
+    </div>
+    `;
+    contenedor.appendChild(viewComment);
   });
-
-  return divElem;
 };

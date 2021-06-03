@@ -4,8 +4,9 @@
 import {
   editPost, addComment, savePost, getComment, currentUser, updateLikes,
 } from '../controller-function/post-firestore.js';
+import { commentView } from './comentarios.js';
 import MessageSignOut from './box_message_sign_out.js';
-import MessageDelte from './box_message_delete.js';
+import MessageDelete from './box_message_delete.js';
 import Perfil from './perfil.js';
 
 export default () => {
@@ -60,7 +61,7 @@ export default () => {
     const user = currentUser();
     // firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      console.log(user);
+      // console.log(user);
       photoForm.innerHTML = `
       <img src="${user.photoURL}">`;
       username.innerHTML = user.displayName;
@@ -114,54 +115,44 @@ export default () => {
           </div>
         </div>
        `;
-        
-       postContainer.appendChild(postElem);
-        const btnsComment = document.querySelectorAll('button.commentButton');
-        btnsComment.forEach((btn) => {
-          btn.addEventListener('click', (e) => {
-            const viewContainer = e.target.parentElement.parentElement.querySelector('div.userComment');
-            if (viewContainer.getAttribute('hidden') === null) {
-              viewContainer.setAttribute('hidden', true);
-            } else {
-              viewContainer.removeAttribute('hidden');
-            }
-          });
+
+        postContainer.appendChild(postElem);
+
+        const commentContainer = document.querySelector(`form[data-id="${post.id}"]`);
+        const contentComment = document.querySelector(`div.contentComment[data-id="${post.id}"]`);
+        const idContent = contentComment.getAttribute('data-id');
+        const btnsComment = document.querySelector(`button.commentButton[data-id="${post.id}"]`);
+
+        // Mostrar la vista para crear los comentarios
+        btnsComment.addEventListener('click', () => {
+          const viewContainer = btnsComment.parentElement.parentElement.querySelector('div.userComment');
+          if (viewContainer.getAttribute('hidden') === null) {
+            viewContainer.setAttribute('hidden', true);
+          } else {
+            viewContainer.removeAttribute('hidden');
+          }
         });
 
-        const commentContainer = document.querySelectorAll('.commentContainer');
         // console.log(commentContainer);
-        commentContainer.forEach((form) => {
-          form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const usernameComment = divElem.querySelector('#commenterName');
-            console.log(usernameComment);
-            const idPost = form.getAttribute('data-id');
-            // console.log(idPost);
-            const descriptionComment = form.commentDesc;
-            addComment(user.uid, idPost, descriptionComment.value, user.displayName);
-            descriptionComment.value = '';
-          });
+        // Enviar los comentarios a Firebase
+        commentContainer.addEventListener('submit', (e) => {
+          e.preventDefault();
+          // const usernameComment = divElem.querySelector('#commenterName');
+          // console.log(usernameComment);
+          const idPost = commentContainer.getAttribute('data-id');
+          // console.log(idPost);
+          const descriptionComment = commentContainer.commentDesc;
+          addComment(user.uid, idPost, descriptionComment.value, user.displayName);
+          descriptionComment.value = '';
         });
 
-        const contentComment = document.querySelectorAll('div.contentComment');
-        contentComment.forEach((content) => {
-          const idContent = content.getAttribute('data-id');
-          getComment(idContent).then((querySnapshot) => querySnapshot.forEach((com) => {
-            const commentPost = com.data();
-            content.innerHTML += `
-                <div class="boxComment">
-                ${(commentPost.userId === user.uid) ? `
-                <div class="btns-edit-delete" name="${post.userId}" data-id-post="${post.id}">
-                  <img class="btn-edit" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120040454-32b6b380-bfcc-11eb-81cb-96f0e713e84c.png">
-                  <img class="btn-delete" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120018025-389c9c80-bfac-11eb-9d7d-0a68441eca20.png">
-                </div>` : ''}
-                <h5>${commentPost.userName}</h5>
-                <h6>${commentPost.date}</h6>
-                <p>${commentPost.comment}</p>
-                </div>
-                `;
-          }));
-        });
+        // Mostrar los comentarios de las Publicaciones
+        getComment(idContent)
+          .onSnapshot((com) => {
+            contentComment.innerHTML = '';
+            commentView(com.docs, post, user, contentComment);
+          });
+
         // ------ actualizar likes
 
         const btnsLikes = document.querySelectorAll('button.like');
@@ -185,7 +176,8 @@ export default () => {
         // console.log(btnsDelete);
         btnsDelete.forEach((btn) => {
           btn.addEventListener('click', (e) => {
-            document.querySelector('#contenedorMessage').appendChild(MessageDelte(e.target.dataset.id, '#contenedorMessage'));
+            document.querySelector('#contenedorMessage').innerHTML = '';
+            document.querySelector('#contenedorMessage').appendChild(MessageDelete(e.target.dataset.id));
           });
         });
 
@@ -270,6 +262,7 @@ export default () => {
   // firebase.auth().onAuthStateChanged((user) => {
   const post = () => {
     const user = currentUser();
+    // console.log(user);
     if (user) {
       firebase.firestore().collection('posts').orderBy('date', 'desc')
         .onSnapshot((data) => {
@@ -288,11 +281,13 @@ export default () => {
   // Get a reference to the storage service, which is used to create
   // references in your storage bucket
   // --ENVIA IMG A FIREBASE AL MOEMNTO DE DAR CLICK ABRIR
-  const postImg = () => {
+  const preViewImg = () => {
     // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
     // Create a storage reference from our storage service
     // const storageRef = storage.ref();
+    // const fileName;
     btnSelectFile.addEventListener('change', (e) => {
+      // const fileName = e.target.files[0].name;
       const reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
 
@@ -304,8 +299,9 @@ export default () => {
 
         preview.innerHTML = '';
         preview.append(image);
-      };
 
+        // return fileName;
+      };
       // console.log(file);
       // const imgpv =
       // divElem.querySelector('#imgpreview').innerHTML = imgpv;
@@ -313,7 +309,14 @@ export default () => {
       // imageRef.put(file);
     });
   };
-  // postImg();
+  preViewImg();
+
+  // const getFileName = () => {
+  //   btnSelectFile.addEventListener('change', (e) => {
+  //     const fileName = e.target.files[0].name;
+  //   });
+  // }
+  
 
   // uploadImg();
 
@@ -332,9 +335,10 @@ export default () => {
   // ---
 
   const getFile = () => {
+    
     btnSelectFile.addEventListener('change', (e) => {
       const file = e.target.files[0].name;
-      // console.log(file);
+      console.log(typeof file);
       return file;
     // console.log(file);
     });
@@ -349,6 +353,7 @@ export default () => {
     const description = postForm['post-description'];
     const date = new Date().toLocaleString('en-ES');
     const file = getFile();
+    console.log(file);
     const userPr = currentUser();
     const userId = userPr.uid;
     // const userId = firebase.auth().currentUser.uid;
@@ -373,6 +378,7 @@ export default () => {
 
   // FUNCION PARA CERRAR SESION
   btnSalir.addEventListener('click', () => {
+    document.querySelector('#contenedorMessage').innerHTML = '';
     document.querySelector('#contenedorMessage').appendChild(MessageSignOut());
   });
 
