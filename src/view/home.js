@@ -6,7 +6,7 @@ import {
 } from '../controller-function/post-firestore.js';
 import { commentView } from './comentarios.js';
 import MessageSignOut from './box_message_sign_out.js';
-import MessageDelte from './box_message_delete.js';
+import MessageDelete from './box_message_delete.js';
 import Perfil from './perfil.js';
 
 export default () => {
@@ -102,7 +102,7 @@ export default () => {
             </div>
           </div>
           <div>
-            <button class="like" data-id="${post.id}"> ❤ </button> <label>${post.likes.length}</label>
+            <button class="like" data-id="${post.id}"> ❤ </button><label>${post.likes.length}</label>
             <button class="commentButton" data-id="${post.id}"> comentarios </button><label class="conterComment"></label>
           </div>
           <div hidden class="userComment" data-id="${post.id}">
@@ -177,7 +177,7 @@ export default () => {
         btnsDelete.forEach((btn) => {
           btn.addEventListener('click', (e) => {
             document.querySelector('#contenedorMessage').innerHTML = '';
-            document.querySelector('#contenedorMessage').appendChild(MessageDelte(e.target.dataset.id));
+            document.querySelector('#contenedorMessage').appendChild(MessageDelete(e.target.dataset.id));
           });
         });
 
