@@ -77,7 +77,7 @@ export default () => {
       postContainer.innerHTML = '';
       data.forEach((doc) => {
         const post = doc.data();
-        // console.log(post);
+        console.log(post);
         post.id = doc.id;
         const user = currentUser();
         const postElem = document.createElement('div');
@@ -281,11 +281,13 @@ export default () => {
   // Get a reference to the storage service, which is used to create
   // references in your storage bucket
   // --ENVIA IMG A FIREBASE AL MOEMNTO DE DAR CLICK ABRIR
-  const postImg = () => {
+  const preViewImg = () => {
     // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
     // Create a storage reference from our storage service
     // const storageRef = storage.ref();
+    // const fileName;
     btnSelectFile.addEventListener('change', (e) => {
+      // const fileName = e.target.files[0].name;
       const reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
 
@@ -297,8 +299,9 @@ export default () => {
 
         preview.innerHTML = '';
         preview.append(image);
-      };
 
+        // return fileName;
+      };
       // console.log(file);
       // const imgpv =
       // divElem.querySelector('#imgpreview').innerHTML = imgpv;
@@ -306,7 +309,13 @@ export default () => {
       // imageRef.put(file);
     });
   };
-  postImg();
+  preViewImg();
+
+  // const getFileName = () => {
+  //   btnSelectFile.addEventListener('change', (e) => {
+  //     const fileName = e.target.files[0].name;
+  //   });
+  // }
 
   // uploadImg();
 
@@ -327,7 +336,7 @@ export default () => {
   const getFile = () => {
     btnSelectFile.addEventListener('change', (e) => {
       const file = e.target.files[0].name;
-      // console.log(file);
+      console.log(typeof file);
       return file;
     // console.log(file);
     });
@@ -342,6 +351,7 @@ export default () => {
     const description = postForm['post-description'];
     const date = new Date().toLocaleString('en-ES');
     const file = getFile();
+    console.log(file);
     const userPr = currentUser();
     const userId = userPr.uid;
     // const userId = firebase.auth().currentUser.uid;
