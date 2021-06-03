@@ -50,12 +50,31 @@
         transform: translateX(-50%);
         top: 140px;
         z-index: 1001;
+        display: flex;
+        flex-direction: row;
     }
     .profile-pic img{
         height: 100%;
         width: 100%;
         border-radius: 50%;
+
     }
+    .profileEditPhoto{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 140px;
+        z-index: 1001;
+        display: flex;
+        flex-direction: row;
+    }
+    .profileEditPhoto img{
+        width: 120px;
+        height: 100%;
+        border-radius: 50%;
+        margin: 8px;
+    }
+    
     #viewPerfil{
         width: 25%;
         padding: 0%;
@@ -66,10 +85,6 @@
         font-size: 14px;
         line-height: 100%;  
     } 
-
-    #img_form{
-        
-    }
 
     /* FIN DE CSS PERFIL */
 }
