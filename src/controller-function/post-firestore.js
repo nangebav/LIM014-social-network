@@ -1,10 +1,16 @@
 /* eslint-disable max-len */
 // const collection = firebase.firestore().collection('posts');
 
-export const deletePost = (id) => firebase.firestore().collection('posts').doc(id).delete();
+// export const deletePost = (id) => firebase.firestore().collection('posts').doc(id).delete();
 
 // export const deletePostAndComments = (id) => firebase.firestore().collection('posts').doc(id).collection('comment')
-//  .delete();
+// .delete();
+ export const commentDelete = (idContent) => firebase.firestore().collection('posts').doc(idContent).collection('comment')
+ .onSnapshot((com) => {
+    com.forEach(element => {
+      console.log(element);
+    });
+});
 // export const editPost = (id) => firebase.firestore().collection('posts').doc(id).onSnapshot((data) => {
 //   console.log(data.docs);
 // });

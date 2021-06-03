@@ -77,7 +77,7 @@ export default () => {
       postContainer.innerHTML = '';
       data.forEach((doc) => {
         const post = doc.data();
-        // console.log(post);
+        console.log(post);
         post.id = doc.id;
         const user = currentUser();
         const postElem = document.createElement('div');
