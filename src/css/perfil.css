@@ -7,9 +7,13 @@
         padding:5px;
         position: relative;
     }
-    .profile-badge img{
+    .profile img{
         height: 200px;
         width: 100%;
+    }
+
+    .profile-Edit{
+        margin: 12px;
     }
     .user-detail{
         background-color: #fff;
@@ -76,6 +80,5 @@
         font-size: 14px;
         line-height: 100%;  
     } 
-
     /* FIN DE CSS PERFIL */
 }
