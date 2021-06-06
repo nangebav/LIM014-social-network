@@ -9,8 +9,13 @@ export const commentView = (collection, post, user, contenedor) => {
       <img class="btn-edit" data-id="${commentPost.id}" src="https://user-images.githubusercontent.com/77282012/120040454-32b6b380-bfcc-11eb-81cb-96f0e713e84c.png">
       <img class="btn-delete" data-id="${commentPost.id}" src="https://user-images.githubusercontent.com/77282012/120018025-389c9c80-bfac-11eb-9d7d-0a68441eca20.png">
     </div>` : ''}
-    <h5>${commentPost.userName}</h5>
-    <h6>${commentPost.date}</h6>
+    <section class="commentPost">
+      <img class="commentUserImage" src="${commentPost.userPhoto}">
+      <section>
+        <h5>${commentPost.userName}</h5>
+        <h6>${commentPost.date}</h6>
+      </section>
+    </section>
     <p>${commentPost.comment}</p>
     </div>
     `;

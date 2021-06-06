@@ -1,13 +1,24 @@
 /* eslint-disable max-len */
 // const collection = firebase.firestore().collection('posts');
 
-// export const deletePost = (id) => firebase.firestore().collection('posts').doc(id).delete();
+export const deletePost = (id) => firebase.firestore().collection('posts').doc(id).delete();
 
 // export const deletePostAndComments = (id) => firebase.firestore().collection('posts').doc(id).collection('comment')
 // .delete();
+<<<<<<< HEAD
 export const commentDelete = (idContent) => firebase.firestore().collection('posts').doc(idContent).collection('comment')
   .onSnapshot((com) => {
     com.forEach((element) => element);
+=======
+export const commentDelete = (idContent) => firebase.firestore().collection('posts').doc(idContent)
+  .collection('comment')
+  .onSnapshot((com) => {
+    com.forEach((element) => {
+      const comment = element.data();
+      comment.id = element.id;
+      console.log(comment.id);
+    });
+>>>>>>> 371589cc91fbe40c765cc472bb1081b7541c93b3
   });
 // export const editPost = (id) => firebase.firestore().collection('posts').doc(id).onSnapshot((data) => {
 //   console.log(data.docs);
@@ -28,13 +39,14 @@ export const editPost = (id) => firebase.firestore().collection('posts').doc(id)
 export const updateLikes = (postid, likes) => firebase.firestore().collection('posts').doc(postid).update({ likes });
 
 // ENVIA EL CONTENIDO DEL POST A FIREBASE
-export const savePost = (name, description, date, userId, userPhoto, likes) => firebase.firestore().collection('posts').add({
+export const savePost = (name, description, date, userId, userPhoto, likes, photo) => firebase.firestore().collection('posts').add({
   name,
   description,
   date,
   userId,
   userPhoto,
   likes,
+  photo,
 });
 
 // FUNCION PARA TRAER DE FIRESTORE LOS DOC CON LA INFO DE POSTS
@@ -53,7 +65,7 @@ export const updatePost = (name, description, date, userId, userPhoto, likes, id
 });
 
 // ------ BASE DE DATOS CLOUD DE COMENTARIO---------
-export const addComment = (UserId, idPost, Comment, userName) => {
+export const addComment = (UserId, idPost, Comment, userName, userPhoto) => {
   const db = firebase.firestore();
   return db.collection('posts').doc(idPost).collection('comment').add({
     userId: UserId,
@@ -61,6 +73,7 @@ export const addComment = (UserId, idPost, Comment, userName) => {
     date: new Date().toLocaleString('en-ES'),
     comment: Comment,
     userName,
+    userPhoto,
   });
 };
 

@@ -67,8 +67,7 @@ describe('signOut', () => {
 // Funcion para guardar el nombre del usuario
 describe('updateProfile', () => {
   it('debería poder guardar mi nombre y apellido', () => {
-    updateProfile('Sutana', 'Fulanita')
-      .then((user) => expect(user.name).toBe('Sutana Fulanita'));
+    expect(updateProfile('Sutana', 'Fulanita')).toBe();
   });
 });
 

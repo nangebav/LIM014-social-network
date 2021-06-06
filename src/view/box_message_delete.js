@@ -1,6 +1,10 @@
 // import { deletePost, deletePostAndComments } from '../controller-function/post-firestore.js';
+<<<<<<< HEAD
 
 import { commentDelete } from '../controller-function/post-firestore.js';
+=======
+import { commentDelete, deletePost } from '../controller-function/post-firestore.js';
+>>>>>>> 371589cc91fbe40c765cc472bb1081b7541c93b3
 
 export default (dataTargetId) => {
   const viewMessageDelete = `
@@ -29,7 +33,7 @@ export default (dataTargetId) => {
 
   btnConfirmDelete.addEventListener('click', () => {
     // deletePostAndComments(dataTargetId);
-    // deletePost(dataTargetId);
+    deletePost(dataTargetId);
     commentDelete(dataTargetId);
     document.querySelector('#contenedorMessage').innerHTML = '';
   });
