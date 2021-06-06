@@ -1,5 +1,7 @@
 // import { deletePost, deletePostAndComments } from '../controller-function/post-firestore.js';
+
 import { commentDelete } from '../controller-function/post-firestore.js';
+
 export default (dataTargetId) => {
   const viewMessageDelete = `
   <div class="contenedor">

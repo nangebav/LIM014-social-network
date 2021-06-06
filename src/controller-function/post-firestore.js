@@ -5,12 +5,10 @@
 
 // export const deletePostAndComments = (id) => firebase.firestore().collection('posts').doc(id).collection('comment')
 // .delete();
- export const commentDelete = (idContent) => firebase.firestore().collection('posts').doc(idContent).collection('comment')
- .onSnapshot((com) => {
-    com.forEach(element => {
-      console.log(element);
-    });
-});
+export const commentDelete = (idContent) => firebase.firestore().collection('posts').doc(idContent).collection('comment')
+  .onSnapshot((com) => {
+    com.forEach((element) => element);
+  });
 // export const editPost = (id) => firebase.firestore().collection('posts').doc(id).onSnapshot((data) => {
 //   console.log(data.docs);
 // });

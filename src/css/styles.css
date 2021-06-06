@@ -429,22 +429,22 @@ input[type=checkbox] {
 
     }
 
-    .messageLogIn, #messageRegister {
+    /* .messageLogIn, #messageRegister {
         position: relative;
         width: 50%;
         height: 100%;
         transition: 0.5s;
         display: flex;
-    }
+    } */
 
-    .messageLogIn .image{
+    /* .messageLogIn .image{
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover;
-    }
+        /* object-fit: cover; */
+ }
 
     #post-form{
         display: flex;
@@ -552,4 +552,4 @@ input[type=checkbox] {
        width: 50%;
    }
 
- }
+ 

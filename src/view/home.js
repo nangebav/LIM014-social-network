@@ -281,77 +281,86 @@ export default () => {
   // Get a reference to the storage service, which is used to create
   // references in your storage bucket
   // --ENVIA IMG A FIREBASE AL MOEMNTO DE DAR CLICK ABRIR
-  const preViewImg = () => {
-    // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
-    // Create a storage reference from our storage service
-    // const storageRef = storage.ref();
-    // const fileName;
-    btnSelectFile.addEventListener('change', (e) => {
-      // const fileName = e.target.files[0].name;
-      const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
 
-      reader.onload = function () {
-        const preview = divElem.querySelector('#imgpreview');
-        const image = document.createElement('img');
+  // const preViewImg = (e) => {
+  //   // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
+  //   // Create a storage reference from our storage service
+  //   // const storageRef = storage.ref();
+  //   // const fileName;
 
-        image.src = reader.result;
+  //   // btnSelectFile.addEventListener('change', (e) => {
+  //   // const fileName = e.target.files[0].name;
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(e.target.files[0]);
 
-        preview.innerHTML = '';
-        preview.append(image);
+  //   reader.onload = function () {
+  //     const preview = divElem.querySelector('#imgpreview');
+  //     const image = document.createElement('img');
 
-        // return fileName;
-      };
-      // console.log(file);
-      // const imgpv =
-      // divElem.querySelector('#imgpreview').innerHTML = imgpv;
-      // const imageRef = storageRef.child(`images/${file.name}`);
-      // imageRef.put(file);
-    });
+  //     image.src = reader.result;
+
+  //     preview.innerHTML = '';
+  //     preview.append(image);
+
+  //     // return fileName;
+  //     // };
+  //     // console.log(file);
+  //     // const imgpv =
+  //     // divElem.querySelector('#imgpreview').innerHTML = imgpv;
+  //     // const imageRef = storageRef.child(`images/${file.name}`);
+  //     // imageRef.put(file);
+  //   };
+  // };
+
+  const getFile = (e) => {
+    const file = e.target.files[0].name;
+    // btnSelectFile.addEventListener('change', (e) => {
+
+    // console.log(file);
+    // console.log(file);
+    // });
+    console.log(file);
+    return file;
+    // console.log(fileE());
   };
-  preViewImg();
 
-  // const getFileName = () => {
-  //   btnSelectFile.addEventListener('change', (e) => {
-  //     const fileName = e.target.files[0].name;
-  //   });
-  // }
-
+  btnSelectFile.addEventListener('change', (e) => {
+  // preViewImg(e);
+    getFile(e);
+  });
   // uploadImg();
 
   // Get a reference to the storage service, which is used to
   // create references in your storage bucket
-  // var storage = firebase.app().storage("gs://miurart---red-social.appspot.com");
-  // // Create a storage reference from our storage service
-  // var storageRef = storage.ref();
-  // btnSelectFile.addEventListener('change', (e) => {
-  //  const file = e.target.files[0];
-  //   //console.log(file);
-  //   const imageRef = storageRef.child(`images/${file.name}`);
-  //   imageRef.put(file);
-  // });
+  // const postImage = (e) => {
+  //   const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
+  //   // Create a storage reference from our storage service
+  //   const storageRef = storage.ref();
+  //   btnSelectFile.addEventListener('change', (e) => {
+  //     const file = e.target.files[0];
+  //     console.log(file);
+  //     const imageRef = storageRef.child(`images/${file.name}`);
+  //     imageRef.put(file);
+  //   // });
+  //   });
+  // };
 
   // ---
 
-  const getFile = () => {
-    btnSelectFile.addEventListener('change', (e) => {
-      const file = e.target.files[0].name;
-      console.log(typeof file);
-      return file;
-    // console.log(file);
-    });
-    // console.log(fileE());
-  };
-  // fileE();
+  // console.log(getFile());
 
   // EVENTO PARA ENVIAR DATOS DEL POST A FIREBASE
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    // const imageFilbtnSelectFile.file
+    // const img = preview.querySelector('img');
+    // const file = img.src;
+    // console.log(file);
     const usernameInside = divElem.querySelector('#post-username');
     const description = postForm['post-description'];
     const date = new Date().toLocaleString('en-ES');
-    const file = getFile();
-    console.log(file);
+    // const file = getFile();
+    // console.log(file);
     const userPr = currentUser();
     const userId = userPr.uid;
     // const userId = firebase.auth().currentUser.uid;
@@ -361,16 +370,17 @@ export default () => {
     // console.log(file);
     savePost(usernameInside.value, description.value, date, userId, userPhoto, likes);
 
+    // postImage();
     // ---PROBAR
     // Get a reference to the storage service, which is used to create
     // references in your storage bucket
-    const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
-    // Create a storage reference from our storage service
-    const storageRef = storage.ref();
-    const imageRef = storageRef.child(`images/${file}`);
-    imageRef.put(file);
-    postForm.reset();
-    description.focus();
+    // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
+    // // Create a storage reference from our storage service
+    // const storageRef = storage.ref();
+    // const imageRef = storageRef.child(`images/${file}`);
+    // imageRef.put(file);
+    // postForm.reset();
+    // description.focus();
   });
   // --- PROBAR --
 
