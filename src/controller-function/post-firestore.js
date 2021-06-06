@@ -33,13 +33,14 @@ export const editPost = (id) => firebase.firestore().collection('posts').doc(id)
 export const updateLikes = (postid, likes) => firebase.firestore().collection('posts').doc(postid).update({ likes });
 
 // ENVIA EL CONTENIDO DEL POST A FIREBASE
-export const savePost = (name, description, date, userId, userPhoto, likes) => firebase.firestore().collection('posts').add({
+export const savePost = (name, description, date, userId, userPhoto, likes, photo) => firebase.firestore().collection('posts').add({
   name,
   description,
   date,
   userId,
   userPhoto,
   likes,
+  photo,
 });
 
 // FUNCION PARA TRAER DE FIRESTORE LOS DOC CON LA INFO DE POSTS

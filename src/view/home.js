@@ -63,7 +63,7 @@ export default () => {
     if (user) {
       // console.log(user);
       photoForm.innerHTML = `
-      <img src="${user.photoURL}">`;
+      <img src="${user.photoURL ? user.photoURL : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP8HtjDCK27FdSoqHRqLGnZ1Fq8yhs7UvvMTKPqMTlvOGdYiHvFzUW07V8gKsM9_fbK8Y&usqp=CAU'}">`;
       username.innerHTML = user.displayName;
       username.value = `${user.displayName}`;
       viewPerfil.appendChild(Perfil());
@@ -77,7 +77,7 @@ export default () => {
       postContainer.innerHTML = '';
       data.forEach((doc) => {
         const post = doc.data();
-        console.log(post);
+        // console.log(post);
         post.id = doc.id;
         const user = currentUser();
         const postElem = document.createElement('div');
@@ -89,8 +89,13 @@ export default () => {
               <img class="btn-edit" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120040454-32b6b380-bfcc-11eb-81cb-96f0e713e84c.png">
               <img class="btn-delete" data-id="${post.id}" src="https://user-images.githubusercontent.com/77282012/120018025-389c9c80-bfac-11eb-9d7d-0a68441eca20.png">
             </div>` : ''}
-            <h6>${post.date}</h6>
-            <h3 class="h5" name="${post.name}">${post.name}</h3>
+            <section class="postUser">
+              <img class="postUserImage" src="${post.userPhoto}">
+              <section>
+                <h6>${post.date}</h6>
+                <h3 class="h5" name="${post.name}">${post.name}</h3>
+              </section>
+            </section>
             <div class="editPublicacion" disabled>
               <p id="descriptionEdit">${post.description}</p>   
               <section id="photoPost"></section>
@@ -100,6 +105,7 @@ export default () => {
               <button class="aceptEdit">Aceptar</button>
               <button class="cancelEdit">Cancelar</button>  
             </div>
+            ${(post.photo) ? `<img class="photoPublic" src="${post.photo}">` : ''}
           </div>
           <div>
             <button class="like" data-id="${post.id}"> ❤ </button><label>${post.likes.length}</label>
@@ -122,6 +128,16 @@ export default () => {
         const contentComment = document.querySelector(`div.contentComment[data-id="${post.id}"]`);
         const idContent = contentComment.getAttribute('data-id');
         const btnsComment = document.querySelector(`button.commentButton[data-id="${post.id}"]`);
+
+        console.log(post.userId === user.uid);
+        if (post.userId === user.uid) {
+          editPost(post.id)
+            .update({
+              userPhoto: `${user.photoURL}`,
+              name: `${user.displayName}`,
+            });
+        }
+        console.log(user);
 
         // Mostrar la vista para crear los comentarios
         btnsComment.addEventListener('click', () => {
@@ -333,15 +349,15 @@ export default () => {
 
   // ---
 
-  const getFile = () => {
-    btnSelectFile.addEventListener('change', (e) => {
-      const file = e.target.files[0].name;
-      console.log(typeof file);
-      return file;
-    // console.log(file);
-    });
-    // console.log(fileE());
-  };
+  // const getFile = () => {
+  //  btnSelectFile.addEventListener('change', (e) => {
+  //    const file = e.target.files[0].name;
+  //    console.log(typeof file);
+  //    return file;
+  //  // console.log(file);
+  //  });
+  // console.log(fileE());
+  // };
   // fileE();
 
   // EVENTO PARA ENVIAR DATOS DEL POST A FIREBASE
@@ -350,27 +366,42 @@ export default () => {
     const usernameInside = divElem.querySelector('#post-username');
     const description = postForm['post-description'];
     const date = new Date().toLocaleString('en-ES');
-    const file = getFile();
-    console.log(file);
+
     const userPr = currentUser();
     const userId = userPr.uid;
     // const userId = firebase.auth().currentUser.uid;
     // const userId = currentUserId;
     const userPhoto = userPr.photoURL;
     const likes = [];
+
+    const inputFile = btnSelectFile.files;
+    console.log(description.length);
+    if (description.value || inputFile.length >= 1) {
+      if (inputFile.length >= 1) {
+        const file = inputFile[0];
+        const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
+        // Create a storage reference from our storage service
+        const storageRef = storage.ref();
+        const imageRef = storageRef.child(`images/${file.name}`);
+        imageRef.put(file).then((snapshot) => {
+          snapshot.ref.getDownloadURL().then((url) => {
+            savePost(usernameInside.value, description.value, date, userId, userPhoto, likes, url);
+          });
+        });
+      } if (description.value) {
+        savePost(usernameInside.value, description.value, date, userId, userPhoto, likes, '');
+      }
+    }
+    postForm.reset();
+    description.focus();
+    divElem.querySelector('#imgpreview').innerHTML = '';
+
     // console.log(file);
-    savePost(usernameInside.value, description.value, date, userId, userPhoto, likes);
+    // savePost(usernameInside.value, description.value, date, userId, userPhoto, likes);
 
     // ---PROBAR
     // Get a reference to the storage service, which is used to create
     // references in your storage bucket
-    const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
-    // Create a storage reference from our storage service
-    const storageRef = storage.ref();
-    const imageRef = storageRef.child(`images/${file}`);
-    imageRef.put(file);
-    postForm.reset();
-    description.focus();
   });
   // --- PROBAR --
 

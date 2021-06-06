@@ -1,4 +1,6 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
 @media screen and (min-width: 1050px){
 
     /* Perfil */
@@ -6,7 +8,9 @@
         border:1px solid #c1c1c1;
         padding:5px;
         position: relative;
+        font-family: Montserrat, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
     }
+
     .profile img{
         height: 200px;
         width: 100%;
@@ -15,6 +19,7 @@
     .profile-Edit{
         margin: 12px;
     }
+    
     .user-detail{
         background-color: #fff;
         position: relative;
@@ -26,11 +31,14 @@
         justify-content: center;
         align-items: center;
     }
+
+    /* Nombre del perfil */
+
     .user-detail h3{
-        margin: 0px;
         margin:0px 0px 5px 0px;
         color: #000;
         padding: 2%;
+        width: 160px;
     }
     .user-detail p{
         font-size:14px;
@@ -63,11 +71,26 @@
         border-radius: 50%;
 
     }
+
+    /* IMAGEN DE PERFIL PARA EDITAR*/
+    .profileEditPhoto{
+        margin: 10px;
+    }
     .profileEditPhoto img{
-        width: 120px;
-        height: 100%;
+        width: 150px;
+        height: 150px;
         border-radius: 50%;
-        margin: 8px;
+        border: solid black 3px;
+    }
+
+    #camera{
+        width: 40px;
+        height: 40px;
+        margin-right: -18px;
+    }
+
+    .profileEditPhoto img:hover {
+        filter: opacity(.5);
     }
     
     #viewPerfil{
@@ -81,4 +104,9 @@
         line-height: 100%;  
     } 
     /* FIN DE CSS PERFIL */
+
+    #gif{
+        width: 40px;
+        height: 40px;
+    }
 }
