@@ -101,17 +101,22 @@ export default () => {
       divElem.querySelector('.profile-Edit').innerHTML = '';
       cargando.innerHTML = '<img id="gif" src="https://acegif.com/wp-content/uploads/loading-25.gif">';
       viewProfile.removeAttribute('hidden');
+
       if (file || editName) {
         if (file) {
           const imageRef = storageRef.child(`images Profile/${file.name}`);
-          imageRef.put(file).then((snapshot) => {
-            cargando.innerHTML = '<img id="gif" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Yes_Check_Circle.svg/240px-Yes_Check_Circle.svg.png">';
-            snapshot.ref.getDownloadURL().then((url) => {
-              user.updateProfile({
-                photoURL: url,
+          imageRef.put(file)
+            .then((snapshot) => {
+              cargando.innerHTML = '<img id="gif" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Yes_Check_Circle.svg/240px-Yes_Check_Circle.svg.png">';
+              snapshot.ref.getDownloadURL().then((url) => {
+                user.updateProfile({
+                  photoURL: url,
+                });
+                // window.location.reload();
+                window.location.hash = '#/home';
+                location.reload();
               });
             });
-          });
         } if (editName) {
           user.updateProfile({
             displayName: `${editName.value}`,

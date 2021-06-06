@@ -59,7 +59,7 @@ export const updatePost = (name, description, date, userId, userPhoto, likes, id
 });
 
 // ------ BASE DE DATOS CLOUD DE COMENTARIO---------
-export const addComment = (UserId, idPost, Comment, userName) => {
+export const addComment = (UserId, idPost, Comment, userName, userPhoto) => {
   const db = firebase.firestore();
   return db.collection('posts').doc(idPost).collection('comment').add({
     userId: UserId,
@@ -67,6 +67,7 @@ export const addComment = (UserId, idPost, Comment, userName) => {
     date: new Date().toLocaleString('en-ES'),
     comment: Comment,
     userName,
+    userPhoto,
   });
 };
 

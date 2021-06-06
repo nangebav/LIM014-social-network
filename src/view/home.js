@@ -129,7 +129,7 @@ export default () => {
         const idContent = contentComment.getAttribute('data-id');
         const btnsComment = document.querySelector(`button.commentButton[data-id="${post.id}"]`);
 
-        console.log(post.userId === user.uid);
+        // console.log(post.userId === user.uid);
         if (post.userId === user.uid) {
           editPost(post.id)
             .update({
@@ -137,7 +137,7 @@ export default () => {
               name: `${user.displayName}`,
             });
         }
-        console.log(user);
+        // console.log(user);
 
         // Mostrar la vista para crear los comentarios
         btnsComment.addEventListener('click', () => {
@@ -158,7 +158,7 @@ export default () => {
           const idPost = commentContainer.getAttribute('data-id');
           // console.log(idPost);
           const descriptionComment = commentContainer.commentDesc;
-          addComment(user.uid, idPost, descriptionComment.value, user.displayName);
+          addComment(user.uid, idPost, descriptionComment.value, user.displayName, user.photoURL);
           descriptionComment.value = '';
         });
 
@@ -276,21 +276,27 @@ export default () => {
 
   // FUNCION PARA TRAER DE FIRESTORE LOS DOC CON LA INFO DE POSTS
   // firebase.auth().onAuthStateChanged((user) => {
-  const post = () => {
-    const user = currentUser();
+  const post = (user) => {
+    // const user = currentUser();
     // console.log(user);
     if (user) {
+      console.log('Estas Logueado');
       firebase.firestore().collection('posts').orderBy('date', 'desc')
         .onSnapshot((data) => {
           setupPosts(data.docs);
           getImagePosted();
         });
     } else {
+      console.log('No estas Logueado');
       window.location.hash = '';
+      // alert('Tu deberías ser un usuario para ver los posts');
     }
   };
 
-  post();
+  if (window.location.hash === '#/home') {
+    const user = currentUser();
+    post(user);
+  }
 
   // --NO BORRAR, IMAGENES
 

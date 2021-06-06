@@ -15,16 +15,17 @@
         border-radius: 50%;
         box-shadow: 0px 0px 5px 0px #c1c1c1;
     }
-    .postUserImage{
-        height: 40px;
-        width: 40px;
-        border-radius: 50%;
-    }
 
-    .postUser{
+    .postUser, .commentPost{
         display: flex;
         flex-direction: row; 
         margin-bottom: 14px;
+    }
+
+    .postUserImage, .commentUserImage{
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
     }
 
     .commentButton img{
@@ -46,7 +47,7 @@
         margin: 5px;
     }
     .post-card{
-        width: 550px;
+        width: 600px;
         border: solid rgb(223, 223, 223);
         margin: 8px;
         padding: 10px;
