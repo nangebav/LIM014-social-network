@@ -58,7 +58,6 @@ export default () => {
 
   // FUNCION PARA OBTENER EL NOMBRE DEL USUARIO
   const getProfile = () => {
-    co
     // firebase.nst user = currentUser();auth().onAuthStateChanged((user) => {
     if (user) {
       // console.log(user);
