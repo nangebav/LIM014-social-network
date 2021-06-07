@@ -59,6 +59,7 @@ export default () => {
   // FUNCION PARA OBTENER EL NOMBRE DEL USUARIO
   const getProfile = () => {
     // firebase.nst user = currentUser();auth().onAuthStateChanged((user) => {
+    const user = currentUser();
     if (user) {
       // console.log(user);
       photoForm.innerHTML = `
