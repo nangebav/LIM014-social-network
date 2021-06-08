@@ -1,50 +1,110 @@
-# Creando una Red Social
+# MIURART Red Social ![Group 17](https://user-images.githubusercontent.com/67443691/121117275-7e900680-c7dd-11eb-94d9-a1505783b2f1.png)
+
+MiurArt es una red social enfocada en el sector de artistas de murales.
 
 ## Definición de producto
 
-### ¿Cuáles son los elementos básicos que tiene una red social?
-    -Permite crear una cuenta personal.  
-    -Permite iniciar sesión. 
-    -Permite hacer publicaciones.  
-    -Permite tener conversaciones con otras personas.  
-    -Permite reaccionar a las personas ante una publicación.   
-    -Permite filtrar por búsqueda publicaciones que al usuario le interese. 
+### ¿Quiénes son los usuarios del producto? 
 
+- Artistas muralistas que quieran exponer su arte de manera virtual
 
-### ¿Cómo descubriste las necesidades de los usuarios?
-    Atravez de entrevistas de artistas independientes y sus nesesidades respecto a las carencias de muchas redes sociales destinadxs a ellxs
+### ¿Cuáles son los elementos tiene nuestra red social?
+  - Permite crear una cuenta personal.  
+  - Permite iniciar sesión. 
+  - Permite hacer publicaciones.  
+  - Permite tener conversaciones con otras personas.  
+  - Permite reaccionar a las personas ante una publicación.
 
-### ¿Qué problema resuelve el producto para estos usuarios?
-    La inexistencia de una red social enfocada exclusivamente en la exposición de su arte
+### ¿Cómo descubrimos las necesidades de los usuarios?
+  - A través de entrevistas de artistas independientes.
+
+ ### ¿Qué problema resuelve el producto para estos usuarios?
+ 
+  - La inexistencia de una red social enfocada exclusivamente en la exposición de su arte
 
 ### ¿Cuáles son los objetivos de estos usuarios en relación al producto?
 
-    Poder encontrar publicaciones de artistas.
-    Poder conocer a otros artistas.
-    Poder promocionar su arte.
-    Poder crear o unirse a una comunidad de artistas
+  - Poder encontrar publicaciones de artistas.
+  - Poder conocer a otros artistas.
+  - Poder promocionar su arte.
+  - Poder crear o unirse a una comunidad de artistas.
 
 
 ### ¿Cuáles son las principales funcionalidades del producto y cuál es su prioridad?
 
-    Permitir hacer publicaciones.
-    Permitir crear una cuenta.
-    Permitir poder ingresar por Facebook o google.
-    Permitir ingresar a la red social.
-    Permitir el compartir y reaccionar a las publicaciones.
-    Permitir la edición o eliminación del post.
+  - Permitir hacer publicaciones.
+  - Permitir crear una cuenta.
+  - Permitir poder ingresar con una cuenta de google.
+  - Permitir ingresar a la red social.
+  - Permitir el compartir y reaccionar a las publicaciones.
+  - Permitir la edición o eliminación de las publicaciones.
+
+
+## ENTREVISTAS 
+
+### PREGUNTAS
+**Pregunta 1:** ¿Sientes que tu trabajo tiene suficiente visibilidad ?    
+**Pregunta 2:** ¿Para tí, es facíl conocer o contctarte con otros artistas del medio?  
+**Pregunta 3:** ¿Consideras importante el relacionarte con otros artistas del medio?  
+**Pregunta 4:** Si hubiera una red social para artistas murales  ¿Que tipo de información te gustaría encontrar?
+
+**Entrevista 1 (Mujer, 27 años)** 
+ 1: Eh no, debido a las restricciones de la pandemia, las zonas donde solían estar mis murales han sido restringidas (Restaurantes, Galerías, y calles cerca a oficinas).  
+ 2: Se a reducido el espacio de interacción, debido a la pandemia.         
+ 3: Si, por que igual siempre hemos sido una comunidad unida. Pero ahora siento que se a limitado nuestra interacción y convivencia.  
+ 4: Me gustaría mostrar mi trabajo como hacía antes, y recibir feedback y comentarios de otros artistas, así como explorar otros perfiles, para ampliar mi red de contactos.  
+
+**Entrevista 2 (Hombre,22 años)**   
+ 1: No mucho, con la llegada de la pandemia mi trabajo como el de otros se a visto detenido e ignorado.     
+ 2: Realmente incluso antes de la pandemia el conocer a otros muralistas fue un tanto limitado.   
+ 3: Por supuesto, como artista me gusta cocnocer gente en este medio en el que pueda apoyarme y denvolverme.    
+ 4: Me gustaría conocer a más artistas y ver su arte, además de mostrarles el mío.  
+ 
 
 # Historias de Usuario
 
-### `Historia de Usuario 1 `
+### `Historia de Usuario 1`
 Yo como usuari@ deseo tener una vista inicial atractiva en la plataforma antes de ingresar a mi cuenta.
 
     Criterio de aceptación:
-    -
-    -
-    -
+    
+    - [x]  Se muestra campos para ingresar: nombre, apellido, nombre de usuario, correo electrónico, contraseña
+
+    - [x]  La contraseña tiene más de 6 dígitos
+
+    - [x] No se pueden ingresar números en los campos de nombre y apellido
+
+    - [x] Se muestra casilla para términos y condiciones
+
+    - [x] No se activa la cuenta si no se acepta el mensaje de verificación
+
+    - [x] Se muestran opciones para registrarse desde google o facebook
+
+    - [x] Se muestra un mensaje indicando que  ya puede iniciar sesión
+
+    - [x] Se muestra mensaje y opción para regresar al log in
+
     Definición de lo terminado:
-    -
+
+    Creación de cuenta de usuario e inicio de sesión
+
+    Login con Firebase:
+    - [x] Para el login y las publicaciones en el muro puedes utilizar Firebase
+    - [x] Creación de cuenta de acceso y autenticación con cuenta de correo y contraseña, y también con una cuenta de Google.
+
+    Validaciones:
+    - [x] Solamente se permite el acceso a usuarios con cuentas válidas.
+    - [x] No pueden haber usuarios repetidos.
+    - [x] La cuenta de usuario debe ser un correo electrónico válido.
+    - [x] Lo que se escriba en el campo (input) de contraseña debe ser secreto.
+
+    Comportamiento:
+    - [x]  Al enviarse el formulario de registro o inicio de sesión, debe validarse.
+    - [x]  Si hay errores, se deben mostrar mensajes descriptivos para ayudar al usuario a corregirlos
+
+    Testei:
+    - [ ]  Se hizo testeo de las funciones de la historia de Usuario
+    
 
 ### `Historia de Usuario 2`
 Yo como usuari@ quisiera poder registrarme a la plataforma con mi correo electrónico
@@ -90,21 +150,26 @@ Yo como usuari@ quiero ver un muro de publicaciones en el muro
 Yo como usuari@ deseo poder dale like o una emoción a las publicaciones que me gusten
 
     Criterio de aceptación:
-    -
-    -
-    -
+    - Hay un botón like en cada publicación realizada
+    - Hay un contador de likes en cada publicación
+    - Un usuario puede dar like 1 vez a 1 publicación
+    - Se peude quitar el like de las publicaciones
+    - Sólo si el usuario está logueado puede dar like
     Definición de lo terminado:
-    -
+    - Las funciones han sido testeadas
+    - El contador muestra la cantidad de likes que tiene la publicación en tiempo real
+    - 
 
 ### `Historia de Usuario 7`
 Yo como usuario quiero editar mi publicación para plasmar algo distinto
 
     Criterio de aceptación:
-    -
-    -
+    - Hay un botón para editar la publicación
+    - Sólo el usuario que hizo la publicación la puede editar
     -
     Definición de lo terminado:
-    -
+    - Se han testeado las funciones
+    - Los cambios se pueden visualizar en menos de 1rn
 
 ### `Historia de Usuario 8`
 Yo como usuario quiero eliminar mi publicación para que ya no aparezca en mi muro de mi red
@@ -126,7 +191,78 @@ Yo como usuaria deseo hacer una busqueda sobre temas que podrían interesarme
     Definición de lo terminado:
     -
 
+### `Historia de Usuario 10`
+Yo como usuari@ deseo poder cerrar mi sesión en la red social
 
+    Criterio de aceptación:
+    - Hay un botón para cerrar la sesión
+    - Al hacer click en el botón Salir se muestra la página de log in
+    - El usuario no puede ver sus publicaciones o las publicaciones del resto
+
+    Definición de lo terminado:
+    - Las funciones de cerrar sesión han sido testedas
+    - Regresa a la página de log in
+
+### `Historia de Usuario 11`
+Yo como usuari@ deseo poder ver mi perfil de la red social cuando este logueada
+
+    Criterio de aceptación:
+    - Se muestra la foto por defecto de la cuenta de google si ingresó a través de esta opción
+    - Se puede cambiar la foto de pefil una vez que haya iniciado sesión
+
+    Definición de lo terminado:
+    - Las funchan sido testedas
+    - Regresa a la página de log in
+
+## PROTIPOS DE BAJA FIDELIDAD
+
+**(Vista Mobile)**
+
+
+![Mobile baja calidad 1](https://user-images.githubusercontent.com/77282012/121119386-20fdb900-c7e1-11eb-9847-154f4ec8439e.png)
+
+![Mobile baja calidad 2](https://user-images.githubusercontent.com/77282012/121119166-c5cbc680-c7e0-11eb-9106-ea3b1880a536.png)
+
+![Mobile baja calidad 3](https://user-images.githubusercontent.com/77282012/121119534-6621eb00-c7e1-11eb-86ff-dda9a578b9d5.png)
+
+![Mobile baja calidad 5](https://user-images.githubusercontent.com/77282012/121119170-c6645d00-c7e0-11eb-9d08-af91ca1c0d4b.png)
+
+
+![Mobile baja calidad 4](https://user-images.githubusercontent.com/77282012/121119168-c5cbc680-c7e0-11eb-89bf-0bdcb99b9927.png)
+
+
+**(Vista Desktop)**
+
+![PC baja calidad 1](https://user-images.githubusercontent.com/77282012/121118924-53f37d00-c7e0-11eb-8bd5-76b3a493bade.png)
+
+![PC baja calidad 2](https://user-images.githubusercontent.com/77282012/121118992-738aa580-c7e0-11eb-8be3-e65d6bbc4dd0.png)
+
+![PC baja calidad 3](https://user-images.githubusercontent.com/77282012/121118987-72597880-c7e0-11eb-95f1-7f75bdf6a6de.png)
+
+
+**Feedback Recibido**
+## PROTOTIPOS ALTA FIDELIDAD
+
+
+**(Vista Mobile)**
+
+![Frame 5](https://user-images.githubusercontent.com/77282012/121119801-eea08b80-c7e1-11eb-995c-01410f150086.png)
+![Mobile alta calidad 5](https://user-images.githubusercontent.com/77282012/121119802-ef392200-c7e1-11eb-9927-c0f8d91b1955.png)
+![Mobile alta calidad 6](https://user-images.githubusercontent.com/77282012/121119804-efd1b880-c7e1-11eb-8564-83e94eb7994f.png)
+![Mobile alta calidad 7](https://user-images.githubusercontent.com/77282012/121119805-efd1b880-c7e1-11eb-9a43-b371fb867eaa.png)
+![Mobile alta fidelidad 1](https://user-images.githubusercontent.com/77282012/121119806-f06a4f00-c7e1-11eb-9879-b015c56d2961.png)
+![Mobile alta fidelidad 2](https://user-images.githubusercontent.com/77282012/121119808-f06a4f00-c7e1-11eb-9cb3-c09089c3a048.png)
+
+**(Vista Desktop)**
+
+![Frame 7](https://user-images.githubusercontent.com/77282012/121119984-4ccd6e80-c7e2-11eb-9e1f-f5d2b6d78cd3.png)
+![Frame 9](https://user-images.githubusercontent.com/77282012/121120128-98801800-c7e2-11eb-9ed8-4f7d0fbf103e.png)
+![PC alta calidad 3](https://user-images.githubusercontent.com/77282012/121120682-abdfb300-c7e3-11eb-8656-af12f0f4e326.png)
+
+
+
+**Feedback Recibido**
+## PROTIPO FINAL
 
 ## 2. Resumen del proyecto
 
