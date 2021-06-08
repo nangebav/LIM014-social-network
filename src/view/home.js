@@ -13,6 +13,7 @@ export default () => {
   const viewHome = `
   <header>
   <h1 class="h1-style"><img src="https://user-images.githubusercontent.com/77282012/118549107-a4ffdc00-b720-11eb-9040-9de50dfb9369.png" alt="app logo">MIURART</h1>
+  <img src="https://user-images.githubusercontent.com/77282012/121115625-f872c080-c7da-11eb-9d55-53aba04edf15.png">
   <button id="btnSalir">Salir</button>
 </header>
     <section id="viewHome">
@@ -137,7 +138,7 @@ export default () => {
               name: `${user.displayName}`,
             });
         }
-        // console.log(user);
+        console.log(user);
 
         // Mostrar la vista para crear los comentarios
         btnsComment.addEventListener('click', () => {

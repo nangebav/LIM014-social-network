@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-console */
 import {
   currentUser,
@@ -9,19 +10,16 @@ export default () => {
   <div class="profile-badge">
     <div class="profile-Edit"></div>
     <div class="profile">
-      <img src="https://dummyimage.com/400x200/e85b27/e85b27">
+      <img src="https://user-images.githubusercontent.com/77282012/121081820-d78e7900-c7a2-11eb-9965-1de7b43074e8.png">
       <div class="profile-pic"></div>
-      <div id="cargando"></div>
       <div class="user-detail text-center">
         <div class="profileDisplayName"></div>
         <div id="Description">
-          <section id="emailUser">
-            <h4>Correo Electrónico</h4>
-          </section>
           </div>
-          <button class="btn btn-defualt"> Follow </button>
+          <p> Usuari@ de MiurArt </p>
+          <div id="cargando"></div>
+          <button id="editProfile" class="buttonProfile"> ✎ Editar Perfil </button>
         </div>
-        <button id="editProfile"> Editar Perfil </button>
       </div>
     </div>
   </div>
@@ -59,19 +57,10 @@ export default () => {
           <section>
             <h4>Nombre de Usuario</h4>
             <input id="EditName" type="text" value="${user.displayName}">
-          </section>
-          <section id="emailUser">
-            <h4>Correo Electrónico</h4>
-            <input type="text" value="${user.email}">
-          </section>
-          <section >
-            <h4>Sobre mí</h4>
-            <textarea placeholder="Artista mural"  cols="30" rows="5" style="resize:none;"></textarea>
-          </section>
-          <button id="acceptProfile">Aceptar Cambios</button>
+          <button id="acceptProfile" class="buttonProfile">Aceptar ✓</button>
         </div>
       </form>
-      <button id="cancelProfile">Cancelar</button>
+      <button id="cancelProfile" class="buttonProfile">Cancelar ✗</button>
     </div>
     `;
 
@@ -99,7 +88,7 @@ export default () => {
       const file = selectPhotoPerfil.files[0];
       console.log(user);
       divElem.querySelector('.profile-Edit').innerHTML = '';
-      cargando.innerHTML = '<img id="gif" src="https://acegif.com/wp-content/uploads/loading-25.gif">';
+      cargando.innerHTML = file ? '<img id="gif" src="https://acegif.com/wp-content/uploads/loading-25.gif">' : '';
       viewProfile.removeAttribute('hidden');
 
       if (file || editName) {
@@ -112,9 +101,10 @@ export default () => {
                 user.updateProfile({
                   photoURL: url,
                 });
-                // window.location.reload();
-                window.location.hash = '#/home';
-                location.reload();
+
+                // window.location.hash = '#/home';
+                window.location.reload();
+                // location.reload();
               });
             });
         } if (editName) {
@@ -141,7 +131,6 @@ export default () => {
   });
 
   perfilDisplayName.innerHTML = `<h3>${user.displayName}</h3>`;
-  divElem.querySelector('#emailUser').innerHTML += `<p>${user.email}</p>`;
   profilePhoto.innerHTML = `<img src="${user.photoURL ? user.photoURL : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP8HtjDCK27FdSoqHRqLGnZ1Fq8yhs7UvvMTKPqMTlvOGdYiHvFzUW07V8gKsM9_fbK8Y&usqp=CAU'}">`;
 
   return divElem;
