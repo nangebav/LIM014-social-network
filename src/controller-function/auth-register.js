@@ -10,16 +10,14 @@
 export const sendEmail = () => {
   const user = firebase.auth().currentUser;
 
-  user.sendEmailVerification()
-    .then(() => {
-      // Email sent.
-    }).catch((error) => {
-      // An error happened.
-      // console.log(error);
-      // console.log('no se envio el correo');
-      const errorMessage = error.message;
-      alert(`${errorMessage}`);
-    });
+  user.sendEmailVerification();
+  // .then(() => {
+  //   // Email sent.
+  // }).catch((error) => {
+  //   // An error happened.
+  //   console.log(error);
+  //   console.log('no se envio el correo');
+  // });
 };
 
 // Función para registrar a mi usuario

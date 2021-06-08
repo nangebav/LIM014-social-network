@@ -19,6 +19,15 @@
     .profile-Edit{
         margin: 12px;
     }
+
+    .buttonProfile{
+        color: #ffffff;
+        background: #FF826D;
+        padding: 10px;
+        border-radius: 12px;
+        border: none;
+        margin-top: 15px;
+    }
     
     .user-detail{
         background-color: #fff;
@@ -35,11 +44,14 @@
     /* Nombre del perfil */
 
     .user-detail h3{
-        margin:0px 0px 5px 0px;
         color: #000;
-        padding: 2%;
-        width: 160px;
+        width: 250px;
+        margin: 0;
+        font-size: 16px;
+        font-family:Arial, Helvetica, sans-serif;
+        text-align: center;
     }
+
     .user-detail p{
         font-size:14px;
     }
@@ -69,7 +81,7 @@
         height: 100%;
         width: 100%;
         border-radius: 50%;
-
+        border: solid 5px #fffcf8;
     }
 
     /* IMAGEN DE PERFIL PARA EDITAR*/
@@ -109,4 +121,5 @@
         width: 40px;
         height: 40px;
     }
+
 }

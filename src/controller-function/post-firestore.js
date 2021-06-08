@@ -11,7 +11,7 @@ export const commentDelete = (idContent) => firebase.firestore().collection('pos
     com.forEach((element) => {
       const comment = element.data();
       comment.id = element.id;
-      console.log(comment.id);
+      // console.log(comment.id);
     });
   });
 // export const editPost = (id) => firebase.firestore().collection('posts').doc(id).onSnapshot((data) => {

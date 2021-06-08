@@ -1,0 +1,61 @@
+@media screen and (min-width: 1050px){
+
+    #viewLog, #viewRegistration{
+        margin: 40px 80px 40px 80px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border-style: solid;
+        background-color: #fff;
+        border: #cfcfcf;
+        box-shadow: 0px 10px 10px -6px black;
+        height: 480px;
+        width: auto;
+        padding: 50px;
+    }
+
+    #frmLogIn, #frmRegistration{
+        width: 400px;
+        margin: 40px 60px 40px 60px;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+    }
+
+    #btnRegister, #btnLogIn {
+        color: #000000;
+        background: #FF826D;
+        border: 1px solid #ffffff;
+        padding: 10px;
+        border-radius: 12px;
+        width: 80px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    #frmLogIn h1, #frmRegistration h1{
+        font-size: 45px;
+    }
+
+    #frmLogIn h3, #frmRegistration h3{
+        font-size: 14px;
+    }
+    
+    #frmLogIn h3, h1{
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    #frmLogIn {
+        font-family: 'Lora', serif;
+        font-size: 12px;
+        text-align: center;
+        margin-bottom: 12px;
+    }
+
+    .image{
+        display: none;
+    }
+
+}

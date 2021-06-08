@@ -25,6 +25,7 @@ const mocksdk = new firebasemock.MockFirebaseSdk(
 mockauth.autoFlush(); //
 global.firebase = mocksdk;
 
+// Firebase Auth
 // Funciones del LogIn
 describe('signInFunction', () => {
   it('Debería poder iniciar sesión con email: lemeca5029@o3live.com y password:abcdefgh', () => {
@@ -71,9 +72,13 @@ describe('updateProfile', () => {
   });
 });
 
+// Firebase Firestore
+
 // Función para eliminar comentarios
 // describe('deletePost', () => {
 //   it('debería eliminar el post que se hizo', () => {
 //     expect(deletePost('tWJz2EbWDSBSjEX382zo')).toBe({ id: 9 });
 //   });
 // });
+
+// Firebase Storage
