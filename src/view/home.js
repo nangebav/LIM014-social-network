@@ -369,9 +369,6 @@ export default () => {
 
   // ---
 
-<<<<<<< HEAD
-  // console.log(getFile());
-=======
   // const getFile = () => {
   //  btnSelectFile.addEventListener('change', (e) => {
   //    const file = e.target.files[0].name;
@@ -382,7 +379,6 @@ export default () => {
   // console.log(fileE());
   // };
   // fileE();
->>>>>>> 371589cc91fbe40c765cc472bb1081b7541c93b3
 
   // EVENTO PARA ENVIAR DATOS DEL POST A FIREBASE
   postForm.addEventListener('submit', (e) => {
@@ -394,12 +390,6 @@ export default () => {
     const usernameInside = divElem.querySelector('#post-username');
     const description = postForm['post-description'];
     const date = new Date().toLocaleString('en-ES');
-<<<<<<< HEAD
-    // const file = getFile();
-    // console.log(file);
-=======
-
->>>>>>> 371589cc91fbe40c765cc472bb1081b7541c93b3
     const userPr = currentUser();
     const userId = userPr.uid;
     // const userId = firebase.auth().currentUser.uid;
@@ -436,16 +426,6 @@ export default () => {
     // ---PROBAR
     // Get a reference to the storage service, which is used to create
     // references in your storage bucket
-<<<<<<< HEAD
-    // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
-    // // Create a storage reference from our storage service
-    // const storageRef = storage.ref();
-    // const imageRef = storageRef.child(`images/${file}`);
-    // imageRef.put(file);
-    // postForm.reset();
-    // description.focus();
-=======
->>>>>>> 371589cc91fbe40c765cc472bb1081b7541c93b3
   });
   // --- PROBAR --
 

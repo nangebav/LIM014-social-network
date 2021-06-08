@@ -5,11 +5,6 @@ export const deletePost = (id) => firebase.firestore().collection('posts').doc(i
 
 // export const deletePostAndComments = (id) => firebase.firestore().collection('posts').doc(id).collection('comment')
 // .delete();
-<<<<<<< HEAD
-export const commentDelete = (idContent) => firebase.firestore().collection('posts').doc(idContent).collection('comment')
-  .onSnapshot((com) => {
-    com.forEach((element) => element);
-=======
 export const commentDelete = (idContent) => firebase.firestore().collection('posts').doc(idContent)
   .collection('comment')
   .onSnapshot((com) => {
@@ -18,7 +13,6 @@ export const commentDelete = (idContent) => firebase.firestore().collection('pos
       comment.id = element.id;
       console.log(comment.id);
     });
->>>>>>> 371589cc91fbe40c765cc472bb1081b7541c93b3
   });
 // export const editPost = (id) => firebase.firestore().collection('posts').doc(id).onSnapshot((data) => {
 //   console.log(data.docs);
