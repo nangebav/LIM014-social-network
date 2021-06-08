@@ -1,6 +1,98 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
 
+@media screen and (max-width: 600px){
+
+    /* {
+       background-color: #FF826D;
+   } */
+   header{
+    background-color:#6F1747;
+    display: flex;
+    /* justify-content: space-between; */
+    align-content: center;
+    align-items: center;
+   }
+
+   header > #btnSalir {
+       display: none;
+   }
+
+   .h1-style {
+    display: none;
+   }
+
+   #logo {
+    display: block;
+    /* justify-content: center; */
+    /* align-self: center; */
+    /* align-items: center; */
+    /* //justify-content: flex-end; */
+   }
+
+   #btnSalir {
+    /* justify-content: flex-end; */
+    background-color: #6F1747;
+    border: none;
+    margin-top: 10px;
+   }
+
+   .profile-badge {
+    display: flex;
+    border:1px solid #c1c1c1;
+    padding:5px;
+    position: relative;
+    font-family: Montserrat, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: none;
+    }
+
+    #post-form {
+    display: flex;
+    width: 100%;
+    }
+   
+    .postUserImage {
+    display: flex;
+    width: 20%;
+    }
+
+    footer {
+        display: block;
+        background-color: #6F1747;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #perfilImg {
+        margin-top: 5px;
+    }
+   }
+   
+   @media screen and (min-width: 600px) and (max-width: 1049px) {
+   
+     
+
+        footer {
+            display: block;
+            background-color: #6F1747;
+        }
+       
+       /* #imageLog{
+           margin: 0px;
+           display: none;
+           flex-direction: column;
+           color: #ffffff;
+           background-image: url(https://user-images.githubusercontent.com/77282012/117875257-92405f80-b267-11eb-8362-d4218c57ca17.png);
+           background-size: cover;
+           height: 100%;
+           width: 65%;
+       } */
+   
+       #imageRegister{
+           display: none;
+       }  
+    }
+
 @media screen and (min-width: 1050px){
 
     /* Perfil */
@@ -120,6 +212,14 @@
     #gif{
         width: 40px;
         height: 40px;
+    }
+
+    #logo{
+        display: none;
+    }
+
+    footer {
+        display: none;
     }
 
 }

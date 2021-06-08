@@ -13,9 +13,9 @@ export default () => {
   const viewHome = `
   <header>
   <h1 class="h1-style"><img src="https://user-images.githubusercontent.com/77282012/118549107-a4ffdc00-b720-11eb-9040-9de50dfb9369.png" alt="app logo">MIURART</h1>
-  <img src="https://user-images.githubusercontent.com/77282012/121115625-f872c080-c7da-11eb-9d55-53aba04edf15.png">
-  <button id="btnSalir">Salir</button>
-</header>
+  <img id="logo" src="https://user-images.githubusercontent.com/77282012/118549107-a4ffdc00-b720-11eb-9040-9de50dfb9369.png" alt="app logo">
+  <button id="btnSalir"><img src="https://user-images.githubusercontent.com/77282012/121115625-f872c080-c7da-11eb-9d55-53aba04edf15.png"></button>
+  </header>
     <section id="viewHome">
     <section id="contenedorMessage"></section>
     <section id="viewPerfil"></section>
@@ -37,12 +37,17 @@ export default () => {
                   <input type="file" accept="image/png, image/jpeg" value="upload" id="fileButton" />
                 </section>
                 <button id="btnPublicar">Publicar</button>
+                <input type="reset" value="Cancelar Post">
               </form>
             </section>
           <section id="postContainer"></section>
         </section>
       </section>
-    </section>`;
+    </section>
+    <footer>
+      <img id="perfilImg" src="https://user-images.githubusercontent.com/67443691/121232034-c2732200-c856-11eb-928c-01e838f3d792.png">
+      <button id="btnSalir"><img src="https://user-images.githubusercontent.com/77282012/121115625-f872c080-c7da-11eb-9d55-53aba04edf15.png"></button>
+    </footer>`;
 
   const divElem = document.createElement('div');
   divElem.innerHTML = viewHome;
@@ -132,6 +137,7 @@ export default () => {
 
         // console.log(post.userId === user.uid);
         if (post.userId === user.uid) {
+          console.log(user);
           editPost(post.id)
             .update({
               userPhoto: `${user.photoURL}`,
@@ -304,55 +310,63 @@ export default () => {
   // Get a reference to the storage service, which is used to create
   // references in your storage bucket
   // --ENVIA IMG A FIREBASE AL MOEMNTO DE DAR CLICK ABRIR
-  const preViewImg = () => {
+
+  const preViewImg = (e) => {
     // const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
     // Create a storage reference from our storage service
     // const storageRef = storage.ref();
     // const fileName;
-    btnSelectFile.addEventListener('change', (e) => {
-      // const fileName = e.target.files[0].name;
-      const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
 
-      reader.onload = function () {
-        const preview = divElem.querySelector('#imgpreview');
-        const image = document.createElement('img');
+    // btnSelectFile.addEventListener('change', (e) => {
+    // const fileName = e.target.files[0].name;
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
 
-        image.src = reader.result;
+    reader.onload = function () {
+      const preview = divElem.querySelector('#imgpreview');
+      const image = document.createElement('img');
 
-        preview.innerHTML = '';
-        preview.append(image);
+      image.src = reader.result;
 
-        // return fileName;
-      };
+      preview.innerHTML = '';
+      preview.append(image);
+
+      // return fileName;
+      // };
       // console.log(file);
       // const imgpv =
       // divElem.querySelector('#imgpreview').innerHTML = imgpv;
       // const imageRef = storageRef.child(`images/${file.name}`);
       // imageRef.put(file);
-    });
+    };
   };
-  preViewImg();
 
-  // const getFileName = () => {
-  //   btnSelectFile.addEventListener('change', (e) => {
-  //     const fileName = e.target.files[0].name;
-  //   });
-  // }
+  const getFile = (e) => {
+    const file = e.target.files[0].name;
+    console.log(file);
+    return file;
+  };
 
+  btnSelectFile.addEventListener('change', (e) => {
+    preViewImg(e);
+    getFile(e);
+  });
   // uploadImg();
 
   // Get a reference to the storage service, which is used to
   // create references in your storage bucket
-  // var storage = firebase.app().storage("gs://miurart---red-social.appspot.com");
-  // // Create a storage reference from our storage service
-  // var storageRef = storage.ref();
-  // btnSelectFile.addEventListener('change', (e) => {
-  //  const file = e.target.files[0];
-  //   //console.log(file);
-  //   const imageRef = storageRef.child(`images/${file.name}`);
-  //   imageRef.put(file);
-  // });
+  // const postImage = (e) => {
+  //   const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
+  //   // Create a storage reference from our storage service
+  //   const storageRef = storage.ref();
+  //   btnSelectFile.addEventListener('change', (e) => {
+  //     const file = e.target.files[0];
+  //     console.log(file);
+  //     const imageRef = storageRef.child(`images/${file.name}`);
+  //     imageRef.put(file);
+  //   // });
+  //   });
+  // };
 
   // ---
 
@@ -370,10 +384,13 @@ export default () => {
   // EVENTO PARA ENVIAR DATOS DEL POST A FIREBASE
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    // const imageFilbtnSelectFile.file
+    // const img = preview.querySelector('img');
+    // const file = img.src;
+    // console.log(file);
     const usernameInside = divElem.querySelector('#post-username');
     const description = postForm['post-description'];
     const date = new Date().toLocaleString('en-ES');
-
     const userPr = currentUser();
     const userId = userPr.uid;
     // const userId = firebase.auth().currentUser.uid;
@@ -406,6 +423,7 @@ export default () => {
     // console.log(file);
     // savePost(usernameInside.value, description.value, date, userId, userPhoto, likes);
 
+    // postImage();
     // ---PROBAR
     // Get a reference to the storage service, which is used to create
     // references in your storage bucket

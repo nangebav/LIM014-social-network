@@ -23,10 +23,10 @@ export const sendEmail = () => {
 // Función para registrar a mi usuario
 export const registrationFunction = (email, password) => firebase.auth()
   .createUserWithEmailAndPassword(email, password)
-  .then((userCredential) => {
+  .then(() => { // (userCredential)
     // Signed in
     sendEmail();
-    console.log(userCredential);
+    // console.log(userCredential);
     // var user = userCredential.user;
     // llamar la funcion para settear el usuario
   })
@@ -44,6 +44,9 @@ export const updateProfile = (nombre, apellido) => {
   user.updateProfile({
     displayName: `${nombre} ${apellido}`,
     // photoURL: 'https://example.com/jane-q-user/profile.jpg',
+  }).catch((error) => {
+    const errorMessage = error.message;
+    alert(`${errorMessage}`);
   });
   // .then(() => {
   // // Update successful.
