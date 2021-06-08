@@ -131,6 +131,7 @@ export default () => {
 
         // console.log(post.userId === user.uid);
         if (post.userId === user.uid) {
+          console.log(user);
           editPost(post.id)
             .update({
               userPhoto: `${user.photoURL}`,

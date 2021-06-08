@@ -113,8 +113,8 @@ export default () => {
                   photoURL: url,
                 });
                 // window.location.reload();
-                window.location.hash = '#/home';
-                location.reload();
+                // window.location.hash = '#/home';
+                window.location.reload();
               });
             });
         } if (editName) {
