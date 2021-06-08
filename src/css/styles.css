@@ -274,9 +274,16 @@ input[type=checkbox] {
     #imageRegister{
         display: none;
     }
+
+
  }
 
  @media screen and (min-width: 1050px){
+
+    #btnSalir{
+        background-color: transparent;
+        border: none;
+    }
     
     /* #container {
         position: relative;
