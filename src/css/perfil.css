@@ -12,6 +12,7 @@
     /* justify-content: space-between; */
     align-content: center;
     align-items: center;
+    max-width: 100%;
    }
 
    header > #btnSalir {
@@ -43,17 +44,34 @@
     padding:5px;
     position: relative;
     font-family: Montserrat, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    display: none;
+    /* display: block; */
     }
 
     #post-form {
-    display: flex;
-    width: 100%;
+    display: none;
     }
    
     .postUserImage {
-    display: flex;
-    width: 20%;
+    display: none;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .profile-badge {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .post-card{
+        display: none;
+    }
+
+    .profile > img{
+        width: 50%;
     }
 
     footer {
