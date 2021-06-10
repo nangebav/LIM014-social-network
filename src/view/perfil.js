@@ -111,6 +111,7 @@ export default () => {
           user.updateProfile({
             displayName: `${editName.value}`,
           });
+          // window.location.reload();
         }
       }
     });

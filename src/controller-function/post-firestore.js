@@ -28,7 +28,8 @@ export const editPost = (id) => firebase.firestore().collection('posts').doc(id)
 // .update({
 //   description: 'prueba con update 2',
 // });
-
+export const editComment = (id, idComment) => firebase.firestore().collection('posts').doc(id).collection('comment')
+  .doc(idComment);
 // ---- actualizar likes
 export const updateLikes = (postid, likes) => firebase.firestore().collection('posts').doc(postid).update({ likes });
 
