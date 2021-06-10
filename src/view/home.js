@@ -32,12 +32,15 @@ export default () => {
                   <textarea id="post-description" name="post-form" cols="50" rows="3" class="form-control" placeholder="¿Qué estás pensando?"></textarea>
                   <div id="imgpreview"></div>
                   </div>
+                  <label for="fileButton">
+                    <img src="https://user-images.githubusercontent.com/77282012/121268708-11837c00-c884-11eb-92dc-b6e6bfa95ce1.png">
+                  </label>
+                  <input hidden type="file" accept="image/png, image/jpeg" value="upload" id="fileButton" />
                 </section>
                 <section>
-                  <input type="file" accept="image/png, image/jpeg" value="upload" id="fileButton" />
+                  <button id="btnPublicar">Publicar ✔ </button>
+                  <input type="reset" value="Cancelar ✖" id="cancelPost">
                 </section>
-                <button id="btnPublicar">Publicar</button>
-                <input type="reset" value="Cancelar Post">
               </form>
             </section>
           <section id="postContainer"></section>
@@ -319,6 +322,7 @@ export default () => {
 
     // btnSelectFile.addEventListener('change', (e) => {
     // const fileName = e.target.files[0].name;
+
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
 
@@ -330,26 +334,26 @@ export default () => {
 
       preview.innerHTML = '';
       preview.append(image);
-
-      // return fileName;
-      // };
-      // console.log(file);
-      // const imgpv =
-      // divElem.querySelector('#imgpreview').innerHTML = imgpv;
-      // const imageRef = storageRef.child(`images/${file.name}`);
-      // imageRef.put(file);
     };
+
+    // return fileName;
+    // };
+    // console.log(file);
+    // const imgpv =
+    // divElem.querySelector('#imgpreview').innerHTML = imgpv;
+    // const imageRef = storageRef.child(`images/${file.name}`);
+    // imageRef.put(file);
   };
 
-  const getFile = (e) => {
-    const file = e.target.files[0].name;
-    console.log(file);
-    return file;
-  };
+  //  const getFile = (e) => {
+  //    const file = e.target.files[0].name;
+  //    console.log(file);
+  //    return file;
+  //  };
 
   btnSelectFile.addEventListener('change', (e) => {
     preViewImg(e);
-    getFile(e);
+  //  getFile(e);
   });
   // uploadImg();
 
@@ -380,6 +384,11 @@ export default () => {
   // console.log(fileE());
   // };
   // fileE();
+
+  divElem.querySelector('#cancelPost').addEventListener('click', () => {
+    btnSelectFile.value = null;
+    divElem.querySelector('#imgpreview').innerHTML = '';
+  });
 
   // EVENTO PARA ENVIAR DATOS DEL POST A FIREBASE
   postForm.addEventListener('submit', (e) => {

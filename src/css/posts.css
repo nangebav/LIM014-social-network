@@ -10,16 +10,16 @@
         margin: 7px;
     }
     .photoForm img{
-        height: 70px;
-        width: 70px;
+        height: 60px;
+        width: 60px;
         border-radius: 50%;
         box-shadow: 0px 0px 5px 0px #c1c1c1;
     }
 
-    .postUser, .commentPost{
+    .postUser, .commentPostUser{
         display: flex;
-        flex-direction: row; 
-        margin-bottom: 14px;
+        flex-direction: row;
+        margin: 4px;
     }
 
     .postUserImage, .commentUserImage{
@@ -28,10 +28,10 @@
         border-radius: 50%;
     }
 
+
     .commentButton img{
-        height:80px;
-        width:80px;
-        margin: 7px;
+        height:40px;
+        width:40px;
     }
     /* FOTO DE PERFIL */
 
@@ -45,8 +45,8 @@
         flex-direction: column;
         align-items: center;
         margin: 0;
-        padding: 5px;
-        width: 550px;
+        padding: 3px;
+        width: 630px;
         border: solid rgb(223, 223, 223) 3px;
         border-radius: 20px;
     }
@@ -66,7 +66,7 @@
     }
 
     .photoPublic{
-        width: 500px;
+        height: 250px;
     }
 
     .card {
@@ -110,16 +110,17 @@
     }
 
     .commentContainer {
+        display: flex;
+        flex-direction: row;
         border: solid rgb(223, 223, 223);
         margin: 12px;
-        padding: 10px;
+        padding: 7px;
         border-radius: 21px;
-        flex-direction: column;
-        align-items:flex-start;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     }
 
     .photoComment {
+        margin: 4px;
         border-radius: 50%;
         width: 40px;
         height: 40px;
@@ -136,6 +137,7 @@
     .commentPost{
         background-color: transparent;
         border: none;
+        margin: 4px;
     }
 
     .boxComment{
@@ -145,4 +147,30 @@
         border-radius: 21px;
     }
 
+    .body-form{
+        display: flex;
+        flex-direction: row;
+    }
+
+    #cancelPost, #btnPublicar{
+        color: #ffffff;
+        background: #6F1747;
+        padding: 10px;
+        border-radius: 12px;
+        border: #6F1747 1px solid;
+        margin: 10px;
+    }
+
+    #cancelPost:hover, #btnPublicar:hover {
+        background: transparent;
+        color:  #6F1747;
+        border: #6F1747 1px solid;
+        transition: all 0.5s ease;
+    }
+
+    .like{
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: transparent;
+        border: none;
+    }
 }
