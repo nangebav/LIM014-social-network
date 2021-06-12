@@ -49,7 +49,7 @@ export default () => {
     </section>
     <footer>
       <img id="perfilImg" src="https://user-images.githubusercontent.com/67443691/121232034-c2732200-c856-11eb-928c-01e838f3d792.png">
-      <button id="btnSalir"><img src="https://user-images.githubusercontent.com/77282012/121115625-f872c080-c7da-11eb-9d55-53aba04edf15.png"></button>
+      <button id="btnSalirM"><img src="https://user-images.githubusercontent.com/77282012/121115625-f872c080-c7da-11eb-9d55-53aba04edf15.png"></button>
     </footer>`;
 
   const divElem = document.createElement('div');
@@ -58,13 +58,19 @@ export default () => {
   // CONSTANTES DE ELEMENTOS HTML
   const postForm = divElem.querySelector('#post-form');
   const btnSalir = divElem.querySelector('#btnSalir');
+  const btnSalirM = divElem.querySelector('#btnSalirM');
   const postContainer = divElem.querySelector('#postContainer');
   const username = divElem.querySelector('#post-username');
   const viewPerfil = divElem.querySelector('#viewPerfil');
   const btnSelectFile = divElem.querySelector('#fileButton');
   const photoForm = divElem.querySelector('.photoForm');
+  const btnPerfil = divElem.querySelector('#perfilImg');
   // const userP = currentUser();
 
+  btnPerfil.addEventListener('click', () => {
+    document.getElementById('#viewPerfil').classList.add('.viewPerfil-btnonclick');
+    console.log('ocultar perfil');
+  });
   // FUNCION PARA OBTENER EL NOMBRE DEL USUARIO
   const getProfile = () => {
     const user = currentUser();
@@ -140,7 +146,6 @@ export default () => {
 
         // console.log(post.userId === user.uid);
         if (post.userId === user.uid) {
-          console.log(user);
           editPost(post.id)
             .update({
               userPhoto: `${user.photoURL}`,
@@ -441,6 +446,11 @@ export default () => {
 
   // FUNCION PARA CERRAR SESION
   btnSalir.addEventListener('click', () => {
+    document.querySelector('#contenedorMessage').innerHTML = '';
+    document.querySelector('#contenedorMessage').appendChild(MessageSignOut());
+  });
+
+  btnSalirM.addEventListener('click', () => {
     document.querySelector('#contenedorMessage').innerHTML = '';
     document.querySelector('#contenedorMessage').appendChild(MessageSignOut());
   });

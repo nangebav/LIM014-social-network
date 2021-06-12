@@ -5,7 +5,12 @@ export const deletePost = (id) => firebase.firestore().collection('posts').doc(i
 
 // export const deletePostAndComments = (id) => firebase.firestore().collection('posts').doc(id).collection('comment')
 // .delete();
-export const commentDelete = (idContent) => firebase.firestore().collection('posts').doc(idContent)
+
+export const deleteComment = (id, idComment) => firebase.firestore().collection('posts').doc(id).collection('comment')
+  .doc(idComment)
+  .delete();
+
+export const commentsDelete = (idContent) => firebase.firestore().collection('posts').doc(idContent)
   .collection('comment')
   .onSnapshot((com) => {
     com.forEach((element) => {
