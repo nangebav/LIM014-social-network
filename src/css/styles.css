@@ -542,6 +542,6 @@ input[type=checkbox] {
    }
 
    #imgpreview > img {
-       width: 50%;
+       height: 200px;
    }
 }

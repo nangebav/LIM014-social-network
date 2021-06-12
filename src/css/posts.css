@@ -173,4 +173,9 @@
         background-color: transparent;
         border: none;
     }
+
+    .likeAndComment{
+        position: relative;
+        left: 80%;
+    }
 }

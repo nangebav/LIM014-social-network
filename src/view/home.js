@@ -116,7 +116,7 @@ export default () => {
             </div>
             ${(post.photo) ? `<img class="photoPublic" src="${post.photo}">` : ''}
           </div>
-          <div>
+          <div class="likeAndComment">
             <button class="like" data-id="${post.id}"> ❤ </button><label>${post.likes.length}</label>
             <button class="commentButton" data-id="${post.id}"> comentarios </button><label class="conterComment"></label>
           </div>
@@ -421,7 +421,7 @@ export default () => {
             savePost(usernameInside.value, description.value, date, userId, userPhoto, likes, url);
           });
         });
-      } if (description.value) {
+      } else if (description.value && !inputFile.length >= 1) {
         savePost(usernameInside.value, description.value, date, userId, userPhoto, likes, '');
       }
     }
