@@ -111,9 +111,8 @@ export default () => {
                 <h3 class="h5" name="${post.name}">${post.name}</h3>
               </section>
             </section>
-            <div class="editPublicacion" disabled>
-              <p id="descriptionEdit">${post.description}</p>   
-              <section id="photoPost"></section>
+            <div class="textInsidePost" disabled>
+              <p id="descriptionEdit">${post.description}</p>  
             </div>
             <div hidden class="editNote">
               <textarea class="note" name="comment">${post.description}</textarea>
@@ -124,7 +123,7 @@ export default () => {
           </div>
           <div class="likeAndComment">
             <button class="like" data-id="${post.id}"> ❤ </button><label>${post.likes.length}</label>
-            <button class="commentButton" data-id="${post.id}"><img src="https://user-images.githubusercontent.com/77282012/121792623-1cf4e100-cbbd-11eb-93e3-9005c0f19485.png"> Comentarios </button><label class="conterComment"></label>
+            <button class="commentButton" data-id="${post.id}"><img src="https://user-images.githubusercontent.com/77282012/121792623-1cf4e100-cbbd-11eb-93e3-9005c0f19485.png"> Comentarios </button>
           </div>
           <div hidden class="userComment" data-id="${post.id}">
             <form class="commentContainer" data-id="${post.id}">
@@ -215,18 +214,18 @@ export default () => {
         btnsEdit.forEach((btn) => {
           btn.addEventListener('click', (e) => {
             // console.log();
-            const editPublicacion = e.target.parentElement.parentElement.querySelector('.editPublicacion');
+            const textInsidePost = e.target.parentElement.parentElement.querySelector('.textInsidePost');
             const editNote = e.target.parentElement.parentElement.querySelector('.editNote');
             editNote.removeAttribute('hidden');
-            editPublicacion.setAttribute('hidden', true);
-            // editPublicacion.innerHTML = `
+            textInsidePost.setAttribute('hidden', true);
+            // textInsidePost.innerHTML = `
             // <textarea class="note" name="comment">${post.description}</textarea>
             // <button class="aceptEdit" >Aceptar</button>`;
-            // const aceptEdit = editPublicacion.querySelector('.aceptEdit');
+            // const aceptEdit = textInsidePost.querySelector('.aceptEdit');
             const aceptEdit = editNote.querySelector('.aceptEdit');
             aceptEdit.addEventListener('click', (eTwo) => {
               const editText = eTwo.target.parentElement.querySelector('.note');
-              editPublicacion.removeAttribute('hidden');
+              textInsidePost.removeAttribute('hidden');
               editNote.setAttribute('hidden', true);
               editPost(e.target.dataset.id)
                 .update({
@@ -236,7 +235,7 @@ export default () => {
 
             const cancelEdit = editNote.querySelector('.cancelEdit');
             cancelEdit.addEventListener('click', () => {
-              editPublicacion.removeAttribute('hidden');
+              textInsidePost.removeAttribute('hidden');
               editNote.setAttribute('hidden', true);
             });
 
@@ -250,44 +249,6 @@ export default () => {
     }
   };
 
-  // Create a reference to the file we want to download
-  const photoPost = divElem.querySelector('#photoPost');
-  const getImagePosted = () => {
-    const storageRef = firebase.storage().ref();
-
-    const starsRef = storageRef.child('images/images.jpeg');
-    // console.log(starsRef);
-    // Get the download URL
-    starsRef.getDownloadURL().then((url) => {
-      // Insert url into an <img> tag to "download"
-      // console.log(url);
-      const imgPrueba = `<img src="${url}">`;
-      photoPost.innerHTML = imgPrueba;
-    }).catch((error) => {
-      // A full list of error codes is available at
-      // https://firebase.google.com/docs/storage/web/handle-errors
-      switch (error.code) {
-        case 'storage/object-not-found':
-          // File doesn't exist
-          break;
-
-        case 'storage/unauthorized':
-          // User doesn't have permission to access the object
-          break;
-
-        case 'storage/canceled':
-          // User canceled the upload
-          break;
-
-        case 'storage/unknown':
-          // Unknown error occurred, inspect the server response
-          break;
-
-        default:
-      }
-    });
-  };
-
   // FUNCION PARA TRAER DE FIRESTORE LOS DOC CON LA INFO DE POSTS
   // firebase.auth().onAuthStateChanged((user) => {
   const post = (user) => {
@@ -298,7 +259,6 @@ export default () => {
       firebase.firestore().collection('posts').orderBy('date', 'desc')
         .onSnapshot((data) => {
           setupPosts(data.docs);
-          getImagePosted();
         });
     } else {
       console.log('No estas Logueado');
@@ -418,11 +378,11 @@ export default () => {
         const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
         // Create a storage reference from our storage service
         const storageRef = storage.ref();
-        const textPost = description.value;
+        // const textPost = description.value;
         const imageRef = storageRef.child(`images/${file.name}`);
         imageRef.put(file).then((snapshot) => {
           snapshot.ref.getDownloadURL().then((url) => {
-            savePost(usernameInside.value, textPost, date, userId, userPhoto, likes, url);
+            savePost(usernameInside.value, description.value, date, userId, userPhoto, likes, url);
           });
         });
       } else {

@@ -6,7 +6,6 @@ export const commentView = (collection, post, user, contenedor) => {
     commentPost.id = com.id;
     const viewComment = document.createElement('div');
     viewComment.innerHTML = `
-    <div class="messageValid"></div>
     <div class="boxComment">
     ${(commentPost.userId === user.uid) ? `
     <div class="btns-edit-delete" name="${commentPost.userId}" data-id-post="${post.id}">
