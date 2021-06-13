@@ -14,17 +14,15 @@ export default () => {
       <div class="profile-pic"></div>
       <div class="user-detail text-center">
         <div class="profileDisplayName"></div>
-        <div id="Description">
-          </div>
+        <div id="Description"></div>
           <p> Usuari@ de MiurArt </p>
           <div id="cargando"></div>
-          <button id="editProfile" class="buttonProfile"> ✎ Editar Perfil </button>
+          <button id="editProfile" class="buttonProfile">✎ Editar Perfil</button>
         </div>
       </div>
     </div>
   </div>
-</div>
- `;
+</div>`;
 
   const divElem = document.createElement('div');
   divElem.innerHTML = viewPerfil;

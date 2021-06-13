@@ -49,7 +49,7 @@ export default () => {
     </section>
     <footer>
       <img id="perfilImg" src="https://user-images.githubusercontent.com/67443691/121232034-c2732200-c856-11eb-928c-01e838f3d792.png">
-      <button id="btnSalir"><img src="https://user-images.githubusercontent.com/77282012/121115625-f872c080-c7da-11eb-9d55-53aba04edf15.png"></button>
+      <button id="btnSalirM"><img src="https://user-images.githubusercontent.com/77282012/121115625-f872c080-c7da-11eb-9d55-53aba04edf15.png"></button>
     </footer>`;
 
   const divElem = document.createElement('div');
@@ -58,13 +58,19 @@ export default () => {
   // CONSTANTES DE ELEMENTOS HTML
   const postForm = divElem.querySelector('#post-form');
   const btnSalir = divElem.querySelector('#btnSalir');
+  const btnSalirM = divElem.querySelector('#btnSalirM');
   const postContainer = divElem.querySelector('#postContainer');
   const username = divElem.querySelector('#post-username');
   const viewPerfil = divElem.querySelector('#viewPerfil');
   const btnSelectFile = divElem.querySelector('#fileButton');
   const photoForm = divElem.querySelector('.photoForm');
+  const btnPerfil = divElem.querySelector('#perfilImg');
   // const userP = currentUser();
 
+  btnPerfil.addEventListener('click', () => {
+    document.getElementById('#viewPerfil').classList.add('.viewPerfil-btnonclick');
+    console.log('ocultar perfil');
+  });
   // FUNCION PARA OBTENER EL NOMBRE DEL USUARIO
   const getProfile = () => {
     const user = currentUser();
@@ -116,9 +122,9 @@ export default () => {
             </div>
             ${(post.photo) ? `<img class="photoPublic" src="${post.photo}">` : ''}
           </div>
-          <div>
+          <div class="likeAndComment">
             <button class="like" data-id="${post.id}"> ❤ </button><label>${post.likes.length}</label>
-            <button class="commentButton" data-id="${post.id}"> comentarios </button><label class="conterComment"></label>
+            <button class="commentButton" data-id="${post.id}"><img src="https://user-images.githubusercontent.com/77282012/121792623-1cf4e100-cbbd-11eb-93e3-9005c0f19485.png"> Comentarios </button><label class="conterComment"></label>
           </div>
           <div hidden class="userComment" data-id="${post.id}">
             <form class="commentContainer" data-id="${post.id}">
@@ -439,6 +445,11 @@ export default () => {
 
   // FUNCION PARA CERRAR SESION
   btnSalir.addEventListener('click', () => {
+    document.querySelector('#contenedorMessage').innerHTML = '';
+    document.querySelector('#contenedorMessage').appendChild(MessageSignOut());
+  });
+
+  btnSalirM.addEventListener('click', () => {
     document.querySelector('#contenedorMessage').innerHTML = '';
     document.querySelector('#contenedorMessage').appendChild(MessageSignOut());
   });

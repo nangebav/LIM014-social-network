@@ -28,10 +28,28 @@
         border-radius: 50%;
     }
 
+    .likeAndComment{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .commentButton{
+        margin: 0px;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        align-items: center;
+        left: 70%;
+        height: 40px;
+        padding: 4px;
+        color: #ffffff;
+        background: #6F1747;
+        border-radius: 15px;
+    }
 
     .commentButton img{
-        height:40px;
-        width:40px;
+        width: 25px;
+        padding-right: 5px;
     }
     /* FOTO DE PERFIL */
 
@@ -110,6 +128,7 @@
     }
 
     .commentContainer {
+        width: 500px;
         display: flex;
         flex-direction: row;
         border: solid rgb(223, 223, 223);
@@ -174,8 +193,4 @@
         border: none;
     }
 
-    .likeAndComment{
-        position: relative;
-        left: 80%;
-    }
 }
