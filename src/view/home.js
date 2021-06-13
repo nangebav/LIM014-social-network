@@ -116,7 +116,7 @@ export default () => {
             </div>
             ${(post.photo) ? `<img class="photoPublic" src="${post.photo}">` : ''}
           </div>
-          <div class="likeAndComment">
+          <div>
             <button class="like" data-id="${post.id}"> ❤ </button><label>${post.likes.length}</label>
             <button class="commentButton" data-id="${post.id}"> comentarios </button><label class="conterComment"></label>
           </div>
@@ -140,14 +140,12 @@ export default () => {
 
         // console.log(post.userId === user.uid);
         if (post.userId === user.uid) {
-          console.log(user);
           editPost(post.id)
             .update({
               userPhoto: `${user.photoURL}`,
               name: `${user.displayName}`,
             });
         }
-        console.log(user);
 
         // Mostrar la vista para crear los comentarios
         btnsComment.addEventListener('click', () => {
@@ -398,30 +396,30 @@ export default () => {
     // const file = img.src;
     // console.log(file);
     const usernameInside = divElem.querySelector('#post-username');
-    const description = postForm['post-description'];
     const date = new Date().toLocaleString('en-ES');
     const userPr = currentUser();
     const userId = userPr.uid;
+    const description = postForm['post-description'];
     // const userId = firebase.auth().currentUser.uid;
     // const userId = currentUserId;
     const userPhoto = userPr.photoURL;
     const likes = [];
 
     const inputFile = btnSelectFile.files;
-    console.log(description.length);
     if (description.value || inputFile.length >= 1) {
       if (inputFile.length >= 1) {
         const file = inputFile[0];
         const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
         // Create a storage reference from our storage service
         const storageRef = storage.ref();
+        const textPost = description.value;
         const imageRef = storageRef.child(`images/${file.name}`);
         imageRef.put(file).then((snapshot) => {
           snapshot.ref.getDownloadURL().then((url) => {
-            savePost(usernameInside.value, description.value, date, userId, userPhoto, likes, url);
+            savePost(usernameInside.value, textPost, date, userId, userPhoto, likes, url);
           });
         });
-      } else if (description.value && !inputFile.length >= 1) {
+      } else {
         savePost(usernameInside.value, description.value, date, userId, userPhoto, likes, '');
       }
     }
