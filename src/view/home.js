@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import {
   editPost, addComment, savePost, getComment, currentUser, updateLikes,
 } from '../controller-function/post-firestore.js';

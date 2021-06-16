@@ -43,7 +43,7 @@
         font-size: 14px;
     }
     
-    #frmLogIn h3, h1{
+    #frmLogIn > h3, #frmLogIn > h1{
         font-family: 'Montserrat', sans-serif;
     }
 

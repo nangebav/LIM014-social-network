@@ -37,27 +37,12 @@
     margin: auto;
    }
 
-   .profile {
-    margin-top: 10%;
-    margin-bottom: 10%;
-    width: 100%;
-   }
-
    #btnSalirM {
     /* justify-content: flex-end; */
     background-color: #6F1747;
     border: none;
     margin-top: 10px;
    }
-
-   .profile-badge {
-    display: flex;
-    border:1px solid #c1c1c1;
-    padding:5px;
-    position: relative;
-    font-family: Montserrat, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    /* display: block; */
-    }
    
     .postUserImage {
     display: none;
@@ -81,6 +66,9 @@
 
     .profile {
         height: auto;
+        margin-top: 10%;
+        margin-bottom: 10%;
+        width: 100%;
     }
 
     /* .profile-Edit, .profileEditPhoto{
@@ -93,11 +81,6 @@
 
     #camera {
         width: 50px;
-        border-radius: 50%;
-    }
-
-
-    #srcImage {
         border-radius: 50%;
     }
 
@@ -117,7 +100,7 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        top: 100px;
+        top: 220px;
         z-index: 1001;
     }
 
@@ -128,6 +111,7 @@
     #srcImage{
         width: 120px;
         height: 120px;
+        border-radius: 50%;
     }
 
     .buttonProfile {
@@ -150,16 +134,13 @@
     .user-detail > #editProfile {
         /* margin: auto; */
         /* position: relative; */
-        margin: auto;
         align-items: center;
+        /* margin-left: 80%; */
+        margin: auto;
         justify-content: center;
 
     }
 
-    #editProfile {
-        align-items: center;
-        margin-left: 80%;
-    }
 
     footer {
         /* display: block; */
@@ -218,6 +199,23 @@
         border-radius: 16px;
     }
 
+    .commentButton {
+        margin: 0px;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        align-items: center;
+        height: 40px;
+        padding: 4px;
+        color: #ffffff;
+        background: #6F1747;
+        border-radius: 15px;
+    }
+
+    .commentButton img{
+    width: 20px;
+    }
+
     #imgpreview img{
         width: 120px;
         margin-left: 40px;
@@ -270,22 +268,6 @@
         border-radius: 50%;
     }
 
-    .commentButton {
-        margin: 0px;
-        display: flex;
-        flex-direction: row;
-        position: relative;
-        align-items: center;
-        height: 40px;
-        padding: 4px;
-        color: #ffffff;
-        background: #6F1747;
-        border-radius: 15px;
-    }
-
-    .commentButton img{
-    width: 20px;
-    }
     
    }
    
@@ -325,6 +307,8 @@
 
     /* Perfil */
     .profile-badge{
+        display: flex;
+        /* display: block; */
         border:1px solid #c1c1c1;
         padding:5px;
         position: relative;
