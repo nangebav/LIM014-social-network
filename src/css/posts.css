@@ -50,6 +50,7 @@
     .commentButton img{
         width: 25px;
         padding-right: 5px;
+        margin: 4px ;
     }
     /* FOTO DE PERFIL */
 
@@ -74,6 +75,8 @@
         border-radius: 16px;
         padding: 8px;
         margin: 5px;
+        height: 78px;
+        width: 408px;
     }
     .post-card{
         width: 600px;
