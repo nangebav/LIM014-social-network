@@ -2,6 +2,7 @@
 import {
   editPost, addComment, savePost, getComment, currentUser, updateLikes,
 } from '../controller-function/post-firestore.js';
+import { uploadFile } from '../controller-function/storage.js';
 import { commentView } from './comentarios.js';
 import MessageSignOut from './box_message_sign_out.js';
 import MessageDelete from './box_message_delete.js';
@@ -71,6 +72,7 @@ export default () => {
   // });
 
   // FUNCION PARA CREAR HTML PARA MOSTRAR LOS POSTS EN PANTALLA
+
   const setupPosts = (data) => {
     if (data.length) {
       postContainer.innerHTML = '';
@@ -289,12 +291,8 @@ export default () => {
     if (description.value || inputFile.length >= 1) {
       if (inputFile.length >= 1) {
         const file = inputFile[0];
-        const storage = firebase.app().storage('gs://miurart---red-social.appspot.com');
-        // Create a storage reference from our storage service
-        const storageRef = storage.ref();
         const textPost = description.value;
-        const imageRef = storageRef.child(`images/${file.name}`);
-        imageRef.put(file).then((snapshot) => {
+        uploadFile(`$images/${file.name}`, file).then((snapshot) => {
           snapshot.ref.getDownloadURL().then((url) => {
             savePost(usernameInside.value, textPost, date, userId, userPhoto, likes, url);
           });

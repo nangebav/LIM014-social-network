@@ -44,10 +44,11 @@ export const updateProfile = (nombre, apellido) => {
   user.updateProfile({
     displayName: `${nombre} ${apellido}`,
     // photoURL: 'https://example.com/jane-q-user/profile.jpg',
-  }).catch((error) => {
-    const errorMessage = error.message;
-    alert(`${errorMessage}`);
   });
+  // .catch((error) => {
+  //  const errorMessage = error.message;
+  //  alert(`${errorMessage}`);
+  // });
   // .then(() => {
   // // Update successful.
   // //  console.log('usuario creado');

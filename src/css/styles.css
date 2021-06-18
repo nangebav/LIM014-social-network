@@ -141,7 +141,7 @@ input[type=checkbox] {
     color: #000000;
     background-color: #fff;
     border: solid rgb(235, 235, 235);
-    position: absolute;
+    position: fixed;
     left: 45%;
     transform: translateX(-50%);
     top: 50%;

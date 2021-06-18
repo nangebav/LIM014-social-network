@@ -1,1 +1,1 @@
-// export const uploadFile = (path, file) => firebase.app().storage().ref(path)
+export const uploadFile = (fileEnv, file) => firebase.storage().ref().child(fileEnv).put(file);

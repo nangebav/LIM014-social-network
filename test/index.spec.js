@@ -53,7 +53,11 @@ describe('registrationFunction', () => {
 
 describe('sendEmail', () => {
   it('debería ser una función', () => {
-    expect(typeof sendEmail).toBe('function');
+    const mockSendEmail = jest.fn();
+    firebase.auth().currentUser.sendEmailVerification = mockSendEmail;
+    sendEmail();
+    expect(mockSendEmail).toHaveBeenCalled();
+    expect(mockSendEmail.mock.calls).toHaveLength(1);
   });
 });
 
@@ -68,7 +72,12 @@ describe('signOut', () => {
 // Funcion para guardar el nombre del usuario
 describe('updateProfile', () => {
   it('debería poder guardar mi nombre y apellido', () => {
-    expect(updateProfile('Sutana', 'Fulanita')).toBe();
+    const user = firebase.auth().currentUser;
+    registrationFunction('lemeca5029@o3live.com', 'abcdefgh')
+      .then(() => {
+        updateProfile('Sutana', 'Fulanita');
+        expect(user.displayName).toBe('Sutana Fulanita');
+      });
   });
 });
 
