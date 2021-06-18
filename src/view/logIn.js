@@ -6,7 +6,7 @@ export default () => {
     <section class="messageLogIn">
       <h2 id="textLogIn">Bienvenidx a la comunidad de muralistas independientes más increíble del mundo</h2>
       <img src="https://user-images.githubusercontent.com/77282012/118579586-fa091580-b753-11eb-9213-69ada53be066.png" class="image">
-      </section>
+    </section>
     <form id="frmLogIn">
       <h1>MiurArt</h1>
       <p id="errorMessage"></p>

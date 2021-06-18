@@ -3,19 +3,55 @@
 
 @media screen and (min-width: 1050px){
 
-    /* FOTO DE PERFIL */
+    /* FOTO DE PERFIL PARA LOS POSTS */
     .photoForm{
         height:80px;
         width:80px;
         margin: 7px;
     }
     .photoForm img{
-        height: 100%;
-        width: 100%;
+        height: 60px;
+        width: 60px;
         border-radius: 50%;
         box-shadow: 0px 0px 5px 0px #c1c1c1;
     }
 
+    .postUser, .commentPostUser{
+        display: flex;
+        flex-direction: row;
+        margin: 4px;
+    }
+
+    .postUserImage, .commentUserImage{
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+    }
+
+    .likeAndComment{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .commentButton{
+        margin: 0px;
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        align-items: center;
+        left: 70%;
+        height: 40px;
+        padding: 4px;
+        color: #ffffff;
+        background: #6F1747;
+        border-radius: 15px;
+    }
+
+    .commentButton img{
+        width: 25px;
+        padding-right: 5px;
+        margin: 4px ;
+    }
     /* FOTO DE PERFIL */
 
     #post-username{
@@ -23,20 +59,36 @@
         font-size: 18px;
     }
 
+    #post-form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+        padding: 3px;
+        width: 630px;
+        border: solid rgb(223, 223, 223) 3px;
+        border-radius: 20px;
+    }
+
     #post-description{
         resize: none;
         border-radius: 16px;
         padding: 8px;
         margin: 5px;
+        height: 78px;
+        width: 408px;
     }
     .post-card{
-        width: 65%;
+        width: 600px;
         border: solid rgb(223, 223, 223);
         margin: 8px;
         padding: 10px;
         border-radius: 21px;
     }
 
+    .photoPublic{
+        height: 250px;
+    }
 
     .card {
         /* display: flex; */
@@ -55,7 +107,7 @@
 
     /* FOTO DE PERFIL */
 
-    .btns{
+    .btns-edit-delete{
         position: relative;
         left: 90%;
     }
@@ -70,5 +122,78 @@
 
     .note{
         font-family: Georgia, 'Times New Roman', Times, serif;
+        resize: none;
+        width: 95%;
     }
+
+    .editNote{
+        margin: 10px;
+    }
+
+    .commentContainer {
+        width: 500px;
+        display: flex;
+        flex-direction: row;
+        border: solid rgb(223, 223, 223);
+        margin: 12px;
+        padding: 7px;
+        border-radius: 21px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    .photoComment {
+        margin: 4px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+    }
+
+    #commentDesc{
+        resize: none;
+        border-radius: 15px;
+        background-color: #e7e7e7;
+        border: none;
+        padding: 4px 0px 0px 10px;
+    }
+
+    .commentPost{
+        background-color: transparent;
+        border: none;
+        margin: 4px;
+    }
+
+    .boxComment{
+        border: solid rgb(223, 223, 223);
+        margin: 12px;
+        padding: 10px;
+        border-radius: 21px;
+    }
+
+    .body-form{
+        display: flex;
+        flex-direction: row;
+    }
+
+    #cancelPost, #btnPublicar{
+        color: #ffffff;
+        background: #6F1747;
+        padding: 10px;
+        border-radius: 12px;
+        border: #6F1747 1px solid;
+        margin: 10px;
+    }
+
+    #cancelPost:hover, #btnPublicar:hover {
+        background: transparent;
+        color:  #6F1747;
+        border: #6F1747 1px solid;
+        transition: all 0.5s ease;
+    }
+
+    .like{
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: transparent;
+        border: none;
+    }
+
 }

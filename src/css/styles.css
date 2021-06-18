@@ -129,6 +129,33 @@ input[type=checkbox] {
     color: #9b9b9b;
     font-size: smaller;
 }
+
+.messageValid{
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    padding: 2%;
+    margin: 5%;
+    align-items: center;
+    width: 300px;
+    height: 150px;
+    color: #000000;
+    background-color: #fff;
+    border: solid rgb(235, 235, 235);
+    position: fixed;
+    left: 45%;
+    transform: translateX(-50%);
+    top: 50%;
+    z-index: 1001;
+}
+
+    .messageValid button{
+    color: white;
+    background-color: #BE3871;
+    border-radius: 3px;
+    padding: 2px;
+    margin: 2px;
+    border: none;
+    }
 }
 
 @media screen and (min-width: 600px) and (max-width: 1049px) {
@@ -242,8 +269,8 @@ input[type=checkbox] {
     }
     
     .icoFb, .icoGoogle {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
         margin-left: 25px;
         margin-right: 25px;
         margin-top: 10px;
@@ -260,12 +287,6 @@ input[type=checkbox] {
         line-height: 19px;
      }
     
-    ::placeholder{
-        color: #9b9b9b;
-        font-size: smaller;
-    }
-
-
     /* #imageLog{
         margin: 0px;
         display: none;
@@ -280,9 +301,17 @@ input[type=checkbox] {
     #imageRegister{
         display: none;
     }
+
+    
+
  }
 
  @media screen and (min-width: 1050px){
+
+    #btnSalir{
+        background-color: transparent;
+        border: none;
+    }
     
     /* #container {
         position: relative;
@@ -299,19 +328,40 @@ input[type=checkbox] {
         display: flex;
         flex-direction: row;
     }
+
+    h2{
+        font-family: 'Montserrat', sans-serif;
+        font-size: 25px;
+        width: 90%;
+        font-style: normal;
+        text-align: center;
+    }
     
     /* BOX MESSAGE PARA ELIMINAR POSTS Y SALIR DEL HOME*/
     .messageValid{
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
         position: fixed;
         padding: 2%;
         margin: 5%;
         z-index: 100;
-        box-shadow: 5px 5px 20px rgba(#CBCDD3, 10%);
+        box-shadow: 5px 5px 20px rgba(#828385, 10%);
         align-items: center;
         width: 20%;
         left: 50%;
         color: #000000;
         background-color: #fff;
+        border: solid rgb(235, 235, 235);
+    }
+
+    .messageValid p {
+        color: #474747;
+        font-size: 18px;
+    }
+
+    .messageValid h2 {
+        color: #000000;
+        font-size: 20px;
     }
     
     /* DEL HOME*/
@@ -416,43 +466,17 @@ input[type=checkbox] {
         font-size: 14px;
     }
 
-    #viewLog, #viewRegistration{
-        margin: 40px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        border-style: solid;
-        background-color: #ffffff;
-        border: #cfcfcf;
-        padding: 15px;
-        box-shadow: 0px 10px 10px -6px black;
-
-    }
-
     .messageLogIn, #messageRegister {
         position: relative;
         width: 50%;
         height: 100%;
         transition: 0.5s;
         display: flex;
-    }
+    } 
 
-    .messageLogIn .image{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    form {
+    .body-form{
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-left: 40px;
-        margin-right: 20px;
-        width: 35%;
+        flex-direction: row;
     }
 
     .icoFb, .icoGoogle {
@@ -500,14 +524,7 @@ input[type=checkbox] {
         margin: 0px;
     }
 
-    h2{
-        font-family: 'Montserrat', sans-serif;
-        font-size: 25px;
-        width: 90%;
-        font-style: normal;
-        text-align: center;
-    }
-    
+
     input[type=email],input[type=password],input[type=text] {
         margin: 5px;
         padding: 6px;
@@ -521,8 +538,6 @@ input[type=checkbox] {
         color: #9B9999;
     
     }
-
-   
 
 
    #taks-form {
@@ -539,5 +554,14 @@ input[type=checkbox] {
        margin-left: 100px;
    }
 
+   #body-form-postsection {
+       display: flex;
+       flex-direction: column;
+   }
 
- }
+   #imgpreview > img {
+       height: 200px;
+   }
+
+
+}

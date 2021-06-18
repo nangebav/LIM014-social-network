@@ -1,120 +1,235 @@
-# Creando una Red Social
+# MIURART Red Social ![Group 17](https://user-images.githubusercontent.com/67443691/121117275-7e900680-c7dd-11eb-94d9-a1505783b2f1.png)
+
+MiurArt es una red social enfocada en artistas de murales que permite compartir datos, información, y la interacción entre los miembros de esta comunidad a través de comentarios y reacciones como "me gusta". Los miembros de esta comunidad tienen un perfil en donde pueden poner una breve descripción suya. También hay una sección para publicar lo que crean conveniente relacionado a su trabajo y arte.
 
 ## Definición de producto
 
-### ¿Cuáles son los elementos básicos que tiene una red social?
-    -Permite crear una cuenta personal.  
-    -Permite iniciar sesión. 
-    -Permite hacer publicaciones.  
-    -Permite tener conversaciones con otras personas.  
-    -Permite reaccionar a las personas ante una publicación.   
-    -Permite filtrar por búsqueda publicaciones que al usuario le interese. 
+### ¿Quiénes son los usuarios del producto? 
 
+- Artistas muralistas que quieran exponer su arte de manera virtual
 
-### ¿Cómo descubriste las necesidades de los usuarios?
-    Atravez de entrevistas de artistas independientes y sus nesesidades respecto a las carencias de muchas redes sociales destinadxs a ellxs
+### ¿Cuáles son los elementos tiene nuestra red social?
+  - Permite crear una cuenta personal.  
+  - Permite iniciar sesión. 
+  - Permite hacer publicaciones.  
+  - Permite tener conversaciones con otras personas.  
+  - Permite reaccionar a las personas ante una publicación.
 
-### ¿Qué problema resuelve el producto para estos usuarios?
-    La inexistencia de una red social enfocada exclusivamente en la exposición de su arte
+### ¿Cómo descubrimos las necesidades de los usuarios?
+  - A través de entrevistas de artistas independientes.
+
+ ### ¿Qué problema resuelve el producto para estos usuarios?
+ 
+  - La inexistencia de una red social enfocada exclusivamente en la exposición de su arte
 
 ### ¿Cuáles son los objetivos de estos usuarios en relación al producto?
 
-    Poder encontrar publicaciones de artistas.
-    Poder conocer a otros artistas.
-    Poder promocionar su arte.
-    Poder crear o unirse a una comunidad de artistas
+  - Poder encontrar publicaciones de artistas.
+  - Poder conocer a otros artistas.
+  - Poder promocionar su arte.
+  - Poder crear o unirse a una comunidad de artistas.
 
 
 ### ¿Cuáles son las principales funcionalidades del producto y cuál es su prioridad?
 
-    Permitir hacer publicaciones.
-    Permitir crear una cuenta.
-    Permitir poder ingresar por Facebook o google.
-    Permitir ingresar a la red social.
-    Permitir el compartir y reaccionar a las publicaciones.
-    Permitir la edición o eliminación del post.
+  - Permitir hacer publicaciones.
+  - Permitir crear una cuenta.
+  - Permitir poder ingresar con una cuenta de google.
+  - Permitir ingresar a la red social.
+  - Permitir el compartir y reaccionar a las publicaciones.
+  - Permitir la edición o eliminación de las publicaciones.
+
+
+## ENTREVISTAS 
+
+### PREGUNTAS
+**Pregunta 1:** ¿Sientes que tu trabajo tiene suficiente visibilidad ?    
+**Pregunta 2:** ¿Para ti, es fácil conocer o contactarte con otros artistas del medio?  
+**Pregunta 3:** ¿Consideras importante el relacionarte con otros artistas del medio?  
+**Pregunta 4:** Si hubiera una red social para artistas murales, ¿Qué tipo de información te gustaría encontrar?
+
+**Entrevista 1 (Mujer, 27 años)** 
+ 1: Eh no, debido a las restricciones de la pandemia, los lugares donde solían estar expuestos mis murales han sido restringidas (Restaurantes, Galerías, y calles cerca a oficinas).  
+ 2: Se ha reducido el espacio de interacción, debido a la pandemia.         
+ 3: Sí, porque igual siempre hemos sido una comunidad unida. Pero ahora siento que se ha limitado nuestra interacción y convivencia.  
+ 4: Me gustaría mostrar mi trabajo como hacía antes, y recibir feedback y comentarios de otros artistas, así como explorar otros perfiles, para ampliar mi red de contactos.  
+
+**Entrevista 2 (Hombre,22 años)**   
+ 1: No mucho, con la llegada de la pandemia mi trabajo como el de otros se ha visto detenido e ignorado.     
+ 2: Realmente incluso antes de la pandemia el conocer a otros muralistas fue un tanto limitado.   
+ 3: Por supuesto, como artista me gusta cocnocer gente en este medio, que pueda apoyarme y denvolverme.    
+ 4: Me gustaría conocer a más artistas y ver su arte, además de mostrarles el mío.  
+ 
 
 # Historias de Usuario
 
-### `Historia de Usuario 1 `
+### `Historia de Usuario 1`
 Yo como usuari@ deseo tener una vista inicial atractiva en la plataforma antes de ingresar a mi cuenta.
 
     Criterio de aceptación:
-    -
-    -
-    -
-    Definición de lo terminado:
-    -
+    
+    - Se muestra campos para ingresar: nombre, apellido, nombre de usuario, correo electrónico, contraseña
+    - La contraseña tiene más de 6 dígitos
+    - No se pueden ingresar números en los campos de nombre y apellido
+    - Se muestra casilla para términos y condiciones
+    - No se activa la cuenta si no se acepta el mensaje de verificación
+    - Se muestran opciones para registrarse desde google o facebook
+    - Se muestra un mensaje indicando que  ya puede iniciar sesión
+    - Se muestra mensaje y opción para regresar al log in
+
+    Definición de lo terminado
+
+    Login con Firebase:
+    - Para el login y las publicaciones en el muro puedes utilizar Firebase
+    - Creación de cuenta de acceso y autenticación con cuenta de correo y contraseña, y también con una cuenta de Google.
+
+    Validaciones:
+    - Solamente se permite el acceso a usuarios con cuentas válidas.
+    - No pueden haber usuarios repetidos.
+    - La cuenta de usuario debe ser un correo electrónico válido.
+    - Lo que se escriba en el campo (input) de contraseña debe ser secreto.
+
+    Comportamiento:
+    - Al enviarse el formulario de registro o inicio de sesión, debe validarse.
+    - Si hay errores, se deben mostrar mensajes descriptivos para ayudar al usuario a corregirlos
+
+    Testeo:
+    - Se hizo testeo de las funciones de la historia de Usuario
+    
 
 ### `Historia de Usuario 2`
-Yo como usuari@ quisiera poder registrarme a la plataforma con mi correo electrónico
-
-    Criterio de aceptación:
-    -
-    -
-    -
-    Definición de lo terminado:
-    -
-
-### `Historia de Usuario 3 `
 Yo como usuari@ quiero iniciar sesión con el correo y la contraseña que registré para poder ver mi muro
 
     Criterio de aceptación:
-    -
-    -
-    -
+    - Se muestra campos para ingresar: correo electrónico y contraseña
+    - La contraseña tiene más de 6 dígitos
+    - El botón se habilita cuando los inputs no esten vacios
+    - Se muestran opciones para ingresar desde google o facebook
+    - Se muestra mensaje y opción para ir al registro
+
+    Validaciones:
+
+     - Solamente se permite el acceso a usuarios con cuentas válidas.
+     - No pueden haber usuarios repetidos.
+     - La cuenta de usuario debe ser un correo electrónico válido.
+     - Lo que se escriba en el campo (input) de contraseña debe ser secreto
+
+     Comportamiento:
+
+     - Al enviarse el formulario de registro o inicio de sesión, debe validarse.
+     - Si hay errores, se deben mostrar mensajes descriptivos para ayudar al usuario a corregirlos.
+
     Definición de lo terminado:
-    -
+    Login con Firebase:
+
+     - Creación de cuenta de acceso y autenticación con cuenta de correo y contraseña.
+     - Creación de cuenta de acceso y autenticación con una cuenta de Google.
+     - Se hizo test unitarios
+     - Se hizo testeo de funciones
+     - Se hizo test manualmente buscando errores e imperfecciones simples.
+     - Se hizo pruebas de usabilidad e incorporaron el feedback de los usuarios como mejoras.
+     - Se recibió feedback de compañeras.
+     - Es responsive.
+
+### `Historia de Usuario 3 `
+Yo como usuari@ quiero poder comentar publicaciones de otros artistas
+
+    Criterio de aceptación:
+    - Hay un botón para generar el comentario
+    - Sólo se puede comentar texto
+    - El comentario se visualiza inmediatamente después de haberlo publicado
+    - Puede hacer comentarios en publicaciones de otros
+    - Puede hacer uno o más comentarios en un mismo post
+    - Se muestra el nombre de la persona que hizo el comentario
+    - Se muestra la foto de la persona que hizo el comentario
+
+    Definición de lo terminado:
+    - Se hizo test unitarios
+    - Se hizo testeo de funciones
+    - Se hizo test manualmente buscando errores e imperfecciones simples.
+    - Se hizo pruebas de usabilidad e incorporaron el feedback de los usuarios como mejoras.
+    - Se recibió feedback de compañeras.
+    - Es responsive.
 
 ### `Historia de Usuario 4 `
-Yo como usuari@ deseo una plataforma que me permita ver las publicaciones de otros y poder publicar en ella
+Yo como usuari@ deseo una plataforma que me permita ver las publicaciones de otros usuarios
 
     Criterio de aceptación:
-    -
-    -
-    -
+    - Al recargar la aplicación, se debe verificar si el usuario está logueado antes de mostrar contenido.
+ 
     Definición de lo terminado:
-    -
+    - Se hizo test unitarios
+    - Se hizo testeo de funciones
+    - Se hizo test manualmente buscando errores e imperfecciones simples.
+    - Se hizo pruebas de usabilidad e incorporaron el feedback de los usuarios como mejoras.
+    - Se recibió feedback de compañeras.
+    - Es responsive
 
 ### `Historia de Usuario 5 `
-Yo como usuari@ quiero ver un muro de publicaciones en el muro
+Yo como usuari@ quiero crear y editar publicaciones en el muro
 
     Criterio de aceptación:
-    -
-    -
-    -
+    Validaciones:
+    - Al publicar, se debe validar que exista contenido en el input.
+      
+    Comportamiento:
+    - Al recargar la aplicación, se debe verificar si el usuario está logueado antes de mostrar contenido.
+    - Puede hacer una o muchas publicaciones.
+    - Puede eliminar publicación(es) específicas.
+    - Pide confirmación antes de eliminar un post.
+    - Al dar click para editar un post, debe cambiar el texto por un input que permita editar el texto y luego guardar los cambios.
+    - Al guardar los cambios debe cambiar de vuelta a un texto normal pero con la información editada
+    - Al recargar la página se puede ver los textos editados.
+
     Definición de lo terminado:
-    -
+    - Se hizo test unitarios
+    - Se hizo testeo de funciones
+    - Se hizo test manualmente buscando errores e imperfecciones simples.
+    - Se hizo pruebas de usabilidad e incorporaron el feedback de los usuarios como mejoras.
+    - Se recibió feedback de compañeras.
+    - Es responsive
 
 ### `Historia de Usuario 6`
 Yo como usuari@ deseo poder dale like o una emoción a las publicaciones que me gusten
 
     Criterio de aceptación:
-    -
-    -
-    -
+    - Hay un botón like en cada publicación realizada
+    - Hay un contador de likes en cada publicación
+    - Un usuario puede dar like 1 vez a 1 publicación
+    - Se peude quitar el like de las publicaciones
+    - Sólo si el usuario está logueado puede dar like
     Definición de lo terminado:
-    -
+    - Las funciones han sido testeadas
+    - El contador muestra la cantidad de likes que tiene la publicación en tiempo real
+    - 
 
 ### `Historia de Usuario 7`
 Yo como usuario quiero editar mi publicación para plasmar algo distinto
 
     Criterio de aceptación:
-    -
-    -
-    -
+    - Hay un botón para editar la publicación
+    - Sólo el usuario que hizo la publicación la puede editar
+    
     Definición de lo terminado:
-    -
+    - Se han testeado las funciones
+    - Los cambios se pueden visualizar en menos de 1rn
 
 ### `Historia de Usuario 8`
 Yo como usuario quiero eliminar mi publicación para que ya no aparezca en mi muro de mi red
 
     Criterio de aceptación:
-    -
-    -
-    -
+    - Sólo el usuario que creó la publicación la puede eliminar
+    - Hay un mensaje de verificación cuando se da click en el botón de eliminar.
+    - El mensaje de verificación contiene un botón para cancelar la acción y otro para verificarla
+    - Al recargar la página, no se verá la publicación ni los posts de esta.
+
     Definición de lo terminado:
-    -
+    - Se hizo test unitarios
+    - Se hizo testeo de funciones
+    - Se hizo test manualmente buscando errores e imperfecciones simples.
+    - Se hizo pruebas de usabilidad e incorporaron el feedback de los usuarios como mejoras.
+    - Se recibió feedback de compañeras.
+    - Es responsive
 
 ### `Historia de Usuario 9`
 Yo como usuaria deseo hacer una busqueda sobre temas que podrían interesarme
@@ -126,7 +241,88 @@ Yo como usuaria deseo hacer una busqueda sobre temas que podrían interesarme
     Definición de lo terminado:
     -
 
+### `Historia de Usuario 10`
+Yo como usuari@ deseo poder cerrar mi sesión en la red social
 
+    Criterio de aceptación:
+    - Hay un botón para cerrar la sesión
+    - Al hacer click en el botón Salir se muestra la página de log in
+    - El usuario no puede ver sus publicaciones o las publicaciones del resto
+
+    Definición de lo terminado:
+    - Las funciones de cerrar sesión han sido testedas
+    - Regresa a la página de log in
+    - Se hizo test unitarios
+    - Se hizo testeo de funciones
+    - Se hizo test manualmente buscando errores e imperfecciones simples.
+    - Se hizo pruebas de usabilidad e incorporaron el feedback de los usuarios como mejoras.
+    - Se recibió feedback de compañeras.
+    - Es responsive.
+
+### `Historia de Usuario 11`
+Yo como usuari@ deseo poder ver mi perfil de la red social cuando este logueada
+
+    Criterio de aceptación:
+    - Se muestra la foto por defecto de la cuenta de google si ingresó a través de esta opción
+    - Se puede cambiar la foto de pefil una vez que haya iniciado sesión
+
+    Definición de lo terminado:
+    - Se hizo test unitarios
+    - Se hizo testeo de funciones
+    - Se hizo test manualmente buscando errores e imperfecciones simples.
+    - Se hizo pruebas de usabilidad e incorporaron el feedback de los usuarios como mejoras.
+    - Se recibió feedback de compañeras.
+    - Es responsive.
+
+## PROTIPOS DE BAJA FIDELIDAD
+
+**(Vista Mobile)**
+
+
+![Mobile baja calidad 1](https://user-images.githubusercontent.com/77282012/121119386-20fdb900-c7e1-11eb-9847-154f4ec8439e.png)
+
+![Mobile baja calidad 2](https://user-images.githubusercontent.com/77282012/121119166-c5cbc680-c7e0-11eb-9106-ea3b1880a536.png)
+
+![Mobile baja calidad 3](https://user-images.githubusercontent.com/77282012/121119534-6621eb00-c7e1-11eb-86ff-dda9a578b9d5.png)
+
+![Mobile baja calidad 5](https://user-images.githubusercontent.com/77282012/121119170-c6645d00-c7e0-11eb-9d08-af91ca1c0d4b.png)
+
+
+![Mobile baja calidad 4](https://user-images.githubusercontent.com/77282012/121119168-c5cbc680-c7e0-11eb-89bf-0bdcb99b9927.png)
+
+
+**(Vista Desktop)**
+
+![PC baja calidad 1](https://user-images.githubusercontent.com/77282012/121118924-53f37d00-c7e0-11eb-8bd5-76b3a493bade.png)
+
+![PC baja calidad 2](https://user-images.githubusercontent.com/77282012/121118992-738aa580-c7e0-11eb-8be3-e65d6bbc4dd0.png)
+
+![PC baja calidad 3](https://user-images.githubusercontent.com/77282012/121118987-72597880-c7e0-11eb-95f1-7f75bdf6a6de.png)
+
+
+**Feedback Recibido**
+## PROTOTIPOS ALTA FIDELIDAD
+
+
+**(Vista Mobile)**
+
+![Frame 5](https://user-images.githubusercontent.com/77282012/121119801-eea08b80-c7e1-11eb-995c-01410f150086.png)
+![Mobile alta calidad 5](https://user-images.githubusercontent.com/77282012/121119802-ef392200-c7e1-11eb-9927-c0f8d91b1955.png)
+![Mobile alta calidad 6](https://user-images.githubusercontent.com/77282012/121119804-efd1b880-c7e1-11eb-8564-83e94eb7994f.png)
+![Mobile alta calidad 7](https://user-images.githubusercontent.com/77282012/121119805-efd1b880-c7e1-11eb-9a43-b371fb867eaa.png)
+![Mobile alta fidelidad 1](https://user-images.githubusercontent.com/77282012/121119806-f06a4f00-c7e1-11eb-9879-b015c56d2961.png)
+![Mobile alta fidelidad 2](https://user-images.githubusercontent.com/77282012/121119808-f06a4f00-c7e1-11eb-9cb3-c09089c3a048.png)
+
+**(Vista Desktop)**
+
+![Frame 7](https://user-images.githubusercontent.com/77282012/121119984-4ccd6e80-c7e2-11eb-9e1f-f5d2b6d78cd3.png)
+![Frame 9](https://user-images.githubusercontent.com/77282012/121120128-98801800-c7e2-11eb-9ed8-4f7d0fbf103e.png)
+![PC alta calidad 3](https://user-images.githubusercontent.com/77282012/121120682-abdfb300-c7e3-11eb-8656-af12f0f4e326.png)
+
+
+
+**Feedback Recibido**
+## PROTIPO FINAL
 
 ## 2. Resumen del proyecto
 
@@ -343,45 +539,12 @@ tus H.U.:
     información editada.
   - Al recargar la página debo de poder ver los textos editados.
 
-### 5.7 Consideraciones técnicas Front-end
 
-* Separar la manipulación del DOM de la lógica (Separación de responsabilidades).
-* Contar con múltiples vistas. Para esto, tu aplicación debe ser una
- [Single Page Application (SPA)](https://es.wikipedia.org/wiki/Single-page_application)
-* Alterar y persistir datos. Los datos que agregues o modifiques deberán
-  persistir a lo largo de la aplicación. Te recomendamos que uses
-  [Firebase](https://firebase.google.com/) para eso también.
 
-#### Pruebas unitarias (unit tests)
 
-* Recuerda que no hay un _setup_ de **tests** definido, dependerá de
-  la estructura de tu proyecto. Algo que no debes de olvidar es pensar en éstas
-  pruebas, te pueden ayudar a definir la estructura y nomenclatura de tu lógica.
 
-* Los tests unitarios deben cubrir un mínimo del 70% de _statements_, _functions_,
-  _lines_, y _branches_.
 
-### 5.8 Consideraciones técnicas UX
 
-* Hacer al menos 2 entrevistas con usuarios.
-* Hacer un  prototipo de baja fidelidad.
-* Asegurarte de que la implementación en código siga los lineamientos del
-  diseño.
-* Hacer sesiones de _testing de usabilidad_ con el producto en HTML.
-
-## 6. Hacker edition
-
-Las secciones llamadas _Hacker Edition_ son **opcionales**. Si **terminaste**
-con todo lo anterior y te queda tiempo, intenta completarlas. Así podrás
-profundizar y/o ejercitar más sobre los objetivos de aprendizaje del proyecto.
-
-* Permite crear posts con imágenes.
-* Permite buscar usuarios, agregar y eliminar "amigos".
-* Permite definir la privacidad de los _posts_ (público o solamente para amigos).
-* Permite ver su muro de cualquier usuario "no-amigo" (solamente los
-  posts _públicos_).
-* Permite comentar o responder una publicación.
-* Permite editar perfil.
 
 ## 7. Entrega
 
@@ -391,55 +554,6 @@ puedas haber encontrado en el camino.
 
 ***
 
-## 8. Pistas, tips y Lecturas complementarias
 
-### Mobile first
 
-El concepto de [_mobile first_](https://www.mediaclick.es/blog/diseno-web-responsive-design-y-la-importancia-del-mobile-first/)
-hace referencia a un proceso de diseño y desarrollo donde partimos de cómo se ve
-y cómo funciona la aplicación en un dispositivo móvil primero, y más adelante se
-ve como adaptar la aplicación a pantallas progresivamente grandes y
-características específicas del entorno desktop. Esto es en contraposición al
-modelo tradicional, donde primero se diseñaban los websites (o webapps) para
-desktop y después se trataba de _arrugar_ el diseño para que entre en pantallas
-más chicas. La clave acá es asegurarse de que desde el principio diseñan usando
-la vista _responsive_ de las herramientas de desarrollador (developer tools) del
-navegador. De esa forma, partimos de cómo se ve y comporta la aplicación en una
-pantalla y entorno móvil.
 
-### Múltiples vistas
-
-En proyectos anteriores nuestras aplicaciones habían estado compuestas de una
-sola _vista_ principal (una sóla _página_). En este proyecto se introduce la
-necesidad de tener que dividir nuestra interfaz en varias _vistas_ o _páginas_
-y ofrecer una manera de navegar entre estas vistas. Este problema se puede
-afrontar de muchas maneras: con archivos HTML independientes (cada uno con su
-URL) y links tradicionales, manteniendo estado en memoria y rederizando
-condicionalmente (sin refrescar la página), [manipulando el historial del
-navegador](https://developer.mozilla.org/es/docs/DOM/Manipulando_el_historial_del_navegador)
-con [`window.history`](https://developer.mozilla.org/es/docs/Web/API/Window/history).
-En este proyecto te invitamos a explorar opciones y decidir una opción
-de implementación.
-
-### Escritura de datos
-
-En los proyectos anteriores hemos consumido (leído) datos, pero todavía no
-habíamos escrito datos (salvar cambios, crear datos, borrar, ...). En este
-proyecto tendrás que crear (salvar) nuevos datos, así como leer, actualizar y
-modificar datos existentes. Estos datos se podrán guardar de forma remota
-usando [Firebase](https://firebase.google.com/).
-
-### Otras:
-
-* [Pildora SPA](https://www.loom.com/share/fa63a8ad0e9a43428222c15b6f6613d3)
-* [Repositorio de pildora de SPA](https://github.com/betsyvies/bootcamp-spa)
-* [Pildora de mock Firebase](https://www.youtube.com/watch?v=06myVn41OTY&t=1s)
-* [Repositorio de pildora de mock Firebase](https://github.com/Danielalab/2018-2-Testing)
-* [Pildora MVC](https://github.com/merunga/todomvc-vanillajs)
-* [Modulos: Export](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/export)
-* [Modulos: Import](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/import)
-* [Diseño web, responsive design y la importancia del mobile first - Media Click](https://www.mediaclick.es/blog/diseno-web-responsive-design-y-la-importancia-del-mobile-first/)
-* [Mobile First: el enfoque actual del diseño web móvil - 1and1](https://www.1and1.es/digitalguide/paginas-web/diseno-web/mobile-first-la-nueva-tendencia-del-diseno-web/)
-* [Mobile First - desarrolloweb.com](https://desarrolloweb.com/articulos/mobile-first-responsive.html)
-* [Mobile First - ZURB](https://zurb.com/word/mobile-first)
-* [Mobile First Is NOT Mobile Only - Nielsen Norman Group](https://www.nngroup.com/articles/mobile-first-not-mobile-only/)

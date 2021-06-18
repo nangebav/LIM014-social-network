@@ -1,5 +1,6 @@
 // importamos la funcion que vamos a testear
 import { signInFunction, signInGoogle, signOut } from '../src/controller-function/auth-logIn.js';
+
 import { sendEmail, registrationFunction, updateProfile } from '../src/controller-function/auth-register.js';
 // import { deletePost } from '../src/controller-function/firesotre.js';
 
@@ -24,6 +25,7 @@ const mocksdk = new firebasemock.MockFirebaseSdk(
 mockauth.autoFlush(); //
 global.firebase = mocksdk;
 
+// Firebase Auth
 // Funciones del LogIn
 describe('signInFunction', () => {
   it('Debería poder iniciar sesión con email: lemeca5029@o3live.com y password:abcdefgh', () => {
@@ -51,7 +53,11 @@ describe('registrationFunction', () => {
 
 describe('sendEmail', () => {
   it('debería ser una función', () => {
-    expect(typeof sendEmail).toBe('function');
+    const mockSendEmail = jest.fn();
+    firebase.auth().currentUser.sendEmailVerification = mockSendEmail;
+    sendEmail();
+    expect(mockSendEmail).toHaveBeenCalled();
+    expect(mockSendEmail.mock.calls).toHaveLength(1);
   });
 });
 
@@ -66,10 +72,16 @@ describe('signOut', () => {
 // Funcion para guardar el nombre del usuario
 describe('updateProfile', () => {
   it('debería poder guardar mi nombre y apellido', () => {
-    updateProfile('Sutana', 'Fulanita')
-      .then((user) => expect(user.name).toBe('Sutana Fulanita'));
+    const user = firebase.auth().currentUser;
+    registrationFunction('lemeca5029@o3live.com', 'abcdefgh')
+      .then(() => {
+        updateProfile('Sutana', 'Fulanita');
+        expect(user.displayName).toBe('Sutana Fulanita');
+      });
   });
 });
+
+// Firebase Firestore
 
 // Función para eliminar comentarios
 // describe('deletePost', () => {
@@ -77,3 +89,5 @@ describe('updateProfile', () => {
 //     expect(deletePost('tWJz2EbWDSBSjEX382zo')).toBe({ id: 9 });
 //   });
 // });
+
+// Firebase Storage
